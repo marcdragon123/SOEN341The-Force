@@ -10,22 +10,30 @@ background: url("../Assets/space.jpg") -25px -50px;
 h4 {
   font-weight: 400;
     font-size: 24px;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.6px;
     padding-bottom: 5px;
 }
 
 h3 {
   font-weight: 400;
     font-size: 20px;
-    letter-spacing: 0.5px;
     line-height: 5px;
-    margin-top: 0px;
+    margin: 0px;
+    letter-spacing: 0.6px;
 }
 
 .course-list{
     margin-top: 25px;
-    margin-bottom: 25px;
     margin-left: 10px;
+    padding: 0px;
+}
+
+.course-list label{
+    width: 20%;
+}
+
+.checkbox-inline+.checkbox-inline{
+    margin: 0px;
 }
 
 a:link, a:visited, a:active, a:hover, a{
@@ -50,7 +58,7 @@ a:link, a:visited, a:active, a:hover, a{
 }
 
 [class*="col-"] {
-    height: 280px;
+    height: 290px;
     padding: 25px;
     opacity: 0.89;
     background: #FFFFFF;
@@ -61,11 +69,15 @@ a:link, a:visited, a:active, a:hover, a{
 .container-fluid, navbar-header, navbar{
     background-color: #232B40;
 }
-a.navbar-brand, .navbar-brand, .navbar-brand:active, .navbar-brand:visited, .navbar-brand:focus, .navbar-brand:hover{
-    font-weight: 400;
+.navbar-brand:link, .navbar-brand, .navbar-brand:active, .navbar-brand:visited, .navbar-brand:focus{
+    font-weight: 300;
     color: white;
     font-size: 20px;
     letter-spacing: 1.7px;
+}
+
+.form-control{
+    margin-bottom: 10px;
 }
 
 .contain{
@@ -95,6 +107,9 @@ a.navbar-brand, .navbar-brand, .navbar-brand:active, .navbar-brand:visited, .nav
 .panel{
     margin: 15px;
 }
+.panel-heading{
+    margin-bottom: 20px;
+}
 
 .btnModal{
     border: 0px;
@@ -111,7 +126,7 @@ a.navbar-brand, .navbar-brand, .navbar-brand:active, .navbar-brand:visited, .nav
     background-image: linear-gradient(-180deg, #60B7E8 0%, #1882D6 100%);
 }
 
-.has-error, .form-control{
+.has-error, .form-group{
     /* Rectangle 3: */
     background-color: rgba(255,255,255,0.8);
     box-shadow: rgba(0, 0, 0, 0)
@@ -124,6 +139,11 @@ a.navbar-brand, .navbar-brand, .navbar-brand:active, .navbar-brand:visited, .nav
     letter-spacing: 1.2px;
     margin: 15px;
     width: 95%;
+}
+
+.help-block{
+    margin: 0px;
+    font-size: 13px;
 }
 
 h1{
@@ -155,6 +175,5 @@ h1{
 }
 
 hr {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin: 40px;
 }
