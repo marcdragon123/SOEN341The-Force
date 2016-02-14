@@ -5,20 +5,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//$servernamelocal = "localhost";
-$servernameremote = "wolfcall.ddns.net";
-$port = 3306;
-$user = "SOEN341user";
-$password = "G3tR3ck3dS0n";
-$schema = "soen341";
+
+
 
 function getCon(){
-	$conn = new mysqli($servernameremote.":".$port, $username, $password, $schema);
+	$servernamelocal = "192.168.2.36";
+	$servernameremote = "wolfcall.ddns.net";
+	$port = 3306;
+	$username = "SOEN341user";
+	$password = "G3tR3ck3dS0n";
+	$schema = "soen341";
+	
+	$conn = new mysqli($servernameremote, $username, $password, $schema, $port);
 	
 	if($conn->connect_error){
-		//$conn  = new mysqli($servernamelocal.":".$port, $username, $password);
+		$conn  = new mysqli($servernamelocal, $username, $password, $schema, $port);
 		
-		//if($conn->connect_error)
+		if($conn->connect_error)
 			die("Connection failed: " . $conn->connect_error);
 	}
 	return $conn;
