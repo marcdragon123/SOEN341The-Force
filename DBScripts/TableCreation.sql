@@ -17,6 +17,7 @@ USE `soen341` ;
 -- -----------------------------------------------------
 -- Table `Student`
 -- -----------------------------------------------------
+drop TABLE IF EXISTS `Student`;
 CREATE TABLE IF NOT EXISTS `Student` (
   `idStudent` INT NOT NULL,
   `FirstName` VARCHAR(45) NOT NULL,
@@ -30,6 +31,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Addresses`
 -- -----------------------------------------------------
+drop TABLE IF EXISTS `Addresses`;
 CREATE TABLE IF NOT EXISTS `Addresses` (
   `idAddresses` INT NOT NULL,
   `address` VARCHAR(45) NOT NULL,
@@ -54,19 +56,21 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `course_Master_List`
 -- -----------------------------------------------------
+drop TABLE IF EXISTS `course_Master_List` ;
 CREATE TABLE IF NOT EXISTS `course_Master_List` (
   `Course_code` VARCHAR(45) NOT NULL,
   `number` VARCHAR(45) NULL,
-  `description` VARCHAR(45) NULL,
+  `description` VARCHAR(100) NULL,
   `Credits` INT(11) NULL,
   `Suggested_Semester` INT(11) NULL,
-  PRIMARY KEY (`Course_code`))
+  PRIMARY KEY (`Course_code`,`number`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `transcripts`
 -- -----------------------------------------------------
+drop TABLE IF EXISTS `transcripts` ;
 CREATE TABLE IF NOT EXISTS `transcripts` (
   `Student_idStudent` INT NOT NULL,
   `Course_code` VARCHAR(45) NOT NULL,
@@ -93,6 +97,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `transcripts_has_courses`
 -- -----------------------------------------------------
+drop TABLE IF EXISTS `transcripts_has_courses` ;
 CREATE TABLE IF NOT EXISTS `transcripts_has_courses` (
   `transcripts_Student_idStudent` INT NOT NULL,
   `courses_department` VARCHAR(45) NOT NULL,
@@ -115,6 +120,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Prereq`
 -- -----------------------------------------------------
+drop TABLE IF EXISTS `Prereq` ;
 CREATE TABLE IF NOT EXISTS `Prereq` (
   `MainCourseID` VARCHAR(45) NOT NULL,
   `PrereqCourseID` VARCHAR(45) NOT NULL,
