@@ -64,7 +64,7 @@ a:link, a:visited, a:active, a:hover, a{
     background: #FFFFFF;
     padding-top: 25px;
     padding-bottom: 15px;
-    border: 0.75px solid grey;
+    border: 0.75px solid #232B40;
 }
 .container-fluid, navbar-header, navbar{
     background-color: #232B40;
