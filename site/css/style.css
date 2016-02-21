@@ -18,6 +18,18 @@
 .search-text{
 	color: #3498DB;
 }
+.panel-body{
+	height: 300px;
+}
+
+.jumbotron{
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+	background-color: #e6e6e6;
+}
+.panel-group{
+	margin-bottom: 0px !important;
+}
 
 .row {
 	margin-left: 15px;
