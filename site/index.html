@@ -10,6 +10,9 @@
 	<script src='js/lib/jquery.min.js'></script>
 	<script src='js/fullcalendar.min.js'></script>
 
+	<!-- Script for producing the table -->
+	<script src='js/ClassTable.js'></script>
+
 	<!-- Script for producing the schedule -->
 	<script src='js/schedule.js'></script>
 </head>
@@ -63,7 +66,8 @@
 
 		<div class="row" class="schedule-content"> 
 			<div class="col-md-6 class-table"> 
-				<table class="table table-bordered class-list">
+				<table class="table table-bordered class-list" id="class-table">
+					<!--
 					<tr>
 						<th rowspan="2">SOEN 341</th>
 						<td> Lecture: Mon & Wed 2:45 - 5:30</td>
@@ -92,7 +96,7 @@
 					<tr>
 						<td>Tutorial: Fri 5:45 - 8:15</td>
 					</tr>
-
+					-->
 				</table>
 			</div>
 			<div class="col-md-6 schedule-container">
