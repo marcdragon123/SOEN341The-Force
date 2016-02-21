@@ -37,7 +37,8 @@
 }
 
 .schedule-content{
-	padding-top: 70px;
+	
+
 }
 
 .class-table{
@@ -63,7 +64,7 @@
 
 #schedule {
 	max-width: 100%;
-	max-height: 100%;
+	max-height: 8px;
 		
 }
 

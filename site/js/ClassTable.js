@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	var classes = '{"classes":[' +
 		'{"class":"SOEN 341","lecture":"Lecture: Mon & Wed 2:45 - 5:30", "tutorial":"Tutorial: Mon & Wed 2:45 - 5:30"  },' +
-		'{"class":"SOEN 341","lecture":"Lecture: Mon & Wed 2:45 - 5:30", "tutorial":"Tutorial: Mon & Wed 2:45 - 5:30" },' +
-		'{"class":"SOEN 341","lecture":"Lecture: Mon & Wed 2:45 - 5:30", "tutorial":"Tutorial: Mon & Wed 2:45 - 5:30" }]}';
+		'{"class":"ENGR 202","lecture":"Lecture: Mon & Wed 2:45 - 5:30", "tutorial":"Tutorial: Mon & Wed 2:45 - 5:30" },' +
+		'{"class":"ENGR 371","lecture":"Lecture: Mon & Wed 2:45 - 5:30", "tutorial":"Tutorial: Mon & Wed 2:45 - 5:30" }]}';
 
 	var classList = JSON.parse(classes);
 
