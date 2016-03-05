@@ -1,9 +1,23 @@
 <head>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Files for Bootstrap -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 
+	<!-- Files for FullCalendar -->
+	<link href='css/fullcalendar.css' rel='stylesheet' />
+	<link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
+	<script src='js/lib/moment.min.js'></script>
+	<script src='js/lib/jquery.min.js'></script>
+	<script src='js/fullcalendar.min.js'></script>
 
-	
+	<!-- Script for producing the table -->
+	<script src='js/ClassTable.js'></script>
+
+	<!-- Script for producing the schedule -->
+	<script src='js/schedule.js'></script>
 </head>
 
 <body>
@@ -31,114 +45,80 @@
 		<div class="row semester-row">
 			<div class="dropdown">
 			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			    Dropdown
+			    Select Semester
 			    <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-			    <li><a href="#">Action</a></li>
-			    <li><a href="#">Another action</a></li>
-			    <li><a href="#">Something else here</a></li>
-			    <li role="separator" class="divider"></li>
-			    <li><a href="#">Separated link</a></li>
+			    <li><a href="#">Winter</a></li>
+			    <li><a href="#">Fall</a></li>
 			  </ul>
 			</div>
 		</div>
 
-		<div class="row search-row"> 
-			<div class="input-group">
-                <input type="text" class="form-control seach-text" placeholder="Search" name="q">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
-            </div>
+		<div class="jumbotron">
+			<div class="panel-group">
+			  <div class="panel panel-default">
+			    <div class="panel-heading">
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" href="#collapse1"><center>Modify Schedule</center></a>
+			      </h4>
+			    </div>
+			    <div id="collapse1" class="panel-collapse collapse">
+			      <div class="panel-body modify-panel">
+			      	<div class="col-md-6">
+			      		<h4> Add Classes</h1>
+			      		<input type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">
+			      	</div>
+			      	<div class="col-md-6">
+			      		<h4> Add Unavailabilities </h4>
+			      		<div class="days">
+							<div class="checkbox">
+													
+								<label class="checkbox-inline">	
+									<input type="checkbox" id="work_monday" value="M" name="M"> M
+								</label>
+
+								<label class="checkbox-inline">
+									<input type="checkbox" id="work_tuesday" value="T" name="T"> T
+								</label>
+
+								<label class="checkbox-inline">
+									<input type="checkbox" id="work_wednesday" value="W" name="W"> W
+								</label>
+														
+								<label class="checkbox-inline">
+									<input type="checkbox" id="work_thursday" value="T" name="R"> T
+								</label>
+
+								<label class="checkbox-inline">
+									<input type="checkbox" id="work_friday" value="F" name="F"> F
+								</label>
+													
+							</div>
+						</div>
+
+						<div class="form-group" class="b1">
+							<input id="time_data" class="time-input" type="text" placeholder="Ex: 14:00-16:00">
+							<button type="button" id="new_worktime" class="btn btn-submit">Add</button>
+							<div id="fail_work_time_add" style="color:red;"></div>
+						</div>
+			      	</div>
+
+			      </div>
+			    </div>
+			  </div>
+			</div>
 		</div>
 
 		<div class="row" class="schedule-content"> 
-			<div class="col-md-4 class-table"> 
-				<table class="table table-bordered class-list">
-					<tr>
-						<th rowspan="2">SOEN 341</th>
-						<td> Lecture: Mon & Wed 2:45 - 5:30</td>
-					</tr>
-					<tr>
-						<td>Tutorial: Fri 5:45 - 8:15</td>
-					</tr>
-					<tr>
-						<th rowspan="2">SOEN 341</th>
-						<td> Lecture: Mon & Wed 2:45 - 5:30</td>
-					</tr>
-					<tr>
-						<td>Tutorial: Fri 5:45 - 8:15</td>
-					</tr>
-					<tr>
-						<th rowspan="2">SOEN 341</th>
-						<td> Lecture: Mon & Wed 2:45 - 5:30</td>
-					</tr>
-					<tr>
-						<td>Tutorial: Fri 5:45 - 8:15</td>
-					</tr>
-					<tr>
-						<th rowspan="2">SOEN 341</th>
-						<td> Lecture: Mon & Wed 2:45 - 5:30</td>
-					</tr>
-					<tr>
-						<td>Tutorial: Fri 5:45 - 8:15</td>
-					</tr>
+			<div class="col-md-6 class-table"> 
+				<table class="table table-bordered class-list" id="class-table">
 
 				</table>
 			</div>
-			<div class="col-md-8 schedule-container">
-				<table class="table table-striped class-schedule">
-					<tr>
-						<th> Time </th>
-						<th> Monday </th>
-						<th> Tuesday </th>
-						<th> Wednesday</th>
-						<th> Thursday</th>
-						<th> Friday</th>
-					</tr>
-
-					<tr>
-       					<th>10:00 - 11:00</th>
-            			<td class="physics">Physics-1</td>
-            			<td class="english">English</td>
-            			<td title="No Class" class="Holiday"></td>
-            			<td class="chemistry">Chemestry-1</td>
-            			<td class="algebra">Alzebra</td>
-   	 				</tr>
-
-   	 				<tr>
-       					<th>11:00 - 12:00</th>
-            			<td class="english">English</td>
-            			<td title="No Class" class="Holiday"></td>
-            			<td class="physics">Physics-1</td>
-            			<td class="chemistry">Chemestry-1</td>
-            			<td class="algebra">Alzebra</td>
-   	 				</tr>
-
-   	 				<tr>
-       					<th>12:00 - 13:00</th>
-            			<td class="english">English</td>
-            			<td title="No Class" class="Holiday"></td>
-            			<td class="physics">Physics-1</td>
-            			<td class="chemistry">Chemestry-1</td>
-            			<td class="algebra">Alzebra</td>
-   	 				</tr>
-
-   	 				<tr>
-       					<th>13:00 - 14:00</th>
-            			<td class="english">English</td>
-            			<td title="No Class" class="Holiday"></td>
-            			<td class="physics">Physics-1</td>
-            			<td class="chemistry">Chemestry-1</td>
-            			<td class="algebra">Alzebra</td>
-   	 				</tr>
-
-
-   	 				
-				</table>
+			<div class="col-md-6 schedule-container">
+				<div id='schedule'> </div>
 			</div>
 		</div>
-
 	</div>
 </body>
