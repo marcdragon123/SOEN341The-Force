@@ -196,4 +196,120 @@ insert into addresses
 insert into addresses 
 (address, `line 2`, city, province, country, zip_code, mailing, home, Student_idStudent) values 
 (cast(round(rand(),18) as char(20)), cast(round(rand(),18) as char(20)), cast(round(rand(),18) as char(20)), cast(round(rand(),18) as char(20)), 'canada', cast(round(rand(),18) as char(20)), true, true, cast((floor(round(rand(),18) * (Select count(*) from student)+1)+1) as char(20)));
- 
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+insert into prereq values
+(floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
