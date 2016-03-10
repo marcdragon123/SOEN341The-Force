@@ -13,7 +13,9 @@
     <!--Custom-->
     <link rel="stylesheet" type="text/css" href="css/custom.css">
 <!--    Background animation-->
-    <script type="text/javascript" src="js/custom.js"></script>   
+    <script type="text/javascript" src="js/custom.js"></script>
+<!--      Form validation-->
+    <script type="text/javascript" src="js/validator.js"></script>  
       
           <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -31,8 +33,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="js/bootstrap.min.js"></script>
-        
-      
+    <script type="text/javascript" src="js/validator.js"></script>  
+      <script type="text/javascript" src="js/custom.js"></script>  
+
       <div id="top-image"></div>
         <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -48,21 +51,6 @@
       </div>
     </nav>
       
-<!--      Background motion-->
-      <script>$(document).ready(function() {
-          var movementStrength = 8;
-          var height = movementStrength / $(window).height();
-          var width = movementStrength / $(window).width();
-          $("body").mousemove(function(e) {
-            var pageX = e.pageX - ($(window).width() / 2);
-            var pageY = e.pageY - ($(window).height() / 2);
-            var newvalueX = width * pageX * -1 - 25;
-            var newvalueY = height * pageY * -1 - 50;
-            $('body').css("background-position", newvalueX + "px     " + newvalueY + "px");
-          });
-        });
-      </script>
-      
       <div class="rowTop">
             <div class="page-header">
             <h1>WELCOME TO THE FORCE</h1>
@@ -70,28 +58,30 @@
           </div>
       </div>
       
-
       <div class="rowTabs">
         <div class="col-md-6">
             <div class="contain">
-
-             <form class="form-signin">
-                <h4 class="form-signin-heading">Sign in</h4>
-                <label for="inputEmail" class="sr-only">Email</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                  </label>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            </form>
+                
+                <form data-toggle="validator" role="form">
+                    <h4 class="form-signin-heading">Sign in</h4>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="That email address is invalid." required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                      <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
+                      <span class="help-block">Minimum of 6 characters</span>
+                    </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                  </div>
+                </form>
+                
+                
           </div>
         </div>
         <div class="col-md-6">
-            <div class="contain"><h4>Make your schedule with The Force.</h4>
+            <div class="contain"><h4>Create your schedule with The Force.</h4>
                  <ul>
                   <li>Lorem ipsum dolor sit amet</li>
                   <li>Consectetur adipiscing elit</li>
@@ -99,7 +89,7 @@
                 <li>Labore et dolore magna aliqua</li>
                      <li>Labore et dolore magna aliqua</li>
                 </ul>
-                <a  href="#foo" data-toggle="modal" data-target="#myModal">Don’t have an account? Create one now</a>
+                <a  href="#foo" data-toggle="modal" data-target="#myModal">Don’t have an account? Create one now.</a>
             </div>  
           </div> 
       </div>
@@ -111,25 +101,25 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+                        <h4 class="modal-title" id="myModalLabel">Create Account</h4>
                       </div>
                       <div class="modal-body">
-                         <form class="form-signin">
-                            <label for="inputEmail" class="sr-only">Email</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email*" required autofocus>
-                            <label for="inputPassword" class="sr-only">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password*" required>
-                             
-<!--                            Dropdown menu-->
-                        <select class="form-control" id="sel1">
-                            <option>Software Engineering</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                             
-                             <div class="panel panel-default">
-                              <div class="panel-heading">Select the courses you have passed.</div>
+                          
+                          <form data-toggle="validator" role="form">
+                            <div class="form-group">
+                                 <input type="text" class="form-control" id="InputName" placeholder="Name*" required>
+                              </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="inputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                                <div class="help-block with-errors"></div>
+                              </div>
+                              <div class="form-group">
+                                  <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password*" required>
+                                  <span class="help-block">Minimum of 6 characters</span>
+                                </div>
+                              
+                              <div class="panel panel-default">
+                              <div class="panel-heading">Select the courses you have passed below.</div>
                               <div class="panel-body">
                                 <h3>ENGR</h3>
                                   <div class="course-list">
@@ -141,10 +131,18 @@
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 233</label>
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="">ENGR 213</label>
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 233</label>
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="">ENGR 213</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="">ENGR 233</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
+                                    <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
                                   </div>
+                                  <hr>
                                 <h3>COMP</h3>
                                 <div class="course-list">
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 213</label>
@@ -166,6 +164,7 @@
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 201</label>
                                   </div>
+                                  <hr>
                                   <h3>SOEN</h3>
                                 <div class="course-list">
                                     <label class="checkbox-inline"><input type="checkbox" value="">ENGR 213</label>
@@ -197,14 +196,17 @@
                                   </div>
                                  </div>
                                 </div>
-                        </form>  
-                      </div>
-                      <div class="modal-footer">
-<!--                        <button type="button" class="btnModal btn-default" data-dismiss="modal">Cancel</button>-->
-                        <button type="submit" class="btnModal btn-primary">Create Account</button>
+                              
+                              <div class="form-group">
+                              <button type="submit" class="btnModal btn-primary">Create Account</button>
+                              </div>
+                          </form>
+  
                       </div>
                     </div>
                   </div>
                 </div>
+      
+      
   </body>
 </html>
