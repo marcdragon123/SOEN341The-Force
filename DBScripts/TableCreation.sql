@@ -18,7 +18,7 @@ USE `soen341` ;
 -- Table `soen341`.`Student`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `soen341`.`Student` (
-  `idStudent` INT NOT NULL auto_increment,
+  `idStudent` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
   `PermenantCode` VARCHAR(45) NOT NULL,
@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 -- Table `soen341`.`Addresses`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `soen341`.`Addresses` (
-  `idAddresses` INT NOT NULL auto_increment,
+  `idAddresses` INT NOT NULL AUTO_INCREMENT,
   `address` VARCHAR(45) NOT NULL,
   `line 2` VARCHAR(45) NULL,
   `city` VARCHAR(45) NULL,
@@ -51,7 +51,7 @@ ENGINE = InnoDB;
 -- Table `soen341`.`course_Master_List`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `soen341`.`course_Master_List` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `Course_code` VARCHAR(45) NOT NULL,
   `description` VARCHAR(250) NULL,
   `Credits` INT(11) NULL,
@@ -119,6 +119,21 @@ CREATE TABLE IF NOT EXISTS `soen341`.`Prereq` (
   `PrereqCourseID` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`MainCourseID`, `PrereqCourseID`),
   INDEX `fk_Prereq_course_Master_List2_idx` (`PrereqCourseID` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `soen341`.`Timeslot`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `soen341`.`Timeslot` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `Sections_Section` VARCHAR(45) NOT NULL,
+  `Sections_course_Master_List_id` VARCHAR(45) NOT NULL,
+  `start` TIME NOT NULL,
+  `end` TIME NOT NULL,
+  `DOW` CHAR NOT NULL,
+  PRIMARY KEY (`id`, `Sections_Section`, `Sections_course_Master_List_id`),
+  INDEX `fk_Timeslot_Sections1_idx` (`Sections_Section` ASC, `Sections_course_Master_List_id` ASC))
 ENGINE = InnoDB;
 
 
