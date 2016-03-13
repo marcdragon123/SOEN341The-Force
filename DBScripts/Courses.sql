@@ -43,3 +43,4 @@ INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALU
 INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('SOEN', 385,'Control System',3);
 INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('ENGR', 392,'Impact of Technology on Society',3);
 #INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('SOEN', 490,'Capstone Software Engineering Design Project',4);
+
