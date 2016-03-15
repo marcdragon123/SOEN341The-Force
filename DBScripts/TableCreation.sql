@@ -24,8 +24,7 @@ CREATE TABLE IF NOT EXISTS `soen341`.`Student` (
   `PermenantCode` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `email` VARCHAR(70) UNIQUE NOT NULL,
-  PRIMARY KEY (`idStudent`),
-  UNIQUE INDEX `PermenantCode_UNIQUE` (`PermenantCode` ASC))
+  PRIMARY KEY (`idStudent`))
 ENGINE = InnoDB;
 
 
