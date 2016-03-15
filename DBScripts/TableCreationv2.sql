@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `soen341`.`Student` (
   `idStudent` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
-  `PermenantCode` VARCHAR(45) NOT NULL,
+  `PermenantCode` VARCHAR(45),
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idStudent`),
   UNIQUE INDEX `PermenantCode_UNIQUE` (`PermenantCode` ASC))
