@@ -62,9 +62,10 @@
         <div class="col-md-6">
             <div class="contain">
                 
-                <form data-toggle="validator" role="form">
+                <form id="signin" data-toggle="validator" role="form" action='PHP/signin_up.php' method='post'>
                     <h4 class="form-signin-heading">Sign in</h4>
                   <div class="form-group">
+					<input type="hidden" value="signin" name="reason" />
                     <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="That email address is invalid." required>
                     <div class="help-block with-errors"></div>
                   </div>
@@ -105,16 +106,20 @@
                       </div>
                       <div class="modal-body">
                           
-                          <form data-toggle="validator" role="form">
+                          <form id="signup" data-toggle="validator" role="form" method="post" action="PHP/signin_up.php">
+							<input type="hidden" value="signup" name="reason" />
                             <div class="form-group">
-                                 <input type="text" class="form-control" id="InputName" placeholder="Name*" required>
+                                 <input type="text" class="form-control" name="InputFirstName" placeholder="First Name*" required>
+                              </div>
+							  <div class="form-group">
+                                 <input type="text" class="form-control" name="InputLastName" placeholder="Last Name*" required>
                               </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                                <input type="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
                                 <div class="help-block with-errors"></div>
                               </div>
                               <div class="form-group">
-                                  <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password*" required>
+                                  <input type="password" data-minlength="6" class="form-control" name="InputPassword" placeholder="Password*" required>
                                   <span class="help-block">Minimum of 6 characters</span>
                                 </div>
                               
