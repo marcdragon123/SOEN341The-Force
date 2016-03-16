@@ -44,16 +44,16 @@ function signUp(){
 	
 	$conn = getCon();
 	
-	$qry = "INSERT INTO STUDENT (FirstName, LastName, password) VALUES (";
-	$qry = $qry. "'" . $_POST['inputFirstName'] . "', ";
-	$qry = $qry. "'" . $_POST['inputLastName'] . "', ";
-	$qry = $qry. "password('" . $_POST['inputPassword'] . "'),";
-	$qry = $qry. "'" . $_POST['inputemail'] . "');";
+	$qry = "INSERT INTO STUDENT (FirstName, LastName, password, email) VALUES (";
+	$qry = $qry. "'" . $_POST['InputFirstName'] . "', ";
+	$qry = $qry. "'" . $_POST['InputLastName'] . "', ";
+	$qry = $qry. "password('" . $_POST['InputPassword'] . "'),";
+	$qry = $qry. "'" . $_POST['InputEmail'] . "');";
 	echo $qry;
 	$res = $conn->query($qry);
 	closeCon($conn);
 	if($res){
-		header('Location: ../index.html');
+		//header('Location: ../index.html');
 		echo("result worked <br />");
 	}
 	echo "didn't redirect";
