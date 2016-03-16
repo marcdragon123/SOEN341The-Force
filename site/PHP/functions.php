@@ -40,13 +40,39 @@ function excuteQuery($qry, $conn){
 	
 }
 
-function signUp($fname, $lname, $pass, $email, $conn){
+function signUp(){
+	$conn = getCon();
+	
 	$qry = "INSERT INTO STUDENT (FirstName, LastName, password) VALUES (";
-	$qry = "'" . $fname . "', ";
-	$qry = "'" . $lname . "', ";
-	$qry = "password('" . $pass . "'),";
-	$qry = "'" . $email . ");";
+	$qry = "'" . $_POST['inputFirstName'] . "', ";
+	$qry = "'" . $_POST['inputLastName'] . "', ";
+	$qry = "password('" . $_POST['inputPassword'] . "'),";
+	$qry = "'" . $_POST['inputemail'] . ");";
 	$res = $conn->query($qry);
-	return $res;
+	
+	closeCon($conn);
+	if($res){
+		header('Location = ../index.html');
+	}
+}
+
+function signIn(){
+	$link = getCon();
+
+	$email = $_POST['inputEmail'];
+	$pass = $_POST['inputPassword'];
+	$result = $link->query($link, $query1 = "select email, password( ' + $pass + ') = password from student where ' + $email + ' = email; " );
+	$errorstr = "Sorry could not login, invalid password or username. Please resubmit with the right login.";
+	
+	closeCon($link);
+	
+	if($result){
+		//link($target = "../Account.html" , $link = "Account");
+		header('Location = ../index.html');
+	}
+	else{
+		$_POST['error_msg'] = $errorstr;
+		header('Location = ../SignIn.html');
+	}
 }
 ?>
