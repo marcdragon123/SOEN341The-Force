@@ -41,15 +41,16 @@ function excuteQuery($qry, $conn){
 }
 
 function signUp(){
+	
 	$conn = getCon();
 	
 	$qry = "INSERT INTO STUDENT (FirstName, LastName, password) VALUES (";
-	$qry = "'" . $_POST['inputFirstName'] . "', ";
-	$qry = "'" . $_POST['inputLastName'] . "', ";
-	$qry = "password('" . $_POST['inputPassword'] . "'),";
-	$qry = "'" . $_POST['inputemail'] . ");";
+	$qry = $qry. "'" . $_POST['inputFirstName'] . "', ";
+	$qry = $qry. "'" . $_POST['inputLastName'] . "', ";
+	$qry = $qry. "password('" . $_POST['inputPassword'] . "'),";
+	$qry = $qry. "'" . $_POST['inputemail'] . "');";
+	echo $qry;
 	$res = $conn->query($qry);
-	
 	closeCon($conn);
 	if($res){
 		header('Location: ../index.html');
