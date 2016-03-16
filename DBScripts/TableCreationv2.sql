@@ -175,6 +175,17 @@ CREATE TABLE IF NOT EXISTS `soen341`.`Prereq` (
     ON UPDATE NO ACTION*/)
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `soen341`.`Timeslot` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `Sections_Section` VARCHAR(45) NOT NULL,
+  `Sections_course_Master_List_id` VARCHAR(45) NOT NULL,
+  `start` TIME NOT NULL,
+  `end` TIME NOT NULL,
+  `DOW` CHAR NOT NULL,
+  PRIMARY KEY (`id`, `Sections_Section`, `Sections_course_Master_List_id`),
+  INDEX `fk_Timeslot_Sections1_idx` (`Sections_Section` ASC, `Sections_course_Master_List_id` ASC))
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
