@@ -10,9 +10,9 @@ $reason = $_POST['reason'];
 
 include 'functions.php';
 
-if ($reason = 'signin'){
+if ($reason == 'signin'){
 	signIn();
-}else if($reason = 'signup'){
+}else if($reason == 'signup'){
 	signUp();
 }
 

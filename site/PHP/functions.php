@@ -52,8 +52,10 @@ function signUp(){
 	
 	closeCon($conn);
 	if($res){
-		header('Location = ../index.html');
+		header('Location: ../index.html');
+		echo("result worked <br />");
 	}
+	echo "didn't redirect";
 }
 
 function signIn(){
@@ -61,18 +63,20 @@ function signIn(){
 
 	$email = $_POST['inputEmail'];
 	$pass = $_POST['inputPassword'];
-	$result = $link->query($link, $query1 = "select email, password( ' + $pass + ') = password from student where ' + $email + ' = email; " );
+	$result = $link->query("select email, password( ' + $pass + ') = password from student where ' + $email + ' = email; " );
 	$errorstr = "Sorry could not login, invalid password or username. Please resubmit with the right login.";
 	
 	closeCon($link);
 	
 	if($result){
 		//link($target = "../Account.html" , $link = "Account");
-		header('Location = ../index.html');
+		header('Location: ../index.html');
+		echo("result worked <br />");
 	}
 	else{
 		$_POST['error_msg'] = $errorstr;
-		header('Location = ../SignIn.html');
+		header('Location: ../SignIn.html');
 	}
+	echo "didn't redirect";
 }
 ?>

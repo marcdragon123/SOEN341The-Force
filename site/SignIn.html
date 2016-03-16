@@ -75,6 +75,7 @@
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary">Sign in</button>
                   </div>
+					<input type="hidden" value="signin" id="reason" />
                 </form>
                 
                 
@@ -105,7 +106,8 @@
                       </div>
                       <div class="modal-body">
                           
-                          <form id="signup" data-toggle="validator" role="form">
+                          <form id="signup" data-toggle="validator" role="form" method="post" action="">
+							<input type="hidden" value="signun" id="reason" />
                             <div class="form-group">
                                  <input type="text" class="form-control" id="InputFirstName" placeholder="First Name*" required>
                               </div>
