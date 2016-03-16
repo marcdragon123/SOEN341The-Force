@@ -31,12 +31,22 @@ function closeCon($conn){
 	$conn->close();
 }
 
-function excuteQuery($qry){
+function excuteQuery($qry, $conn){
 	$res = $conn->query($qry);
 	if($res == null || $res === FALSE){
 		return false;
 	}
 	return $res;
 	
+}
+
+function signUp($fname, $lname, $pass, $email, $conn){
+	$qry = "INSERT INTO STUDENT (FirstName, LastName, password) VALUES (";
+	$qry = "'" . $fname . "', ";
+	$qry = "'" . $lname . "', ";
+	$qry = "password('" . $pass . "'),";
+	$qry = "'" . $email . ");";
+	$res = $conn->query($qry);
+	return $res;
 }
 ?>
