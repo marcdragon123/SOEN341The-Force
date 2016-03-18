@@ -53,7 +53,7 @@ function signUp(){
 	$res = $conn->query($qry);
 	closeCon($conn);
 	if($res){
-		//header('Location: ../index.html');
+		header('Location: ../index.html');
 		echo("result worked <br />");
 	}
 	echo "didn't redirect";
@@ -61,16 +61,20 @@ function signUp(){
 
 function signIn(){
 	$link = getCon();
-
+	//var_dump($_POST);
 	$email = $_POST['inputEmail'];
 	$pass = $_POST['inputPassword'];
-	$result = $link->query("select email, password( ' + $pass + ') = password from student where ' + $email + ' = email; " );
+	$result = $link->query("select email, password( '" . $pass . "') = password from student where '" . $email . "' = email; " );
 	$errorstr = "Sorry could not login, invalid password or username. Please resubmit with the right login.";
 	
+	//echo "select email, password( '" . $pass . "') = password from student where '" . $email . "' = email; " ;
 	closeCon($link);
-	
-	if($result){
+	$row = $result->fetch_row();
+	/*echo $row[1]."<br />";
+	echo $result->num_rows;*/
+	if($row[1] == '1' && $result->num_rows == 1){
 		//link($target = "../Account.html" , $link = "Account");
+		
 		header('Location: ../index.html');
 		echo("result worked <br />");
 	}
