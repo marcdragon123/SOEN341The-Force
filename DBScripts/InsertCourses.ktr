@@ -103,9 +103,10 @@
   </connection>
   <order>
   <hop> <from>Text file input</from><to>SQL File Output</to><enabled>N</enabled> </hop>
-  <hop> <from>Table input</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
   <hop> <from>Modified Java Script Value</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>SQL File Output 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Table input</from><to>Clone row</to><enabled>Y</enabled> </hop>
+  <hop> <from>Clone row</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>SQL File Output</name>
@@ -296,7 +297,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>144</xloc>
-      <yloc>128</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -326,7 +327,7 @@
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>288</xloc>
-      <yloc>128</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -365,8 +366,8 @@
       </file>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>448</xloc>
-      <yloc>128</yloc>
+      <xloc>608</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -415,8 +416,34 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>368</xloc>
-      <yloc>128</yloc>
+      <xloc>448</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Clone row</name>
+    <type>CloneRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <nrclones>2</nrclones>
+    <addcloneflag>N</addcloneflag>
+    <cloneflagfield/>
+    <nrcloneinfield>N</nrcloneinfield>
+    <nrclonefield/>
+    <addclonenum>N</addclonenum>
+    <clonenumfield/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>208</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
