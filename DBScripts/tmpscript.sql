@@ -316,3 +316,5 @@ insert into prereq values
 
 insert into prereq values
 (floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1, floor(round(rand(),18) * (Select count(*) from course_master_list)+1)+1);
+
+/*insert into prereq values (,);*/
