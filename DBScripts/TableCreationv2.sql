@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `soen341`.`Timeslot` (
   `Sections_course_Master_List_id` VARCHAR(45) NOT NULL,
   `start` TIME NOT NULL,
   `end` TIME NOT NULL,
-  `DOW` CHAR NOT NULL,
+  `DOW` CHAR(5) NOT NULL,
   PRIMARY KEY (`id`, `Sections_Section`, `Sections_course_Master_List_id`),
   INDEX `fk_Timeslot_Sections1_idx` (`Sections_Section` ASC, `Sections_course_Master_List_id` ASC))
 ENGINE = InnoDB;
