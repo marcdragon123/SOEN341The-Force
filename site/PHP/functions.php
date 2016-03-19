@@ -84,4 +84,14 @@ function signIn(){
 	}
 	echo "didn't redirect";
 }
+
+function loadClasses(){
+	$conn = getCon();
+	
+	$result = $conn->query("Select course_code, `number` from course_master_list order  by course_code, `number`;");
+	var_dump($result->fetch_all());
+	//foreach()
+	
+	closeCon($conn);
+}
 ?>

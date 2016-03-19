@@ -186,6 +186,13 @@ CREATE TABLE IF NOT EXISTS `soen341`.`Timeslot` (
   INDEX `fk_Timeslot_Sections1_idx` (`Sections_Section` ASC, `Sections_course_Master_List_id` ASC))
 ENGINE = InnoDB;
 
+CREATE tABLE IF NOT EXISTS `soen341`.`Admin` (
+	`username` varchar(45) not null,
+    `password` varchar(45) not null,
+    `first_name` varchar(45),
+    `last_name` varchar(45),
+    Primary key (`username`)
+)ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

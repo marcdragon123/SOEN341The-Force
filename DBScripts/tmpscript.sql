@@ -5,6 +5,9 @@ Select * from student;
 #Select * from information_schema.tables
 Show columns from student;
 
+insert into admin (`username`, `password`, `first_name`, `last_name`)
+values ('mstyoda', password('there is no try'), 'Master', 'Yoda');
+
 insert into student (FirstName, LastName, PermenantCode, `password`, email) 
 values ('Georges','Mathieu','GMASASASASA', password('BLAHBLAH'), 'gm@email.com');
 
