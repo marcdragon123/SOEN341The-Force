@@ -1,9 +1,3 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
 <?php
 include "functions.php";
 $con = getCon();
@@ -22,10 +16,7 @@ for ($i = 0; $i < sizeOf($class_ID); $i++)
 	for ($j = 0; $j < 3; $j++)
 	{
 	$sections[$j] = array($classID[$i],"select Section from Sections where course_master_list_id = '$IDs[$i][1]'");
-	echo $sections[$i][$j];
 	}
 }
 
 ?>
-</body>
-</html>
