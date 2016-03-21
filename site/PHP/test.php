@@ -10,6 +10,11 @@ include "functions.php"
 <html>
     <head>
         <meta charset="UTF-8">
+		<style>
+			div{
+				border: 1px  solid  black;
+			}
+		</style>
         <title></title>
     </head>
     <body>

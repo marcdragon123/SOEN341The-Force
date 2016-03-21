@@ -85,12 +85,26 @@ function signIn(){
 	echo "didn't redirect";
 }
 
-function loadClasses(){
+function loadClasses($nme){
 	$conn = getCon();
 	
 	$result = $conn->query("Select course_code, `number` from course_master_list order  by course_code, `number`;");
-	var_dump($result->fetch_all());
-	//foreach()
+	echo "<code>";
+	//print_r(array_values($result->fetch_all()));
+	echo "</code>";
+	$last = null;
+	echo "<div>";
+	foreach($result->fetch_all() as $val){
+		if($last == null){
+			$last = $val[0];
+		}
+		else if($last != $val[0]){
+			echo "</div><h3>$val[0]</h3><div>";
+			$last = $val[0];
+		}
+		echo "<input type='checkbox' name=".$nme." value='".$val[0]." ".$val[1]."' /> ".$val[0]." ".$val[1]."<br/>";
+	}
+	echo "</div>";
 	
 	closeCon($conn);
 }
