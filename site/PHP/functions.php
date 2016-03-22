@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//header('Content-Type: application/json');
 
 
 function getCon(){
@@ -83,5 +83,32 @@ function signIn(){
 		header('Location: ../SignIn.html');
 	}
 	echo "didn't redirect";
+}
+
+function loadClasses($nme){
+	$conn = getCon();
+	
+	$result = $conn->query("Select course_code, `number` from course_master_list order  by course_code, `number`;");
+	echo "<code>";
+	//print_r(array_values($result->fetch_all()));
+	echo "</code>";
+	$last = null;
+	echo "<div class='panel panel-default'>";
+    echo '<div class="panel-heading">Select the courses you have passed below.</div>';
+    echo '<div class="panel-body">';
+	foreach($result->fetch_all() as $val){
+		if($last == null){
+			$last = $val[0];
+			echo '<h3>'.$val[0].'</h3>';
+		}
+		else if($last != $val[0]){
+			echo "</div><h3>$val[0]</h3><div>";
+			$last = $val[0];
+		}
+		echo "<label><input type='checkbox' name='".$nme."' value='".$val[0]." ".$val[1]."' /> ".$val[0]." ".$val[1]."</label><br/>";
+	}
+	echo "</div></div></div>";
+	
+	closeCon($conn);
 }
 ?>
