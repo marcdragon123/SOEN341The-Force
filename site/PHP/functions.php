@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//header('Content-Type: application/json');
 
 
 function getCon(){
@@ -93,18 +93,21 @@ function loadClasses($nme){
 	//print_r(array_values($result->fetch_all()));
 	echo "</code>";
 	$last = null;
-	echo "<div>";
+	echo "<div class='panel panel-default'>";
+    echo '<div class="panel-heading">Select the courses you have passed below.</div>';
+    echo '<div class="panel-body">';
 	foreach($result->fetch_all() as $val){
 		if($last == null){
 			$last = $val[0];
+			echo '<h3>'.$val[0].'</h3>';
 		}
 		else if($last != $val[0]){
 			echo "</div><h3>$val[0]</h3><div>";
 			$last = $val[0];
 		}
-		echo "<input type='checkbox' name=".$nme." value='".$val[0]." ".$val[1]."' /> ".$val[0]." ".$val[1]."<br/>";
+		echo "<label><input type='checkbox' name='".$nme."' value='".$val[0]." ".$val[1]."' /> ".$val[0]." ".$val[1]."</label><br/>";
 	}
-	echo "</div>";
+	echo "</div></div></div>";
 	
 	closeCon($conn);
 }
