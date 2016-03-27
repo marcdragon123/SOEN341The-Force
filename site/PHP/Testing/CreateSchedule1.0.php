@@ -9,13 +9,14 @@
     </head>
     <body>
 <?php
+echo "hell";
 include "../functions.php";
 $conn = getCon();
 
 //$class_ID=$_POST[class_id];
 
 $class_ID = array('COMP 249', 'SOEN 341', 'ENGR 201', 'SOEN 228', 'ENGR 213');
-$IDs = [];
+$IDs = array();
 for ($i = 0; $i < sizeOf($class_ID); $i++){
 	echo substr($class_ID[$i],0,4)." ".(int)substr($class_ID[$i],5,3);
 		$sql = "select id from course_master_list where course_code = ". substr($class_ID[$i],0,4)." and number = ".substr($class_ID[$i],5,3);
@@ -28,7 +29,7 @@ for ($i = 0; $i < sizeOf($class_ID); $i++){
 
 		echo($IDs[$i])."<br/>";
 }
-$sections = [];
+$sections = array();
 for ($i = 0; $i < sizeOf($class_ID); $i++)
 {
 	for ($j = 0; $j < 3; $j++)
