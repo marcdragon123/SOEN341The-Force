@@ -26,13 +26,22 @@ for ($i = 0; $i < sizeOf($class_ID); $i++){
 		echo($result)."<br/>"; 
 		$IDs[] = array($classID[$i], $result);
 
+<<<<<<< HEAD
 		echo($IDs[$i])."<br/>";
 }
 $sections = [];
+=======
+$IDs = array();
+for ($i = 0; $i < sizeOf($class_ID); $i++)
+		$IDs[$i] = array($classID[$i],"select id from course_master_list where Course_code = 'substr(".$array[$i].",-4)' and number = 'substr(".$array[$i].",5)'");
+
+$sections = array();
+>>>>>>> origin/server_side
 for ($i = 0; $i < sizeOf($class_ID); $i++)
 {
 	for ($j = 0; $j < 3; $j++)
 	{
+<<<<<<< HEAD
 	$sql = "select Section from Sections where course_master_list_id = '.$IDs[$i][1]'";
 	$result = $conn -> query($sql);
 	$sections[] = array($classID[$i], $result);
@@ -40,6 +49,13 @@ for ($i = 0; $i < sizeOf($class_ID); $i++)
 	}
 }
 closeCon($conn);
+=======
+	$sections[$j] = array($classID[$i],"select Section from Sections where course_master_list_id = '".$IDs[$i][1]."'");
+	echo $sections[$i][$j];
+	}
+}
+
+>>>>>>> origin/server_side
 ?>
 </body>
 </html>
