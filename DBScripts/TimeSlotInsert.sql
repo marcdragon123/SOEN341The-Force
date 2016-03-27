@@ -1,3 +1,3 @@
 use soen341;
 
-select * from Sections;
+select * from course_master_list;
