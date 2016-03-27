@@ -9,7 +9,6 @@
     </head>
     <body>
 <?php
-echo "hell";
 include "../functions.php";
 $conn = getCon();
 
@@ -19,12 +18,13 @@ $class_ID = array('COMP 249', 'SOEN 341', 'ENGR 201', 'SOEN 228', 'ENGR 213');
 $IDs = array();
 for ($i = 0; $i < sizeOf($class_ID); $i++){
 	echo substr($class_ID[$i],0,4)." ".(int)substr($class_ID[$i],5,3);
-		$sql = "select id from course_master_list where course_code = ". substr($class_ID[$i],0,4)." and number = ".substr($class_ID[$i],5,3);
+		$sql = "select id from course_master_list where course_code = '". substr($class_ID[$i],0,4)."' and number = ".substr($class_ID[$i],5,3);
 		echo ($sql)."<br/>"; 
 		$query = $conn->query($sql);
-		echo ($query)."<br/>"; 
+		var_dump($query);
+		//echo ($query)."<br/>"; 
 		$result = $query->fetch_all();
-		echo($result)."<br/>"; 
+		var_dump($result); 
 		$IDs[] = array($classID[$i], $result);
 
 		echo($IDs[$i])."<br/>";
