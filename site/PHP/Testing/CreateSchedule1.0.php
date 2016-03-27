@@ -25,19 +25,21 @@ for ($i = 0; $i < sizeOf($class_ID); $i++){
 		echo "<br/>"; 
 		$result = $query->fetch_all();
 		//var_dump($result); 
-		$IDs= array_merge($IDs,array($class_ID[$i], $result[0][0]));
+		$IDs[$i]= array($class_ID[$i], $result[0][0]);
 		var_dump($IDs);
-		//echo($IDs[$i])."<br/>";
+		echo"<br/>";
 }
 $sections = array();
 for ($i = 0; $i < sizeOf($class_ID); $i++)
 {
 	for ($j = 0; $j < 3; $j++)
 	{
-	$sql = "select Section from Sections where course_master_list_id = '.$IDs[$i][1]'";
-	$result = $conn -> query($sql);
-	$sections[] = array($classID[$i], $result);
-	echo var_dump($sections[$i][$j])."<br/>";
+	$sql = "select Section from Sections where course_master_list_id = '".$IDs[$i][1]."'";
+	$result = $conn->query($sql);
+	$set = $result->fetch_all();
+	$sections[$classID[$i][1]] = $set[0];
+	var_dump($sections);
+	echo "<br />";
 	}
 }
 closeCon($conn);
