@@ -22,26 +22,48 @@ for ($i = 0; $i < sizeOf($class_ID); $i++){
 		//echo ($sql)."<br/>"; 
 		$query = $conn->query($sql);
 		//var_dump($query);
-		echo "<br/>"; 
+		//echo "<br/>"; 
 		$result = $query->fetch_all();
 		//var_dump($result); 
-		$IDs[$i]= array($class_ID[$i], $result[0][0]);
-		var_dump($IDs);
-		echo"<br/>";
+		$IDs[$i]= array($class_ID[$i], $result);
+		//var_dump($IDs);
+		//echo"<br/>";
 }
+
+var_dump($IDs);
+echo"<br/>";
+
 $sections = array();
-for ($i = 0; $i < sizeOf($class_ID); $i++)
+$rows = array();
+for ($i = 0; $i < sizeOf($IDs); $i++)
 {
-	for ($j = 0; $j < 3; $j++)
+	
+	//for ($j = 0; $j < 3; $j++)
 	{
-	$sql = "select Section from Sections where course_master_list_id = '".$IDs[$i][1]."'";
+	$sql = "select Section from Sections where course_master_list_id = ".$IDs[$i][1];
 	$result = $conn->query($sql);
-	$set = $result->fetch_all();
-	$sections[$classID[$i][1]] = $set[0];
-	var_dump($sections);
-	echo "<br />";
+
+	while($row = $result->fetch_row()) 
+	{
+  	$rows[]=$row;
+ 
+	}
+	//$sections[$i] = array($class_ID[$i], $rows);
 	}
 }
+for ($i = 0; $i < (sizeOf($IDs)*3); $j++)
+{
+	for ($j = 0; $j < sizeOf($IDs); $j++)
+	{
+	for ($k = 0; $k < 3; $k++)
+	{
+	$sections[$i] = array($class_ID[$j], $rows[$k]);
+	}
+	}
+}
+	
+var_dump($sections);
+echo "<br />";
 closeCon($conn);
 ?>
 </body>
