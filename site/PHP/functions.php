@@ -86,7 +86,7 @@ function signIn(){
 		//link($target = "../Account.html" , $link = "Account");
 		$_SESSION['loginID'] = $row[0];
 		//var_dump($_SESSION);
-		//header('Location: ../index.html');
+		header('Location: ../index.html');
 		//echo("result worked <br />");
 	}
 	else{
