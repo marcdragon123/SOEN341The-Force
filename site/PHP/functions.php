@@ -85,9 +85,9 @@ function signIn(){
 	if($row[2] == '1' && $result->num_rows == 1){
 		//link($target = "../Account.html" , $link = "Account");
 		$_SESSION['loginID'] = $row[0];
-		var_dump($_SESSION);
+		//var_dump($_SESSION);
 		//header('Location: ../index.html');
-		echo("result worked <br />");
+		//echo("result worked <br />");
 	}
 	else{
 		$_POST['error_msg'] = $errorstr;
@@ -124,7 +124,12 @@ function loadClasses($nme){
 }
 
 function isLoggedIN(){
-	return isset($_SESSION['loginID']);
+	if(isset($_SESSION['loginID'])){
+		return;
+	}
+	else{
+		header("Location: wolfcall.ddns.net:8085");
+	}
 }
 
 ?>
