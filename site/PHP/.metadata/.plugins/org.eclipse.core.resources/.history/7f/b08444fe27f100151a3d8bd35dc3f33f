@@ -1,0 +1,39 @@
+<?php 
+
+include "../functions.php";
+?>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+<?php
+$con = getCon();
+
+//$class_ID=$_POST[class_id];
+
+$class_ID = array('COMP 249', 'SOEN 341', 'ENGR 201', 'SOEN 228', 'ENGR 213');
+$IDs = [];
+for ($i = 0; $i < sizeOf($class_ID); $i++){
+		$sql = "select id from course_master_list where Course_code = '. substr($class_ID[$i],0,4).' and number = '.(int)substr($class_ID[$i],5,3)'";
+		$result = $con -> query($sql);
+		$IDs[] = array($classID[$i], $result);
+
+		print($IDs[$i])."<br/>";
+}
+$sections = [];
+for ($i = 0; $i < sizeOf($class_ID); $i++)
+{
+	for ($j = 0; $j < 3; $j++)
+	{
+	$sql = "select Section from Sections where course_master_list_id = '.$IDs[$i][1]'";
+	$result = $con -> query($sql);
+	$sections[] = array($classID[$i], $result);
+	echo var_dump($sections[$i][$j])."<br/>";
+	}
+}
+closeCon($con);
+?>
+</body>
+</html>
