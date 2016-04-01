@@ -43,10 +43,11 @@ for ($i = 0; $i < sizeOf($IDs); $i++)
 	$sql = "select Section from Sections where course_master_list_id = ".$IDs[$i][1];
 	$result = $conn->query($sql);
 
-	//while($row = $result->fetch_assoc()) 
+	while($row = $result->fetch_row()) 
 	{
-  	$rows[]=$result->fetch_assoc();
-  	
+  	$rows[]=$row;
+  	var_dump($rows);
+  	echo "<br />";
 	}
 	//$sections[$i] = array($class_ID[$i], $rows);
 	}

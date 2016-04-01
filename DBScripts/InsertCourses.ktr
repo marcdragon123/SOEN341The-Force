@@ -113,7 +113,7 @@
   <hop> <from>Modified Java Script Value 2 2</from><to>Append streams</to><enabled>Y</enabled> </hop>
   <hop> <from>Append streams</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Select values 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values 2</from><to>SQL File Output 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 2</from><to>SQL File Output 3</to><enabled>N</enabled> </hop>
   </order>
   <step>
     <name>Append streams</name>
