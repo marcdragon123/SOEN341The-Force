@@ -36,6 +36,7 @@ for ($i=0; $i < count($IDs); $i++){
 	for($j = 0; $j < 2; $j++)
 	{
 	$Times[$i][$j] = $Times[$i][$j][0];
+	$Times[$i][$j] = str_replace(":","",$Times[$i][$j]);
 	}
 	print_r($Times[$i]);
 	echo "<br />";
@@ -52,6 +53,7 @@ for ($i=0; $i < count($IDs); $i++){
 	for($j = 0; $j < 2; $j++)
 	{
 	$Timef[$i][$j] = $Timef[$i][$j][0];
+	$Timef[$i][$j] = str_replace(":","",$Timef[$i][$j]);
 	}
 	print_r($Timef[$i]);
 	echo "<br />";
@@ -71,10 +73,11 @@ for ($i=0; $i < count($IDs); $i++){
 	echo "<br />";
 }
 
+
 for($i=0; $i<count($TEMP); $i++){
 	for($j=0; $j<count($TEMP[$i]); $j++){
-		if (strlen($TEMP[$i][$j])>1){
-			$DOW[$i] = explode("," , $TEMP[$i][$j]);
+		if (strlen($TEMP[$i][j])>1){
+			$DOW[$i][$j] = explode("," , $TEMP[$i][$j]);
 		}
 		else{
 			$DOW[$i][$j] = $TEMP[$i][$j];
@@ -82,25 +85,127 @@ for($i=0; $i<count($TEMP); $i++){
 	}
 }
 
-for ($i=0; $i<count($DOW); $i++){
-	for ($j=0; $j<count($DOW[$i]); $j++){
-		for($k=0; $k<count($DOW[$i][$j]); $k++){
-			var_dump($DOW[$i][$j][$k]." ");
+for ($j=0; $j<count($DOW); $j++){
+	for($k=0; $k<count($DOW[$j]); $k++){
+		if (count($DOW[$j][$k])>1){
+			for($i=0; $i<count($DOW[$j][$k]); $i++){
+				print_r($DOW[$j][$k][$i]);
+				echo "<br />";
+			}
+		
+		}
+		else{
+			print_r($DOW[$j][$k]);
+			echo "<br />";
 		}
 	}
-	echo "<br />";
+}
 
+$tempo = "";
+for ($j=0; $j<5; $j++)
+{
+	$DOW[$j][2] = $DOW[$j][1];
+	
+	$tempo = $DOW[$j][0];
+	
+	$DOW[$j][0] = substr($tempo, 0, strpos($tempo, ','));
+	$DOW[$j][1] = substr($tempo, strpos($tempo, ',')+1);
+	
+	
+	print_r($DOW[$j]);
+	echo "<br />";
 }
 //Olivier Algorithm section
-$times = array(false, false, false, false, false);//for all five courses, if no conflic, put to true
+$timebool = array(false, false, false, false, false);//for all five courses, if no conflic, put to true
 for ($i = 0; $i < 4; $i++)
 {
 	for ($j = $i+1; $j < 5; $j++)
 	{
-		if ($DOW)
+		if ($DOW[$i][0] != $DOW[$j][0] && $DOW[$i][1] != $DOW[$j][0] && $DOW[$i][0] != $DOW[$j][1] && $DOW[$i][1] != $DOW[$j][1])//no common lectures DOW
 		{
-			
+			if ($DOW[$i][2] != $DOW[$j][2])//no common tutorial DOW
+			{
+				$timebool[$i] = true;
+			}
+			else
+			{
+				if ((int)$Times[$i][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
+				{
+					$timebool[$i] = true;
+				}
+				else if ((int)$Times[$i][2] < (int)$Timef[$j][2] && (int)$Times[$i][2] > (int)$Times[$j][2])//starts in middle of other
+				{
+					$timebool[$i] = false;
+				}
+				else if ((int)$Times[$j][2] > (int)$Timef[$i][2])
+				{
+					$timebool[$i] = true;
+				}
+			}
 		}
+		else
+		{
+			if ((int)$Times[$i][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
+			{
+				$timebool[$i] = true;
+			}
+			else if ((int)$Times[$i][0] < (int)$Timef[$j][0] && (int)$Times[$i][0] > (int)$Times[$j][0])//starts in middle of other
+			{
+				$timebool[$i] = false;
+			}
+			else if ((int)$Times[$j][0] > (int)$Timef[$i][0])
+			{
+				$timebool[$i] = true;
+			}
+		}
+	}
+}
+for ($j = 0; $j < 4; $j++)
+{
+if ($DOW[4][0] != $DOW[$j][0] && $DOW[4][1] != $DOW[$j][0] && $DOW[4][0] != $DOW[$j][1] && $DOW[4][1] != $DOW[$j][1])//no common lectures DOW
+		{
+			if ($DOW[4][2] != $DOW[$j][2])//no common tutorial DOW
+			{
+				$timebool[4] = true;
+			}
+			else
+			{
+				if ((int)$Times[4][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
+				{
+					$timebool[4] = true;
+				}
+				else if ((int)$Times[4][2] < (int)$Timef[$j][2] && (int)$Times[4][2] > (int)$Times[$j][2])//starts in middle of other
+				{
+					$timebool[4] = false;
+				}
+				else if ((int)$Times[$j][2] > (int)$Timef[4][2])
+				{
+					$timebool[4] = true;
+				}
+			}
+		}
+		else
+		{
+			if ((int)$Times[4][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
+			{
+				$timebool[4] = true;
+			}
+			else if ((int)$Times[4][0] < (int)$Timef[$j][0] && (int)$Times[4][0] > (int)$Times[$j][0])//starts in middle of other
+			{
+				$timebool[4] = false;
+			}
+			else if ((int)$Times[$j][0] > (int)$Timef[4][0])
+			{
+				$timebool[4] = true;
+			}
+		}
+}
+for ($i = 0; $i < 5; $i++)
+{
+	if ($timebool[$i] == false)
+	{
+	print_r("Course ".$class_ID[$i]." conflicts with other courses");
+	echo "<br />";
 	}
 }
 //These loops will have two checkers for two different indexes in the array of DOW which will check if there is a day of the week where they are equal.
