@@ -1,3 +1,3 @@
 use soen341;
 
-select * from Timeslot;
+select * from timeslot;
