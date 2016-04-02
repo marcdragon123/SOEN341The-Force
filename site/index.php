@@ -126,7 +126,7 @@
 			</div>
 		</div>
 	</div>
-	<form action = "/PHP/CreateSchedule1.0.php">
+	<form action = "/PHP/geotest.php">
 	<input type="submit" />
 	<input type = 'text' id = "test" />
 	</form>

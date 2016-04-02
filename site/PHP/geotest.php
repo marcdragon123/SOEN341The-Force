@@ -19,8 +19,9 @@ include "functions.php"
     </head>
     <body>
 		<?php
+		$_SESSION['loginID'] = 1;
 		// put your code here
-		loadClasses();
+		loadSchedule();
 		?>
     </body>
 </html>
