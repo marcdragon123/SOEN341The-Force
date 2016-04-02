@@ -158,26 +158,6 @@ for ($i = 0; $i < 4; $i++)
 			{
 				$timebool[$i] = true;
 			}
-			//Have to check Tutorials again
-			if ($DOW[$i][2] != $DOW[$j][2])//no common tutorial DOW
-			{
-				//don't want to overwrite any previous conflicts
-			}
-			else
-			{
-				if ((int)$Times[$i][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
-				{
-					//don't want to overwrite any previous conflicts
-				}
-				else if ((int)$Times[$i][2] < (int)$Timef[$j][2] && (int)$Times[$i][2] > (int)$Times[$j][2])//starts in middle of other
-				{
-					$timebool[$i] = false;
-				}
-				else if ((int)$Times[$j][2] > (int)$Timef[$i][2])
-				{
-					//don't want to overwrite any previous conflicts
-				}
-			}
 		}
 	}
 }
@@ -219,26 +199,6 @@ if ($DOW[4][0] != $DOW[$j][0] && $DOW[4][1] != $DOW[$j][0] && $DOW[4][0] != $DOW
 			else if ((int)$Times[$j][0] > (int)$Timef[4][0])
 			{
 				$timebool[4] = true;
-			}
-			//Have to check Tutorials again
-			if ($DOW[4][2] != $DOW[$j][2])//no common tutorial DOW
-			{
-				//don't want to overwrite any previous conflicts
-			}
-			else
-			{
-				if ((int)$Times[4][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
-				{
-					//don't want to overwrite any previous conflicts
-				}
-				else if ((int)$Times[4][2] < (int)$Timef[$j][2] && (int)$Times[4][2] > (int)$Times[$j][2])//starts in middle of other
-				{
-					$timebool[4] = false;
-				}
-				else if ((int)$Times[$j][2] > (int)$Timef[4][2])
-				{
-					//don't want to overwrite any previous conflicts
-				}
 			}
 		}
 }
