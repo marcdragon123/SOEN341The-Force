@@ -49,13 +49,19 @@ function signUp(){
 	$qry = $qry. "'" . $_POST['InputLastName'] . "', ";
 	$qry = $qry. "password('" . $_POST['InputPassword'] . "'),";
 	$qry = $qry. "'" . $_POST['InputEmail'] . "');";
-	echo $qry;
+	echo $qry."<br />";
 	$res = $conn->query($qry);
+	$qry = "Select idStudent from student";
+	$qry .= "where password('".$_POST['InputPassword']."') = password";
+	$qry .= "and email = '".$_POST['InputEmail']."'";
+	$res2 = $conn->query();
+	var_dump($res2);
 	closeCon($conn);
 	if($res){
-		header('Location: ../index.html');
+		//header('Location: ../index.html');
 		echo("result worked <br />");
 	}
+	//header('Location: ../index.html');
 	echo "didn't redirect";
 }
 
@@ -64,19 +70,24 @@ function signIn(){
 	//var_dump($_POST);
 	$email = $_POST['inputEmail'];
 	$pass = $_POST['inputPassword'];
-	$result = $link->query("select email, password( '" . $pass . "') = password from student where '" . $email . "' = email; " );
+	$qry = "select idstudent, email, password( '" . $pass . "') = password from student where '" . $email . "' = email " ;
+	$result = $link->query($qry);
 	$errorstr = "Sorry could not login, invalid password or username. Please resubmit with the right login.";
-	
+	//echo $qry."<br />";
+	//$res = $conn->query($qry);
+	//var_dump($result);
 	//echo "select email, password( '" . $pass . "') = password from student where '" . $email . "' = email; " ;
 	closeCon($link);
 	$row = $result->fetch_row();
-	/*echo $row[1]."<br />";
-	echo $result->num_rows;*/
-	if($row[1] == '1' && $result->num_rows == 1){
+	//var_dump($row);
+	//echo "<br />";
+	//echo $result->num_rows;*/
+	if($row[2] == '1' && $result->num_rows == 1){
 		//link($target = "../Account.html" , $link = "Account");
-		
+		$_SESSION['loginID'] = $row[0];
+		//var_dump($_SESSION);
 		header('Location: ../index.html');
-		echo("result worked <br />");
+		//echo("result worked <br />");
 	}
 	else{
 		$_POST['error_msg'] = $errorstr;
@@ -110,5 +121,29 @@ function loadClasses($nme){
 	echo "</div></div></div>";
 	
 	closeCon($conn);
+}
+
+function isLoggedIN(){
+	if(isset($_SESSION['loginID'])){
+		return;
+	}
+	else{
+		header("Location: wolfcall.ddns.net:8085");
+	}
+}
+
+
+function loadSchedule() {
+	$id = $_SESSION['loginID'];
+	$qry = "Select * from enrollment";
+	$qry .= "left join timeslot on timeslot.Sections_Section = enrollment.Sections_Section";
+	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id";
+	$qry .= "where ".$id." = emrollment.student.idstudent";
+	
+	$conn = getCon();
+	
+	$res = $conn->query($qry);
+	
+	$rows = $res->fetch_all();
 }
 ?>
