@@ -11,9 +11,12 @@
 .main-body{
 	width: 100%;
 	height: 100%;
-	background-color: #e6e6e6;
+    background-color: #e6e6e6;
 }
 
+body{
+    background-color: #e6e6e6;
+}
 
 .search-text{
 	color: #3498DB;
