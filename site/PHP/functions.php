@@ -132,4 +132,18 @@ function isLoggedIN(){
 	}
 }
 
+
+function loadSchedule() {
+	$id = $_SESSION['loginID'];
+	$qry = "Select * from enrollment";
+	$qry .= "left join timeslot on timeslot.Sections_Section = enrollment.Sections_Section";
+	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id";
+	$qry .= "where ".$id." = emrollment.student.idstudent";
+	
+	$conn = getCon();
+	
+	$res = $conn->query($qry);
+	
+	$rows = $res->fetch_all();
+}
 ?>
