@@ -58,13 +58,30 @@ function signUp(){
 	$qry = $qry. "'" . $_POST['InputLastName'] . "', ";
 	$qry = $qry. "password('" . $_POST['InputPassword'] . "'),";
 	$qry = $qry. "'" . $_POST['InputEmail'] . "');";
-	echo $qry."<br />";
+	//echo $qry."<br />";
 	$res = $conn->query($qry);
-	$qry = "Select idStudent from student";
-	$qry .= "where password('".$_POST['InputPassword']."') = password";
+	
+	$qry = "Select idStudent from student ";
+	$qry .= "where password('".$_POST['InputPassword']."') = password ";
 	$qry .= "and email = '".$_POST['InputEmail']."'";
-	$res2 = $conn->query();
-	var_dump($res2);
+	//echo $qry;
+	$res2 = $conn->query($qry);
+	
+	$tmp = $res2->fetch_row();
+	var_dump($tmp[0]);
+	$_SESSION['loginID'] = $tmp[0];
+	
+	echo "<br />".$_SESSION['loginID']."<br />";
+	
+	foreach($_POST["finished"] as $val){
+		$qry = "insert into transcripts "
+		. "(Enrollment_Student_idStudent, Enrollment_Sections_course_Master_List_id, completed) "
+		. "values (".$_SESSION["loginID"].", ".$val.", true)";
+		echo $qry."<br/>";
+		$res3= $conn->query($qry);
+		var_dump($res3);
+	}
+	
 	closeCon($conn);
 	if($res){
 		header('Location: ../index.php');
@@ -108,7 +125,7 @@ function signIn(){
 function loadClasses($nme){
 	$conn = getCon();
 	
-	$result = $conn->query("Select course_code, `number` from course_master_list order  by course_code, `number`;");
+	$result = $conn->query("Select course_code, `number`, id from course_master_list order  by course_code, `number`;");
 	echo "<code>";
 	//print_r(array_values($result->fetch_all()));
 	echo "</code>";
@@ -125,7 +142,7 @@ function loadClasses($nme){
 			echo "</div></div><div class='panel-body'><h3>$val[0]</h3><div class='checkboxList'>";
 			$last = $val[0];
 		}
-		echo "<label><input type='checkbox' name='".$nme."' value='".$val[0]." ".$val[1]."' /> ".$val[0]." ".$val[1]."</label><br/>";
+		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
 	}
 	echo "</div></div></div>";
 	

@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -131,7 +132,7 @@
                                   <span class="help-block">Minimum of 6 characters</span>
                                 </div>
                                 <?php
-                                  echo loadClasses();
+                                  echo loadClasses("finished");
                                 ?>
                               <div class="form-group">
                               <button type="submit" class="btnModal btn-primary">Create Account</button>
