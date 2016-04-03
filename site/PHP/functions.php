@@ -35,10 +35,12 @@ function getCon(){
 	return $conn;
 }
 
+//closes a connection takes a connection object
 function closeCon($conn){
 	$conn->close();
 }
 
+//takes a query and a connection to run a db query
 function excuteQuery($qry, $conn){
 	$res = $conn->query($qry);
 	if($res == null || $res === FALSE){
@@ -48,6 +50,7 @@ function excuteQuery($qry, $conn){
 	
 }
 
+//signs up a new user uses post for data
 function signUp(){
 	
 	$conn = getCon();
@@ -73,6 +76,7 @@ function signUp(){
 	echo "didn't redirect";
 }
 
+//signs the user in with POST data
 function signIn(){
 	$link = getCon();
 	//var_dump($_POST);
@@ -104,6 +108,7 @@ function signIn(){
 	echo "didn't redirect";
 }
 
+//loads a list of classes takes a name to fill the name attribute of the input
 function loadClasses($nme){
 	$conn = getCon();
 	
@@ -131,6 +136,7 @@ function loadClasses($nme){
 	closeCon($conn);
 }
 
+//checks if the session is set up
 function isLoggedIN(){
 	if(isset($_SESSION['loginID'])){
 		return;
@@ -140,7 +146,7 @@ function isLoggedIN(){
 	}
 }
 
-
+//loads the schedule for the index page
 function loadSchedule() {
 	$id = $_SESSION['loginID'];
 	$qry = "Select * from enrollment ";
@@ -182,6 +188,7 @@ function loadSchedule() {
 	
 }
 
+//converts day of week from letters to numbers
 function getDayStr($str){
 	$tokens = explode(',', $str);
 	$res = "";

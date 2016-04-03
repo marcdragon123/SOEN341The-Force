@@ -130,7 +130,7 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 
-   				$.post(".../PHP/functions.php", {function: "loadSchedule"});
+   				$.post("PHP/functions.php", {function: "loadSchedule"});
 
 			});
 		</script>
