@@ -6,7 +6,10 @@ background: url("../Assets/space.jpg") -25px -50px;
   height: 100%;
   background-size: calc(100% + 50px);
 }
-
+.panel-default h3{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 h4 {
   font-weight: 400;
     font-size: 24px;
@@ -107,9 +110,7 @@ a:link, a:visited, a:active, a:hover, a{
 .panel{
     margin: 15px;
 }
-.panel-heading{
-    margin-bottom: 20px;
-}
+
 
 .btnModal{
     border: 0px;
@@ -177,3 +178,4 @@ h1{
 hr {
   margin: 40px;
 }
+

@@ -15,7 +15,9 @@ if (isset ($_POST['function']) && !empty($_POST['function'])){
 		case 'loadClasses' : loadclasses($_POST['name']); break;
 	}
 }
-
+function test_tings(){
+	echo "HIIIII";
+}
 function getCon(){
 	$servernamelocal = "192.168.2.36";
 	$servernameremote = "wolfcall.ddns.net";
@@ -126,7 +128,7 @@ function loadClasses($nme){
 			echo '<h3>'.$val[0].'</h3>';
 		}
 		else if($last != $val[0]){
-			echo "</div><h3>$val[0]</h3><div>";
+			echo "</div><div class='panel-body'><h3>$val[0]</h3>";
 			$last = $val[0];
 		}
 		echo "<label><input type='checkbox' name='".$nme."' value='".$val[0]." ".$val[1]."' /> ".$val[0]." ".$val[1]."</label><br/>";

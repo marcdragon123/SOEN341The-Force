@@ -20,7 +20,6 @@
           <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-    <!-- Load Associated PHP Files-->
     <script>
       <?php
         include 'PHP/functions.php';                           
@@ -42,6 +41,7 @@
       <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/validator.js"></script>  
       <script type="text/javascript" src="js/custom.js"></script>  
+
       <div id="top-image"></div>
         <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -78,10 +78,9 @@
                   <div class="form-group">
                       <input type="password" data-minlength="6" class="form-control" name="inputPassword" placeholder="Password" required>
                       <span class="help-block">Minimum of 6 characters</span>
-                    </div>
-
+                  </div>
+                    
                   <div class="form-group">
-
                     <button type="submit" class="btn btn-primary">Sign in</button>
                   </div>
                 </form>
@@ -129,15 +128,9 @@
                                   <input type="password" data-minlength="6" class="form-control" name="InputPassword" placeholder="Password*" required>
                                   <span class="help-block">Minimum of 6 characters</span>
                                 </div>
-                              
-                              <script>
                                 <?php
-                                  include 'PHP/functions.php';
-        
-                                  loadClasses("classList");
+                                  echo loadClasses();
                                 ?>
-                              </script>
-                              
                               <div class="form-group">
                               <button type="submit" class="btnModal btn-primary">Create Account</button>
                               </div>
