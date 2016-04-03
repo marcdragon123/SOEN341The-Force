@@ -1,28 +1,31 @@
-<?php
-	session_start();
-	
-	
-?>
 <head>
 	<!-- Files for Bootstrap -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css" />
 
 	<!-- Files for FullCalendar -->
 	<link href='css/fullcalendar.css' rel='stylesheet' />
 	<link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
 	<script src='js/lib/moment.min.js'></script>
 	<script src='js/lib/jquery.min.js'></script>
-	<script src='js/fullcalendar.min.js'></script>
+	<!--script src='js/fullcalendar.min.js'></script-->
+	<script src='js/fullcalendar.js'></script>
 
 	<!-- Script for producing the table -->
 	<script src='js/ClassTable.js'></script>
 
 	<!-- Script for producing the schedule -->
-	<script src='js/schedule.js'></script>
+	<!--<script src='js/schedule.js'></script>-->
+	<script>
+		<?php
+			include 'PHP/functions.php';
+			
+			loadSchedule();
+		?>
+	</script>
 </head>
 
 <body>
@@ -125,15 +128,6 @@
 				<div id='schedule'> </div>
 			</div>
 		</div>
-
-		<!-- JQuery AJAX call to PHP function loadSchedule -->
-		<script type="text/javascript">
-			$(document).ready(function(){
-
-   				$.post(".../PHP/functions.php", {function: "loadSchedule"});
-
-			});
-		</script>
 	</div>
 	<form action = "/PHP/geotest.php">
 	<input type="submit" />

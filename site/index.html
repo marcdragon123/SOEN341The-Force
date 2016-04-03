@@ -18,7 +18,9 @@
 	<script src='js/ClassTable.js'></script>
 
 	<!-- Script for producing the schedule -->
-	<script src='js/schedule.js'></script>
+	<script >
+		$(document).ready(function() {$('#schedule').fullCalendar({ header: { left: '', center: '', right: ''},defaultView: 'agendaWeek',editable: false,allDaySlot: false,eventLimit: true,events: [{title:"ENGR 371",start:"19:45:00",end: "21:00:00",dow: [ 5] },{title:"ENGR 371",start:"19:45:00",end: "21:00:00",dow: [ 3] },{title:"ENGR 371",start:"16:45:00",end: "18:45:00",dow: [ 4] },]});}); 
+	</script>
 </head>
 
 <body>

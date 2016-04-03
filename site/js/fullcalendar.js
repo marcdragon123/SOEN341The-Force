@@ -6937,7 +6937,7 @@ TimeGrid.mixin({
 			startTimeText = this.getEventTimeText(event, null, false); // displayEnd=false
 		}
 
-		return '<a id="'+htmlEscape(event.title) + htmlEscape(event.dow)+'" class="' + classes.join(' ') + '"' +
+		return '<a id="course'+htmlEscape(event.title) + htmlEscape(event.dow)+'" class="' + classes.join(' ') + '"' +
 			(event.url ?
 				' href="' + htmlEscape(event.url) + '"' :
 				''

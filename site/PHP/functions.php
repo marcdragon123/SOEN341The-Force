@@ -66,10 +66,10 @@ function signUp(){
 	var_dump($res2);
 	closeCon($conn);
 	if($res){
-		header('Location: ../index.html');
+		header('Location: ../index.php');
 		echo("result worked <br />");
 	}
-	//header('Location: ../index.html');
+	//header('Location: ../index.php');
 	echo "didn't redirect";
 }
 
@@ -94,7 +94,7 @@ function signIn(){
 		//link($target = "../Account.html" , $link = "Account");
 		$_SESSION['loginID'] = $row[0];
 		//var_dump($_SESSION);
-		header('Location: ../index.html');
+		header('Location: ../index.php');
 		//echo("result worked <br />");
 	}
 	else{
@@ -148,36 +148,35 @@ function loadSchedule() {
 	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id ";
 	$qry .= "left join course_Master_List on enrollment.Sections_course_Master_List_id = course_master_list.id ";
 	$qry .= "where ".$id." = enrollment.student_idstudent";
-	echo "$qry";
+	//echo "$qry";
 	$conn = getCon();
 	
 	$res = $conn->query($qry);
 	
 	echo "$(document).ready(function() {"
-			."$('#schedule').fullCalendar({\r\n"
-			."	header: {\r\n"
-			."	left: '',\r\n"
-			."	center: '',\r\n"
-			."	right: ''\r\n"
-			."},\r\n"
+			."$('#schedule').fullCalendar({"
+			."	header: {"
+			."	left: '',"
+			."	center: '',"
+			."	right: ''"
+			."},"
 
-			."defaultView: 'agendaWeek',\r\n"
-			."editable: false,\r\n"
-			."allDaySlot: false,\r\n"
-			."eventLimit: true,\r\n" // allow "more" link when too many events
-			."events: [\r\n"
-			;
+			."defaultView: 'agendaWeek',"
+			."editable: false,"
+			."allDaySlot: false,"
+			."eventLimit: true," // allow "more" link when too many events
+			."events: [";
+	
 	while($rows = $res->fetch_assoc()){
-		foreach (explode(',', $rows['DOW']) as $val){
-			echo "<br />\r\n";
-			echo $rows['DOW']."<br />";
-			echo "	{\r\n"
-				."		title:\"".$rows['Course_code']." ".$rows['number']."\",\r\n"
-				."		start: '".$rows['start']."',\r\n"
-				."		end: '".$rows['end']."',\r\n"
-				."		dow: [".getDayStr($val)."], \r\n"
-				."},\r\n";
-		}
+		
+		//foreach (explode(',', $rows['DOW']) as $val){
+			/*echo '{'
+				.'title:"'.$rows['Course_code'].' '.$rows['number'].'",'
+				.'start:"'.$rows['start'].'",'
+				.'end: "'.$rows['end'].'",'
+				.'dow: ['.getDayStr($val).'] '
+				.'},';*/
+		//}
     }						
 	echo "]});});";
 	
@@ -204,7 +203,7 @@ function getDayStr($str){
 			$res .= " 7,";
 		}
 	//}
-	echo substr($res, 0, strlen($res)-1)."<br />ohoiohohjk";
+	//echo substr($res, 0, strlen($res)-1)."<br />";
 	return substr($res, 0, strlen($res)-1);
 }
 
