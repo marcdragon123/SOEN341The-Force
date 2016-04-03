@@ -1,12 +1,19 @@
-<?php
 
+<?php
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 //header('Content-Type: application/json');
-
+//following block of code reads the function POST parameter and the corresponding value should point to the method to be invoked. 
+if (isset ($_POST['function']) && !empty($_POST['function'])){
+	$action = $_POST['function'];
+	switch($action){
+		case 'loadSchedule' : loadSchedule(); break;
+		case 'loadClasses' : loadclasses($_POST['name']); break;
+	}
+}
 function test_tings(){
 	echo "HIIIII";
 }
@@ -28,12 +35,10 @@ function getCon(){
 	}
 	return $conn;
 }
-
 //closes a connection takes a connection object
 function closeCon($conn){
 	$conn->close();
 }
-
 //takes a query and a connection to run a db query
 function excuteQuery($qry, $conn){
 	$res = $conn->query($qry);
@@ -43,7 +48,6 @@ function excuteQuery($qry, $conn){
 	return $res;
 	
 }
-
 //signs up a new user uses post for data
 function signUp(){
 	
@@ -69,7 +73,6 @@ function signUp(){
 	//header('Location: ../index.php');
 	echo "didn't redirect";
 }
-
 //signs the user in with POST data
 function signIn(){
 	$link = getCon();
@@ -101,7 +104,6 @@ function signIn(){
 	}
 	echo "didn't redirect";
 }
-
 //loads a list of classes takes a name to fill the name attribute of the input
 function loadClasses($nme){
 	$conn = getCon();
@@ -129,7 +131,6 @@ function loadClasses($nme){
 	
 	closeCon($conn);
 }
-
 //checks if the session is set up
 function isLoggedIN(){
 	if(isset($_SESSION['loginID'])){
@@ -139,31 +140,6 @@ function isLoggedIN(){
 		header("Location: wolfcall.ddns.net:8085");
 	}
 }
-
-function loadClassesArray($nme){
-	$conn = getCon();
-	
-	$last = null;
-	echo "[";
-	foreach($result->fetch_all() as $val){
-		echo "$val[0]." ".$val[1]";
-		echo ","
-	}
-	echo "]";
-	
-	closeCon($conn);
-}
-
-//checks if the session is set up
-function isLoggedIN(){
-	if(isset($_SESSION['loginID'])){
-		return;
-	}
-	else{
-		header("Location: wolfcall.ddns.net:8085");
-	}
-}
-
 //loads the schedule for the index page
 function loadSchedule() {
 	$id = $_SESSION['loginID'];
@@ -184,7 +160,6 @@ function loadSchedule() {
 			."	center: '',"
 			."	right: ''"
 			."},"
-
 			."defaultView: 'agendaWeek',"
 			."editable: false,"
 			."allDaySlot: false,"
@@ -193,21 +168,18 @@ function loadSchedule() {
 	
 	while($rows = $res->fetch_assoc()){
 		
-		foreach (explode(',', $rows['DOW']) as $val){
-			echo '{'
+		//foreach (explode(',', $rows['DOW']) as $val){
+			/*echo '{'
 				.'title:"'.$rows['Course_code'].' '.$rows['number'].'",'
 				.'start:"'.$rows['start'].'",'
 				.'end: "'.$rows['end'].'",'
 				.'dow: ['.getDayStr($val).'] '
-				.'},';
-		}
+				.'},';*/
+		//}
     }						
 	echo "]});});";
 	
 }
-
-
-
 //converts day of week from letters to numbers
 function getDayStr($str){
 	//$tokens = explode(',', $str);
@@ -233,5 +205,4 @@ function getDayStr($str){
 	//echo substr($res, 0, strlen($res)-1)."<br />";
 	return substr($res, 0, strlen($res)-1);
 }
-
 ?>
