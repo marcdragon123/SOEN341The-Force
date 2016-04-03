@@ -175,14 +175,14 @@ function loadSchedule() {
 	
 	while($rows = $res->fetch_assoc()){
 		
-		//foreach (explode(',', $rows['DOW']) as $val){
-			/*echo '{'
+		foreach (explode(',', $rows['DOW']) as $val){
+			echo '{'
 				.'title:"'.$rows['Course_code'].' '.$rows['number'].'",'
 				.'start:"'.$rows['start'].'",'
 				.'end: "'.$rows['end'].'",'
 				.'dow: ['.getDayStr($val).'] '
-				.'},';*/
-		//}
+				.'},';
+		}
     }						
 	echo "]});});";
 	
