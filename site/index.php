@@ -125,6 +125,15 @@
 				<div id='schedule'> </div>
 			</div>
 		</div>
+
+		<!-- JQuery AJAX call to PHP function loadSchedule -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+
+   				$.post(".../PHP/functions.php", {function: "loadSchedule"});
+
+			});
+		</script>
 	</div>
 	<form action = "/PHP/geotest.php">
 	<input type="submit" />
