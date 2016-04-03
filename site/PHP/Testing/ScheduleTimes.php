@@ -60,7 +60,7 @@ for ($i=0; $i < count($IDs); $i++){
 }
 echo "<br />";
 for ($i=0; $i < count($IDs); $i++){
-	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$IDs[$i]."' and Sections_Section = '".$section[$i]."'";;
+	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$IDs[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query3 = $con->query($sqlDOW);
 	$result3 = mysqli_fetch_all($query3);
 	$TEMP[$i] = $result3;
@@ -250,38 +250,8 @@ for ($i = 0; $i < 5; $i++)
 	echo "<br />";
 	}
 }
-//These loops will have two checkers for two different indexes in the array of DOW which will check if there is a day of the week where they are equal.
-
-/*for ($i=0; $i<count($DOW); $i++){
-	for ($j=0; $j<count($DOW);$j++){
-		if ($i==$j){
-			continue;
-		}
-		else{
-			if (count($DOW[$j])<1){
-				for($k=0; $k<count($DOW[$j]); $k++){
-					if($DOW[$i]== $DOW[$j][$k]){
-						$NC[$val]=array($i,$j);
-						$val++;
-					}
-					else{
-						continue;
-					}
-						
-				}
-			}
-			else{
-				if($DOW[$i]==$DOW[$j]){
-					$NC[$val] = array($i,$j);
-					$val++;
-				}
-				else{
-					continue;
-				}
-					
-			}
-		}
-	}	
-}*/
+$GLOBALS['Times']=$Times;
+$GLOBALS['Timef']=$Timef;
+$GLOBALS['DOW']=$DOW;        
 closeCon($con);
 ?>
