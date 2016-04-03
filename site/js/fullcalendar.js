@@ -6937,7 +6937,7 @@ TimeGrid.mixin({
 			startTimeText = this.getEventTimeText(event, null, false); // displayEnd=false
 		}
 
-		return '<a class="' + classes.join(' ') + '"' +
+		return '<a id="'+htmlEscape(event.title) + htmlEscape(event.dow)+'" class="' + classes.join(' ') + '"' +
 			(event.url ?
 				' href="' + htmlEscape(event.url) + '"' :
 				''
@@ -6947,7 +6947,7 @@ TimeGrid.mixin({
 				''
 				) +
 			'>' +
-				'<div class="fc-content">' +
+				'<div id="test" class="fc-content">' +
 					(timeText ?
 						'<div class="fc-time"' +
 						' data-start="' + htmlEscape(startTimeText) + '"' +

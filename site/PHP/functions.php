@@ -174,15 +174,16 @@ function loadSchedule() {
 			."events: [\r\n"
 			;
 	while($rows = $res->fetch_assoc()){
-		var_dump($rows);
-		echo "<br />\r\n";
-		echo $rows['DOW']."<br />";
-		echo "	{\r\n"
-			."		title:\"".$rows['Course_code']." ".$rows['number']."\",\r\n"
-    		."		start: '".$rows['start']."',\r\n"
-    		."		end: '".$rows['end']."',\r\n"
-    		."		dow: [".getDayStr($rows['DOW'])."], \r\n"
-    		."},\r\n";
+		foreach (explode(',', $rows['DOW']) as $val){
+			echo "<br />\r\n";
+			echo $rows['DOW']."<br />";
+			echo "	{\r\n"
+				."		title:\"".$rows['Course_code']." ".$rows['number']."\",\r\n"
+				."		start: '".$rows['start']."',\r\n"
+				."		end: '".$rows['end']."',\r\n"
+				."		dow: [".getDayStr($val)."], \r\n"
+				."},\r\n";
+		}
     }						
 	echo "]});});";
 	
@@ -190,9 +191,10 @@ function loadSchedule() {
 
 //converts day of week from letters to numbers
 function getDayStr($str){
-	$tokens = explode(',', $str);
+	//$tokens = explode(',', $str);
 	$res = "";
-	foreach ($tokens as $val){
+	$val = $str;
+	//foreach ($tokens as $val){
 		if($val == "M"){
 			$res .= " 1,";
 		}elseif ($val == "Tu") {
@@ -208,7 +210,7 @@ function getDayStr($str){
 		}elseif ($val == "Su"){
 			$res .= " 7,";
 		}
-	}
+	//}
 	echo substr($res, 0, strlen($res)-1)."<br />ohoiohohjk";
 	return substr($res, 0, strlen($res)-1);
 }
