@@ -125,10 +125,10 @@ function loadClasses($nme){
 	foreach($result->fetch_all() as $val){
 		if($last == null){
 			$last = $val[0];
-			echo '<h3>'.$val[0].'</h3>';
+			echo '<h3>'.$val[0].'</h3><div class="checkboxList">';
 		}
 		else if($last != $val[0]){
-			echo "</div><div class='panel-body'><h3>$val[0]</h3>";
+			echo "</div></div><div class='panel-body'><h3>$val[0]</h3><div class='checkboxList'>";
 			$last = $val[0];
 		}
 		echo "<label><input type='checkbox' name='".$nme."' value='".$val[0]." ".$val[1]."' /> ".$val[0]." ".$val[1]."</label><br/>";

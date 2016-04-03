@@ -7,9 +7,21 @@ background: url("../Assets/space.jpg") -25px -50px;
   background-size: calc(100% + 50px);
 }
 .panel-default h3{
+    width: 100%;
     margin-top: 15px;
     margin-bottom: 15px;
 }
+
+.panel-body{
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+.checkboxList{
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+}
+
 h4 {
   font-weight: 400;
     font-size: 24px;
@@ -155,6 +167,13 @@ h1{
     line-height: 54px;
     text-align: center;
 }
+
+ul.checkbox li { 
+  border: 1px transparent solid; 
+  display:inline-block;
+  width:12em;
+}
+
 .lead{
     font-weight: 700;
     font-size: 27px;
