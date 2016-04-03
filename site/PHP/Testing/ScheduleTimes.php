@@ -252,6 +252,7 @@ for ($i = 0; $i < 5; $i++)
 }
 $GLOBALS['Times']=$Times;
 $GLOBALS['Timef']=$Timef;
-$GLOBALS['DOW']=$DOW;        
+$GLOBALS['DOW']=$DOW;
+$GLOBALS['timebool'] = $timebool;
 closeCon($con);
 ?>
