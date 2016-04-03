@@ -7,7 +7,7 @@
  */
 //header('Content-Type: application/json');
 
-
+//Gets connection for DBaccess returns a connection object
 function getCon(){
 	$servernamelocal = "192.168.2.36";
 	$servernameremote = "wolfcall.ddns.net";
@@ -26,11 +26,11 @@ function getCon(){
 	}
 	return $conn;
 }
-
+//closes a connection takes a connection object
 function closeCon($conn){
 	$conn->close();
 }
-
+//takes a query and a connection to run a db query
 function excuteQuery($qry, $conn){
 	$res = $conn->query($qry);
 	if($res == null || $res === FALSE){
@@ -40,6 +40,7 @@ function excuteQuery($qry, $conn){
 	
 }
 
+//signs up a new user uses post for data
 function signUp(){
 	
 	$conn = getCon();
@@ -58,13 +59,14 @@ function signUp(){
 	var_dump($res2);
 	closeCon($conn);
 	if($res){
-		//header('Location: ../index.html');
+		header('Location: ../index.html');
 		echo("result worked <br />");
 	}
 	//header('Location: ../index.html');
 	echo "didn't redirect";
 }
 
+//signs the user in with POST data
 function signIn(){
 	$link = getCon();
 	//var_dump($_POST);
@@ -96,6 +98,7 @@ function signIn(){
 	echo "didn't redirect";
 }
 
+//loads a list of classes takes a name to fill the name attribute of the input
 function loadClasses($nme){
 	$conn = getCon();
 	
@@ -123,6 +126,7 @@ function loadClasses($nme){
 	closeCon($conn);
 }
 
+//checks if the session is set up
 function isLoggedIN(){
 	if(isset($_SESSION['loginID'])){
 		return;
@@ -130,6 +134,73 @@ function isLoggedIN(){
 	else{
 		header("Location: wolfcall.ddns.net:8085");
 	}
+}
+
+//loads the schedule for the index page
+function loadSchedule() {
+	$id = $_SESSION['loginID'];
+	$qry = "Select * from enrollment ";
+	$qry .= "left join timeslot on timeslot.Sections_Section = enrollment.Sections_Section ";
+	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id ";
+	$qry .= "left join course_Master_List on enrollment.Sections_course_Master_List_id = course_master_list.id ";
+	$qry .= "where ".$id." = enrollment.student_idstudent";
+	echo "$qry";
+	$conn = getCon();
+	
+	$res = $conn->query($qry);
+	
+	echo "$(document).ready(function() {"
+			."$('#schedule').fullCalendar({\r\n"
+			."	header: {\r\n"
+			."	left: '',\r\n"
+			."	center: '',\r\n"
+			."	right: ''\r\n"
+			."},\r\n"
+
+			."defaultView: 'agendaWeek',\r\n"
+			."editable: false,\r\n"
+			."allDaySlot: false,\r\n"
+			."eventLimit: true,\r\n" // allow "more" link when too many events
+			."events: [\r\n"
+			;
+	while($rows = $res->fetch_assoc()){
+		var_dump($rows);
+		echo "<br />\r\n";
+		echo $rows['DOW']."<br />";
+		echo "	{\r\n"
+			."		title:\"".$rows['Course_code']." ".$rows['number']."\",\r\n"
+    		."		start: '".$rows['start']."',\r\n"
+    		."		end: '".$rows['end']."',\r\n"
+    		."		dow: [".getDayStr($rows['DOW'])."], \r\n"
+    		."},\r\n";
+    }						
+	echo "]});});";
+	
+}
+
+//converts day of week from letters to numbers
+function getDayStr($str){
+	$tokens = explode(',', $str);
+	$res = "";
+	foreach ($tokens as $val){
+		if($val == "M"){
+			$res .= " 1,";
+		}elseif ($val == "Tu") {
+			$res .= " 2,";
+		}elseif ($val == "W"){
+			$res .= " 3,";
+		}elseif ($val == "Th"){
+			$res .= " 4,";
+		}elseif ($val == "F"){
+			$res .= " 5,";
+		}elseif ($val == "St"){
+			$res .= " 6,";
+		}elseif ($val == "Su"){
+			$res .= " 7,";
+		}
+	}
+	echo substr($res, 0, strlen($res)-1)."<br />ohoiohohjk";
+	return substr($res, 0, strlen($res)-1);
 }
 
 ?>
