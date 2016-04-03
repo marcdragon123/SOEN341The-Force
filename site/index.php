@@ -25,6 +25,11 @@ and open the template in the editor.
 		<script src='js/fullcalendar.js'></script>
 		<!-- Script for producing the table -->
 		<script src='js/ClassTable.js'></script>
+
+		<!-- Jquery UI -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 		<script>
 			<?php
 			include 'PHP/functions.php';
@@ -81,7 +86,39 @@ and open the template in the editor.
 			      <div class="panel-body modify-panel">
 			      	<div class="col-md-6">
 			      		<h4> Add Classes</h1>
-			      		<input type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">
+			      		<input id="tags" type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">
+			      		<!-- JQUery for autocomplete class list -->
+			      		<script>
+						  $(function() {
+						    var availableTags = [
+						      "ActionScript",
+						      "AppleScript",
+						      "Asp",
+						      "BASIC",
+						      "C",
+						      "C++",
+						      "Clojure",
+						      "COBOL",
+						      "ColdFusion",
+						      "Erlang",
+						      "Fortran",
+						      "Groovy",
+						      "Haskell",
+						      "Java",
+						      "JavaScript",
+						      "Lisp",
+						      "Perl",
+						      "PHP",
+						      "Python",
+						      "Ruby",
+						      "Scala",
+						      "Scheme"
+						    ];
+						    $( "#tags" ).autocomplete({
+						      source: availableTags
+						    });
+						  });
+						  </script>
 			      	</div>
 			      	<div class="col-md-6">
 			      		<h4> Add Unavailabilities </h4>

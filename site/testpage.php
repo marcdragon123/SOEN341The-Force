@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,10 +36,10 @@
     <![endif]-->
   </head>
   <body>
- 
+  <p></p>
       <?php
         
-        echo loadClasses();
+        echo "test_tings()";
       ?>
 
   </body>

@@ -7,14 +7,6 @@
  */
 //header('Content-Type: application/json');
 
-//following block of code reads the function POST parameter and the corresponding value should point to the method to be invoked. 
-if (isset ($_POST['function']) && !empty($_POST['function'])){
-	$action = $_POST['function'];
-	switch($action){
-		case 'loadSchedule' : loadSchedule(); break;
-		case 'loadClasses' : loadclasses($_POST['name']); break;
-	}
-}
 function test_tings(){
 	echo "HIIIII";
 }
@@ -148,6 +140,30 @@ function isLoggedIN(){
 	}
 }
 
+function loadClassesArray($nme){
+	$conn = getCon();
+	
+	$last = null;
+	echo "[";
+	foreach($result->fetch_all() as $val){
+		echo "$val[0]." ".$val[1]";
+		echo ","
+	}
+	echo "]";
+	
+	closeCon($conn);
+}
+
+//checks if the session is set up
+function isLoggedIN(){
+	if(isset($_SESSION['loginID'])){
+		return;
+	}
+	else{
+		header("Location: wolfcall.ddns.net:8085");
+	}
+}
+
 //loads the schedule for the index page
 function loadSchedule() {
 	$id = $_SESSION['loginID'];
@@ -189,6 +205,8 @@ function loadSchedule() {
 	echo "]});});";
 	
 }
+
+
 
 //converts day of week from letters to numbers
 function getDayStr($str){
