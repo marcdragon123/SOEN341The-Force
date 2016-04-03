@@ -32,7 +32,7 @@ and open the template in the editor.
 
 		<script>
 			<?php
-			
+			include "PHP/functions.php";
 			// put your code here
 			loadSchedule();
 			?>
