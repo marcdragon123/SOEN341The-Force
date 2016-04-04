@@ -263,6 +263,10 @@ if ($DOW[4][0] != $DOW[$j][0] && $DOW[count($class_ID)][1] != $DOW[$j][0] && $DO
 			}
 		}
 }
+if (count($timebool) == 1)//in case user only puts in 1 class
+{
+	$timebool[$i] = true;
+}
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	if ($timebool[$i] == false)
