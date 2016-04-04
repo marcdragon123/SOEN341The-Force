@@ -266,6 +266,7 @@ if (count($timebool) == 1)//in case user only puts in 1 class
 {
 	$timebool[$i] = true;
 }
+$errorStr = ""
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	if ($timebool[$i] == true)
@@ -281,8 +282,12 @@ for ($i = 0; $i < count($class_ID); $i++)
 		$qry = ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
 		$query = $con->query($qry);
 		$temp = (mysqli_fetch_row($query));
-		echo ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
+		$errorStr .= ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
 	
+}
+if ($errorStr != "")
+{
+	echo $errorStr;
 }
 
 $GLOBALS['Times']=$Times;
