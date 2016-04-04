@@ -30,7 +30,7 @@ for ($i = 0; $i < count($class_ID); $i++){
 }
 */
 //pick a section
-
+echo "<br />";
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	$sql45 = "select Section from Sections where course_Master_List_id = '".$class_ID[$i]."'";
@@ -73,6 +73,7 @@ for ($i=0; $i < count($class_ID); $i++){
 	echo "<br />";
 }
 echo "<br />";
+
 for ($i=0; $i < count($class_ID); $i++){
 	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query3 = $con->query($sqlDOW);
@@ -129,13 +130,14 @@ for ($j=0; $j<count($class_ID); $j++)
 	print_r($DOW[$j]);
 	echo "<br />";
 }
+
 //Olivier Algorithm section
 $timebool = array();//for all five courses, if no conflic, put to true
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	$timebool = false;
 }
-}
+
 //will check for the first 4 course
 for ($i = 0; $i < count($class_ID)-1; $i++)
 {
@@ -265,9 +267,15 @@ for ($i = 0; $i < count($class_ID); $i++)
 {
 	if ($timebool[$i] == false)
 	{
-	print_r("Course ".$class_ID[$i]." conflicts with other courses");
+		
+		$temp = array();
+		$sql = "select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
+		$query = $con->query($sql);
+		$temp = (mysqli_fetch_row($query));
+	print_r("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
 	echo "<br />";
 	}
+	
 }
 
 $GLOBALS['Times']=$Times;
