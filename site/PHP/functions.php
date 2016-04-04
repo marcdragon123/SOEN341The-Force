@@ -96,7 +96,7 @@ function signIn(){
 	//var_dump($_POST);
 	$email = $_POST['inputEmail'];
 	$pass = $_POST['inputPassword'];
-	$qry = "select idstudent, email, password( '" . $pass . "') = password from student where '" . $email . "' = email " ;
+	$qry = "select idStudent, email, password( '" . $pass . "') = password from student where '" . $email . "' = email " ;
 	$result = $link->query($qry);
 	$errorstr = "Sorry could not login, invalid password or username. Please resubmit with the right login.";
 	//echo $qry."<br />";

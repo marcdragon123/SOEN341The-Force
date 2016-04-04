@@ -83,7 +83,7 @@ and open the template in the editor.
 			   
 			      </h4>
 			    </div>
-			    <form action="javascript:void(0);" method="post">
+			    <form action="/PHP/Testing/ScheduleTimes.php" method="post">
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
 			      	<div class="col-md-6 checkboxDiv">
