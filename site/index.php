@@ -83,7 +83,7 @@ and open the template in the editor.
 			   
 			      </h4>
 			    </div>
-			    <form action="javascript:void(0);" method="post">
+			    <form action = "/PHP/Testing/ScheduleTimes.php" method = 'POST'>
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
 			      	<div class="col-md-6 checkboxDiv">
@@ -105,87 +105,42 @@ and open the template in the editor.
 			      	<div class="col-md-3">
 			      		<h4> Add Unavailabilities </h4>
 			      		<div class="days">
-			      			
-								<div class="checkbox">
+							<div class="checkbox">
+													
+								<label class="checkbox-inline">	
+									<input type="checkbox" id="work_monday" value="M" name="M"> M
+								</label>
+
+								<label class="checkbox-inline">
+									<input type="checkbox" id="work_tuesday" value="T" name="T"> T
+								</label>
+
+								<label class="checkbox-inline">
+									<input type="checkbox" id="work_wednesday" value="W" name="W"> W
+								</label>
 														
-									<label class="checkbox-inline">	
-										<input type="checkbox" name="dow" id="dow" value="M" name="M"> M
-									</label>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="work_thursday" value="T" name="R"> T
+								</label>
 
-									<label class="checkbox-inline">
-										<input type="checkbox"  name="dow"id="dow" value="T" name="T"> T
-									</label>
-
-									<label class="checkbox-inline">
-										<input type="checkbox" name="dow" id="dow" value="W" name="W"> W
-									</label>
-															
-									<label class="checkbox-inline">
-										<input type="checkbox" name="dow" id="dow" value="T" name="R"> T
-									</label>
-
-									<label class="checkbox-inline">
-										<input type="checkbox" name="dow" id="dow" value="F" name="F"> F
-									</label>
-														
-								</div>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="work_friday" value="F" name="F"> F
+								</label>
+													
+							</div>
 						</div>
 
 					
 						
 						<div class="form-group" class="b1">
-							<input type="time" id="startTime" value="00:00:00">
-							to
-							<input type="time" id="endTime" value="00:00:00">
-							<div>
-                            	<input  onClick="displayUnavailability(this.form)"> Add </input>
-							</div>
-							<div id="fail_work_time_add" class="failUnavailabilityBlock" style="color:red;">
-								<ul id="unList">
-
-								</ul>
-							</div>
+							<input id="time_data" class="time-input" type="text" placeholder="Ex: 14:00-16:00">
+							<div id="fail_work_time_add" class="failUnavailabilityBlock" style="color:red;"></div>
 						</div>
-						<script type="text/javascript">
-							function displayUnavailability(form){
-								var days =[];
-								var result = "";
-								for (var i in frm.dow) {
-							        if (frm.dow[i].checked) {
-							            days.push(frm.dow[i].value);
-							        }
-							    }
-								var startTime = document.getElementById("startTime").value;
-								var endTime = document.getElementById("endTime").value;
-
-								for (var i in days){
-									result = result.concat(var[i], " ");
-									
-									}
-								}
-								result.concat("from", startTime, " to ", endTime);
-								var node = document.createElement("LI");
-							    var textnode = document.createTextNode(result);
-							    node.appendChild(textnode);
-							    document.getElementById("unList").appendChild(node);
-							}
-						</script>
 					</div>
 					<div class="col-md-3">
 						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute Schedule" />
 					</div>
 					</form>
-
-					<!-- calls php page without refresh -->
-					<script type="text/javascript">
-					    $("form").submit(function(){
-					        var str = $(this).serialize();
-					        $.ajax('/PHP/Testing/ScheduleTimes.php', str, function(result){
-					            alert(result); 
-					        }
-					        return(false);
-					    });
-					</script>
 			      	
 
 			      </div>
