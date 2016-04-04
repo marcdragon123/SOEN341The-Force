@@ -4,7 +4,7 @@ include "../functions.php";
 $con = getCon();
 $userId = $_SESSION['loginID'];
 //$class_ID = array(0=>'COMP 249', 1=>'SOEN 341', 2=>'ENGR 201', 3=>'SOEN 228', 4=>'ENGR 213');
-$class_ID = $_POST['chosen'];
+$class_ID = $_REQUEST['chosen'];
 $section = array();
 $IDs = array();
 $Times = array();
@@ -14,7 +14,7 @@ $TEMP = array();
 $NC = array();
 $val = 0;
 $val2 = 0;
-print_r($class_ID);
+print_r($userId." </br>");
 //stores ID of classes to be retrieved later
 /*
 for ($i = 0; $i < count($class_ID); $i++){
@@ -266,24 +266,29 @@ if (count($timebool) == 1)//in case user only puts in 1 class
 {
 	$timebool[$i] = true;
 }
-$errorStr = ""
+$errorStr = "";
+
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	if ($timebool[$i] == true)
 	{
-		$sql = "INSERT INTO Enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID"');";
+		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."');";
 		//"select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
-		$query = $con->query($sql);
+		$query222 = $con->query($sql);
+		//echo $_REQUEST['chosen'];
 		//$temp = (mysqli_fetch_row($query));
 	//print_r("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
 	//echo "<br />";
 	}
-	else 
-		$qry = ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
+	
+	else
+	{
+		$qry = "select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
+		
 		$query = $con->query($qry);
 		$temp = (mysqli_fetch_row($query));
 		$errorStr .= ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
-	
+	}
 }
 if ($errorStr != "")
 {
