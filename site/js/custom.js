@@ -1,6 +1,6 @@
 //Backgroundmotion      
 $(document).ready(function() {
-          var movementStrength = 8;
+          var movementStrength = 15;
           var height = movementStrength / $(window).height();
           var width = movementStrength / $(window).width();
           $("body").mousemove(function(e) {

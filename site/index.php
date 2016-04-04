@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
 
 	<!-- Files for FullCalendar -->
 	<link href='css/fullcalendar.css' rel='stylesheet' />
@@ -36,7 +37,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="SignIn/out.html">THE FORCE</a>
+      <a class="navbar-brand" href="index.html">THE FORCE</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -139,4 +140,34 @@
 	<form action="test.php">
 		<input type="submit" />
 	</form>
+    
+            <div class="site-footer">
+
+        
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>FRONT END</h3></center><br>
+            <center>Julian Ippolito</center>
+            <center>Hasan Ahmed</center>
+            <center>Jordan Stern</center>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>BACK END</h3></center><br>
+            <center>Georges Mathieu</center>
+            <center>Olivier Cameron-Chevrier</center>
+            <center>Marc-Andre Dragon</center>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>DOCUMENTATION</h3></center><br>
+            <center>Stefano Pace</center>
+            <center>Adam Arcaro</center>
+            <center>Joey Tedeschi</center>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>TESTING</h3></center><br>
+            <center>George Theophanous</center>
+
+        </div>
+
+            
+        </div>
 </body>
