@@ -4,8 +4,9 @@ include "../functions.php";
 
 $con = getCon();
 
-$class_ID = array(0=>'COMP 249', 1=>'SOEN 341', 2=>'ENGR 201', 3=>'SOEN 228', 4=>'ENGR 213');
-$section = array(0=>'HO', 1=>'KB', 2=>'TY', 3=>'RK', 4=>'CS');
+//$class_ID = array(0=>'COMP 249', 1=>'SOEN 341', 2=>'ENGR 201', 3=>'SOEN 228', 4=>'ENGR 213');
+$class_ID = $_POST['chosen'];
+$section = array();
 $IDs = array();
 $Times = array();
 $Timesf = array();
@@ -14,8 +15,9 @@ $TEMP = array();
 $NC = array();
 $val = 0;
 $val2 = 0;
-
+print_r($class_ID);
 //stores ID of classes to be retrieved later
+/*
 for ($i = 0; $i < count($class_ID); $i++){
 	$subs = substr($class_ID[$i],0,4);
 	$subs1 = substr($class_ID[$i],5,3);
@@ -26,9 +28,21 @@ for ($i = 0; $i < count($class_ID); $i++){
 	var_dump($IDs[$i]." ");
 	echo "<br />";
 }
+*/
+//pick a section
 
-for ($i=0; $i < count($IDs); $i++){
-	$sqlstart = "select start from Timeslot where Sections_course_Master_List_id = '".$IDs[$i]."' and Sections_Section = '".$section[$i]."'";
+for ($i = 0; $i < count($class_ID); $i++)
+{
+	$sql45 = "select Section from Sections where course_Master_List_id = '".$class_ID[$i]."'";
+	$query45 = $con->query($sql45);
+	$resultsec = mysqli_fetch_array($query45);
+	$section[$i] = $resultsec[0];
+	print_r($section[$i]." ");
+	echo "<br />";
+}
+
+for ($i=0; $i < count($class_ID); $i++){
+	$sqlstart = "select start from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query1 = $con->query($sqlstart);
 	$result1 = mysqli_fetch_all($query1);
 	$Times[$i]=$result1;
@@ -43,8 +57,8 @@ for ($i=0; $i < count($IDs); $i++){
 }
 
 echo "<br />";
-for ($i=0; $i < count($IDs); $i++){
-	$sqlend = "select end from Timeslot where Sections_course_Master_List_id = '".$IDs[$i]."' and Sections_Section = '".$section[$i]."'";
+for ($i=0; $i < count($class_ID); $i++){
+	$sqlend = "select end from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query2 = $con->query($sqlend);
 	$result2 = mysqli_fetch_all($query2);
 	$Timef[$i]=$result2;
@@ -59,8 +73,8 @@ for ($i=0; $i < count($IDs); $i++){
 	echo "<br />";
 }
 echo "<br />";
-for ($i=0; $i < count($IDs); $i++){
-	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$IDs[$i]."' and Sections_Section = '".$section[$i]."'";
+for ($i=0; $i < count($class_ID); $i++){
+	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query3 = $con->query($sqlDOW);
 	$result3 = mysqli_fetch_all($query3);
 	$TEMP[$i] = $result3;
@@ -102,7 +116,7 @@ for ($j=0; $j<count($DOW); $j++){
 }
 
 $tempo = "";
-for ($j=0; $j<5; $j++)
+for ($j=0; $j<count($class_ID); $j++)
 {
 	$DOW[$j][2] = $DOW[$j][1];
 	
@@ -116,11 +130,16 @@ for ($j=0; $j<5; $j++)
 	echo "<br />";
 }
 //Olivier Algorithm section
-$timebool = array(false, false, false, false, false);//for all five courses, if no conflic, put to true
-//will check for the first 4 course
-for ($i = 0; $i < 4; $i++)
+$timebool = array();//for all five courses, if no conflic, put to true
+for ($i = 0; $i < count($class_ID); $i++)
 {
-	for ($j = $i+1; $j < 5; $j++)
+	$timebool = false;
+}
+}
+//will check for the first 4 course
+for ($i = 0; $i < count($class_ID)-1; $i++)
+{
+	for ($j = $i+1; $j < count($class_ID); $j++)
 	{
 		if ($DOW[$i][0] != $DOW[$j][0] && $DOW[$i][1] != $DOW[$j][0] && $DOW[$i][0] != $DOW[$j][1] && $DOW[$i][1] != $DOW[$j][1])//no common lectures DOW
 		{
@@ -182,67 +201,67 @@ for ($i = 0; $i < 4; $i++)
 	}
 }
 //This is specifically for the fifth course
-for ($j = 0; $j < 4; $j++)
+for ($j = 0; $j < count($class_ID)-1; $j++)
 {
-if ($DOW[4][0] != $DOW[$j][0] && $DOW[4][1] != $DOW[$j][0] && $DOW[4][0] != $DOW[$j][1] && $DOW[4][1] != $DOW[$j][1])//no common lectures DOW
+if ($DOW[4][0] != $DOW[$j][0] && $DOW[count($class_ID)][1] != $DOW[$j][0] && $DOW[count($class_ID)][0] != $DOW[$j][1] && $DOW[count($class_ID)][1] != $DOW[$j][1])//no common lectures DOW
 		{
-			if ($DOW[4][2] != $DOW[$j][2])//no common tutorial DOW
+			if ($DOW[count($class_ID)][2] != $DOW[$j][2])//no common tutorial DOW
 			{
-				$timebool[4] = true;
+				$timebool[count($class_ID)] = true;
 			}
 			else
 			{
-				if ((int)$Times[4][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
+				if ((int)$Times[count($class_ID)][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
 				{
-					$timebool[4] = true;
+					$timebool[count($class_ID)] = true;
 				}
-				else if ((int)$Times[4][2] < (int)$Timef[$j][2] && (int)$Times[4][2] > (int)$Times[$j][2])//starts in middle of other
+				else if ((int)$Times[count($class_ID)][2] < (int)$Timef[$j][2] && (int)$Times[count($class_ID)][2] > (int)$Times[$j][2])//starts in middle of other
 				{
-					$timebool[4] = false;
+					$timebool[count($class_ID)] = false;
 				}
-				else if ((int)$Times[$j][2] > (int)$Timef[4][2])
+				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)][2])
 				{
-					$timebool[4] = true;
+					$timebool[count($class_ID)] = true;
 				}
 			}
 		}
 		else
 		{
-			if ((int)$Times[4][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
+			if ((int)$Times[count($class_ID)][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
 			{
-				$timebool[4] = true;
+				$timebool[count($class_ID)] = true;
 			}
-			else if ((int)$Times[4][0] < (int)$Timef[$j][0] && (int)$Times[4][0] > (int)$Times[$j][0])//starts in middle of other
+			else if ((int)$Times[count($class_ID)][0] < (int)$Timef[$j][0] && (int)$Times[count($class_ID)][0] > (int)$Times[$j][0])//starts in middle of other
 			{
-				$timebool[4] = false;
+				$timebool[count($class_ID)] = false;
 			}
-			else if ((int)$Times[$j][0] > (int)$Timef[4][0])
+			else if ((int)$Times[$j][0] > (int)$Timef[count($class_ID)][0])
 			{
-				$timebool[4] = true;
+				$timebool[count($class_ID)] = true;
 			}
 			//Have to check Tutorials again
-			if ($DOW[4][2] != $DOW[$j][2])//no common tutorial DOW
+			if ($DOW[count($class_ID)][2] != $DOW[$j][2])//no common tutorial DOW
 			{
 				//don't want to overwrite any previous conflicts
 			}
 			else
 			{
-				if ((int)$Times[4][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
+				if ((int)$Times[count($class_ID)][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
 				{
 					//don't want to overwrite any previous conflicts
 				}
-				else if ((int)$Times[4][2] < (int)$Timef[$j][2] && (int)$Times[4][2] > (int)$Times[$j][2])//starts in middle of other
+				else if ((int)$Times[count($class_ID)][2] < (int)$Timef[$j][2] && (int)$Times[count($class_ID)][2] > (int)$Times[$j][2])//starts in middle of other
 				{
-					$timebool[4] = false;
+					$timebool[count($class_ID)] = false;
 				}
-				else if ((int)$Times[$j][2] > (int)$Timef[4][2])
+				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)][2])
 				{
 					//don't want to overwrite any previous conflicts
 				}
 			}
 		}
 }
-for ($i = 0; $i < 5; $i++)
+for ($i = 0; $i < count($class_ID); $i++)
 {
 	if ($timebool[$i] == false)
 	{
@@ -250,9 +269,12 @@ for ($i = 0; $i < 5; $i++)
 	echo "<br />";
 	}
 }
+
 $GLOBALS['Times']=$Times;
 $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
+
 closeCon($con);
+//insert redirect header
 ?>
