@@ -1,9 +1,8 @@
 <?php
-
 include "../functions.php";
 
 $con = getCon();
-
+$userId = $_SESSION['loginID'];
 //$class_ID = array(0=>'COMP 249', 1=>'SOEN 341', 2=>'ENGR 201', 3=>'SOEN 228', 4=>'ENGR 213');
 $class_ID = $_POST['chosen'];
 $section = array();
@@ -30,15 +29,15 @@ for ($i = 0; $i < count($class_ID); $i++){
 }
 */
 //pick a section
-echo "<br />";
+//echo "<br />";
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	$sql45 = "select Section from Sections where course_Master_List_id = '".$class_ID[$i]."'";
 	$query45 = $con->query($sql45);
 	$resultsec = mysqli_fetch_array($query45);
 	$section[$i] = $resultsec[0];
-	print_r($section[$i]." ");
-	echo "<br />";
+	//print_r($section[$i]." ");
+	//echo "<br />";
 }
 
 for ($i=0; $i < count($class_ID); $i++){
@@ -52,11 +51,11 @@ for ($i=0; $i < count($class_ID); $i++){
 	$Times[$i][$j] = $Times[$i][$j][0];
 	$Times[$i][$j] = str_replace(":","",$Times[$i][$j]);
 	}
-	print_r($Times[$i]);
-	echo "<br />";
+	//print_r($Times[$i]);
+	//echo "<br />";
 }
 
-echo "<br />";
+//echo "<br />";
 for ($i=0; $i < count($class_ID); $i++){
 	$sqlend = "select end from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query2 = $con->query($sqlend);
@@ -69,10 +68,10 @@ for ($i=0; $i < count($class_ID); $i++){
 	$Timef[$i][$j] = $Timef[$i][$j][0];
 	$Timef[$i][$j] = str_replace(":","",$Timef[$i][$j]);
 	}
-	print_r($Timef[$i]);
-	echo "<br />";
+	//print_r($Timef[$i]);
+	//echo "<br />";
 }
-echo "<br />";
+//echo "<br />";
 
 for ($i=0; $i < count($class_ID); $i++){
 	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
@@ -84,8 +83,8 @@ for ($i=0; $i < count($class_ID); $i++){
 	{
 	$TEMP[$i][$j] = $TEMP[$i][$j][0];
 	}
-	print_r($TEMP[$i]);
-	echo "<br />";
+	//print_r($TEMP[$i]);
+	//echo "<br />";
 }
 
 
@@ -104,14 +103,14 @@ for ($j=0; $j<count($DOW); $j++){
 	for($k=0; $k<count($DOW[$j]); $k++){
 		if (count($DOW[$j][$k])>1){
 			for($i=0; $i<count($DOW[$j][$k]); $i++){
-				print_r($DOW[$j][$k][$i]);
-				echo "<br />";
+				//print_r($DOW[$j][$k][$i]);
+				//echo "<br />";
 			}
 		
 		}
 		else{
-			print_r($DOW[$j][$k]);
-			echo "<br />";
+			//print_r($DOW[$j][$k]);
+			//echo "<br />";
 		}
 	}
 }
@@ -127,8 +126,8 @@ for ($j=0; $j<count($class_ID); $j++)
 	$DOW[$j][1] = substr($tempo, strpos($tempo, ',')+1);
 	
 	
-	print_r($DOW[$j]);
-	echo "<br />";
+	//print_r($DOW[$j]);
+	//echo "<br />";
 }
 
 //Olivier Algorithm section
@@ -269,15 +268,14 @@ if (count($timebool) == 1)//in case user only puts in 1 class
 }
 for ($i = 0; $i < count($class_ID); $i++)
 {
-	if ($timebool[$i] == false)
+	if ($timebool[$i] == true)
 	{
-		
-		$temp = array();
-		$sql = "select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
+		$sql = "INSERT INTO Enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID"');";
+		//"select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
 		$query = $con->query($sql);
-		$temp = (mysqli_fetch_row($query));
-	print_r("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
-	echo "<br />";
+		//$temp = (mysqli_fetch_row($query));
+	//print_r("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
+	//echo "<br />";
 	}
 	
 }
@@ -288,5 +286,6 @@ $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 
 closeCon($con);
+
 //insert redirect header
 ?>
