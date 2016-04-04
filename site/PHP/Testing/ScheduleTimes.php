@@ -277,6 +277,11 @@ for ($i = 0; $i < count($class_ID); $i++)
 	//print_r("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
 	//echo "<br />";
 	}
+	else 
+		$qry = ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
+		$query = $con->query($qry);
+		$temp = (mysqli_fetch_row($query));
+		echo ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
 	
 }
 
