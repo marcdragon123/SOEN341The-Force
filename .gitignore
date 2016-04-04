@@ -2,3 +2,5 @@
 
 web.config
 /site/nbproject/private/
+
+site/js/.DS*
