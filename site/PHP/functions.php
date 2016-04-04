@@ -132,7 +132,7 @@ function loadClasses($nme){
 	echo "</code>";
 	$last = null;
 	echo "<div class='panel panel-default'>";
-    echo '<div class="panel-heading">Select the courses you have passed below.</div>';
+    echo '<div class="panel-heading"></div>';
     echo '<div class="panel-body">';
 	foreach($result->fetch_all() as $val){
 		if($last == null){
@@ -223,4 +223,17 @@ function getDayStr($str){
 	//echo substr($res, 0, strlen($res)-1)."<br />";
 	return substr($res, 0, strlen($res)-1);
 }
+/*
+function allClasses()
+{
+	$courses = array();
+	$sqlDOW = "select Course_code, number from course_Master_list";
+	$query3 = $con->query($sqlDOW);
+	$result3 = mysqli_fetch_all($query3);
+	$courses = $result3;
+	for($i = 0; $i < count($courses; $i++)
+	echo course[$i]."<br/>";
+			
+}
+*/
 ?>

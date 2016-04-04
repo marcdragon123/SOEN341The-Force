@@ -80,45 +80,25 @@ and open the template in the editor.
 			    <div class="panel-heading">
 			      <h4 class="panel-title">
 			        <a data-toggle="collapse" href="#collapse1"><center>Modify Schedule</center></a>
+			   
 			      </h4>
 			    </div>
+			    <form action = "/PHP/Testing/ScheduleTimes.php" method = 'POST'>
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
 			      	<div class="col-md-6">
 			      		<h4> Add Classes</h1>
-			      		<input id="tags" type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">
+			      		<!--  <input id="tags" type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">-->
+			      		<?php loadClasses("chosen");?>
 			      		<!-- JQUery for autocomplete class list -->
-			      		<script>
+			      		<!--  <script>
 						  $(function() {
-						    var availableTags = [
-						      "ActionScript",
-						      "AppleScript",
-						      "Asp",
-						      "BASIC",
-						      "C",
-						      "C++",
-						      "Clojure",
-						      "COBOL",
-						      "ColdFusion",
-						      "Erlang",
-						      "Fortran",
-						      "Groovy",
-						      "Haskell",
-						      "Java",
-						      "JavaScript",
-						      "Lisp",
-						      "Perl",
-						      "PHP",
-						      "Python",
-						      "Ruby",
-						      "Scala",
-						      "Scheme"
-						    ];
+							  var availableTags = <?php //echo allClasses() ?>
 						    $( "#tags" ).autocomplete({
 						      source: availableTags
 						    });
 						  });
-						  </script>
+						  </script>-->
 			      	</div>
 			      	<div class="col-md-6">
 			      		<h4> Add Unavailabilities </h4>
@@ -147,12 +127,13 @@ and open the template in the editor.
 													
 							</div>
 						</div>
-
+						
 						<div class="form-group" class="b1">
 							<input id="time_data" class="time-input" type="text" placeholder="Ex: 14:00-16:00">
-							<button type="button" id="new_worktime" class="btn btn-submit">Add</button>
+							<input type="submit" id="new_worktime" class="btn btn-submit" value = "Add" />
 							<div id="fail_work_time_add" style="color:red;"></div>
 						</div>
+						</form>
 			      	</div>
 
 			      </div>
