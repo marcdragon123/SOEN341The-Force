@@ -143,7 +143,7 @@ function loadClasses($nme){
 			echo "</div></div><div class='panel-body'><h3>$val[0]</h3><div class='checkboxList'>";
 			$last = $val[0];
 		}
-		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
+		echo "<label><input id='cbcourse".$val[2]."' type='checkbox' name='".$nme."[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
 	}
 	echo "</div></div></div>";
 	
