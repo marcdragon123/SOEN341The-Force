@@ -22,7 +22,8 @@ body{
 	color: #3498DB;
 }
 .panel-body{
-	height: 300px;
+	height: auto;
+	padding: 3px;
 }
 
 .jumbotron{
@@ -34,16 +35,26 @@ body{
 	margin-bottom: 0px !important;
 }
 
+
+
 .row {
 	margin-left: 15px;
 	margin-right: 15px;
 }
 
 .schedule-content{
-	
 
 }
 
+.checkboxList{
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+}
+
+.recomputeBtn {
+	margin: 10px;
+}
 .class-table{
 	margin-right-left: 20px;
 }

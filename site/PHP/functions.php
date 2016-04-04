@@ -149,6 +149,36 @@ function loadClasses($nme){
 	
 	closeCon($conn);
 }
+
+//A modified version of loadClasses() with the appropriate styling adjustments for the index.php
+function loadClassesIndex($nme){
+	$conn = getCon();
+	
+	$result = $conn->query("Select course_code, `number`, id from course_master_list order  by course_code, `number`;");
+	//echo "<code>";
+	//print_r(array_values($result->fetch_all()));
+	//echo "</code>";
+	$collapseID = 0; //an ID that will aid in creating groups for the accordion function
+	$last = null;
+
+    echo '<div class="panel-body">';
+	foreach($result->fetch_all() as $val){
+		if($last == null){
+			$last = $val[0];
+			echo '<a data-toggle="collapse" href="#'.$collapseID.'"><h5>'.$val[0].'</h5></a><div class="panel-collapse collapse checkboxList" id="'.$collapseID.'">';
+			$collapseID++;
+		}
+		else if($last != $val[0]){
+			echo "</div></div><div class='panel-body'><a data-toggle='collapse' href='#".$collapseID."'><h5>$val[0]</h5></a><div class='panel-collapse collapse checkboxList' id='".$collapseID."'>";
+			$last = $val[0];
+			$collapseID++;
+		}
+		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
+	}
+	echo "</div></div>";
+	
+	closeCon($conn);
+}
 //checks if the session is set up
 function isLoggedIN(){
 	if(isset($_SESSION['loginID'])){

@@ -16,6 +16,10 @@ background: url("../Assets/space.jpg") -25px -50px;
     padding-top: 10px;
     padding-bottom: 5px;
 }
+
+.checkboxDiv .panel-body{
+    height : 100%; 
+}
 .checkboxList{
     -webkit-column-count: 3; /* Chrome, Safari, Opera */
     -moz-column-count: 3; /* Firefox */

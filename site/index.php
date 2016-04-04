@@ -86,10 +86,10 @@ and open the template in the editor.
 			    <form action = "/PHP/Testing/ScheduleTimes.php" method = 'POST'>
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
-			      	<div class="col-md-6">
+			      	<div class="col-md-6 checkboxDiv">
 			      		<h4> Add Classes</h1>
 			      		<!--  <input id="tags" type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">-->
-			      		<?php loadClasses("chosen");?>
+			      		<?php loadClassesIndex("chosen");?>
 			      		<!-- JQUery for autocomplete class list -->
 			      		<!--  <script>
 						  $(function() {
@@ -100,7 +100,9 @@ and open the template in the editor.
 						  });
 						  </script>-->
 			      	</div>
-			      	<div class="col-md-6">
+			      	
+			      	
+			      	<div class="col-md-3">
 			      		<h4> Add Unavailabilities </h4>
 			      		<div class="days">
 							<div class="checkbox">
@@ -127,14 +129,19 @@ and open the template in the editor.
 													
 							</div>
 						</div>
+
+					
 						
 						<div class="form-group" class="b1">
 							<input id="time_data" class="time-input" type="text" placeholder="Ex: 14:00-16:00">
-							<input type="submit" id="new_worktime" class="btn btn-submit" value = "Add" />
-							<div id="fail_work_time_add" style="color:red;"></div>
+							<div id="fail_work_time_add" class="failUnavailabilityBlock" style="color:red;"></div>
 						</div>
-						</form>
-			      	</div>
+					</div>
+					<div class="col-md-3">
+						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute Schedule" />
+					</div>
+					</form>
+			      	
 
 			      </div>
 			    </div>
