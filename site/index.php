@@ -15,6 +15,7 @@ and open the template in the editor.
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/footer.css">
 
 		<!-- Files for FullCalendar -->
 		<link href='css/fullcalendar.css' rel='stylesheet' />
@@ -29,7 +30,13 @@ and open the template in the editor.
 		<!-- Jquery UI -->
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		
+		<!-- Script for producing the table -->
+		<script src='js/ClassTable.js'></script>
 
+		<!-- Script for producing the schedule -->
+		<script src='js/schedule.js'></script>
+				
 		<script>
 			<?php
 				include "PHP/functions.php";
@@ -40,24 +47,30 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="Home/index.html">The Force</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="Account.html">Account</a></li>
-            <li class="active"><a href="./">Sign out <span class="sr-only">(current)</span></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="index.html">THE FORCE</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+			  <ul class="nav navbar-nav navbar-right">
+				<li><a href="Account.html">ACCOUNT</a></li>
+				<li><a href="SignIn.html">SIGN OUT</a></li>
+				
+			  </ul>
+			</div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
 
 	<div class="container main-body"> 
 
@@ -201,5 +214,35 @@ and open the template in the editor.
 	<form action="test.php">
 		<input type="submit" />
 	</form>
+    
+            <!--div class="site-footer">
+
+        
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>FRONT END</h3></center><br>
+            <center>Julian Ippolito</center>
+            <center>Hasan Ahmed</center>
+            <center>Jordan Stern</center>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>BACK END</h3></center><br>
+            <center>Georges Mathieu</center>
+            <center>Olivier Cameron-Chevrier</center>
+            <center>Marc-Andre Dragon</center>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>DOCUMENTATION</h3></center><br>
+            <center>Stefano Pace</center>
+            <center>Adam Arcaro</center>
+            <center>Joey Tedeschi</center>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>TESTING</h3></center><br>
+            <center>George Theophanous</center>
+
+        </div>
+
+            
+        </div-->
 </body>
 </html>

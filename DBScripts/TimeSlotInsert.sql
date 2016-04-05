@@ -1,3 +1,3 @@
 use soen341;
 
-select * from enrollment;
+delete from  enrollment where Student_idStudent = 1;

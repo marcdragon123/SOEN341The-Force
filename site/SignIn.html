@@ -15,7 +15,9 @@
 <!--    Background animation-->
     <script type="text/javascript" src="js/custom.js"></script>
 <!--      Form validation-->
-    <script type="text/javascript" src="js/validator.js"></script>  
+    <script type="text/javascript" src="js/validator.js"></script>
+ <!--      email and pass validation -->
+    <script type="text/javascript" src="js/emailValidSignUp.js"></script>
       
           <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -122,7 +124,7 @@
                                  <input type="text" class="form-control" name="InputLastName" placeholder="Last Name*" required>
                               </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                                <input type="email" id = "email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
                                 <div class="help-block with-errors"></div>
                               </div>
                               <div class="form-group">
@@ -139,7 +141,7 @@
                               </script>
                               
                               <div class="form-group">
-                              <button type="submit" class="btnModal btn-primary">Create Account</button>
+                              <button type="submit" onclick="validateEmail()"class="btnModal btn-primary">Create Account</button>
                               </div>
                           </form>
   
@@ -147,9 +149,13 @@
                     </div>
                   </div>
                 </div>
+<<<<<<< HEAD
       <form action="PHP/geotest.php" method="POST">
+=======
+      <!-- <form action="PHP/signin_ip.php" method="POST">
+>>>>>>> refs/remotes/origin/Test-branch
 		  <input type="submit" value="test" />
-	  </form>
-      
+	  </form> -->
+
   </body>
 </html>

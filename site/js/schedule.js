@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /**
+=======
+/*
+>>>>>>> origin/server_side
 $(document).ready(function() {
 		
 		$('#schedule').fullCalendar({
@@ -36,3 +40,4 @@ $(document).ready(function() {
 		});
 		
 	});
+	*/

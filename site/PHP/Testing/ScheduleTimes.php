@@ -15,6 +15,19 @@ $NC = array();
 $val = 0;
 $val2 = 0;
 print_r($userId." </br>");
+//for if he enrolled in classes before
+$sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
+$queryEnr = $con->query($sqlEnr);
+$resultEnr = mysqli_fetch_all($queryEnr);
+$enrolled = array();
+for ($i = 0; $i < count($resultEnr)+1; $i++)
+{
+	print_r($resultEnr[$i][0]." </br>");
+	$class_ID[] = $resultEnr[$i][0]; 
+	//print_r($enrolled[count($class_ID)+$i]);
+}
+
+//$class_ID = array_merge($class_ID, $enrolled);
 //stores ID of classes to be retrieved later
 /*
 for ($i = 0; $i < count($class_ID); $i++){
@@ -30,7 +43,7 @@ for ($i = 0; $i < count($class_ID); $i++){
 */
 //pick a section
 //echo "<br />";
-for ($i = 0; $i < count($class_ID); $i++)
+for ($i = 0; $i < count($class_ID)-1; $i++)
 {
 	$sql45 = "select Section from Sections where course_Master_List_id = '".$class_ID[$i]."'";
 	$query45 = $con->query($sql45);
@@ -39,8 +52,17 @@ for ($i = 0; $i < count($class_ID); $i++)
 	//print_r($section[$i]." ");
 	//echo "<br />";
 }
-
-for ($i=0; $i < count($class_ID); $i++){
+/*$sqlEnrSec = "select Sections_Section from enrollment where Student_idStudent = '".$userId."'";
+$queryEnrSec = $con->query($sqlEnrSec);
+$resultEnrSec = mysqli_fetch_array($queryEnrSec);
+$enrolledSec = array();
+for ($i = 0; $i < count($resultEnrSec); $i++)
+{
+	$enrolledSec[count($section)+$i] = $resultEnrSec;
+}
+$section = array_merge($section, $enrolledSec);
+*/
+for ($i=0; $i < count($class_ID)-1; $i++){
 	$sqlstart = "select start from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query1 = $con->query($sqlstart);
 	$result1 = mysqli_fetch_all($query1);
@@ -51,12 +73,12 @@ for ($i=0; $i < count($class_ID); $i++){
 	$Times[$i][$j] = $Times[$i][$j][0];
 	$Times[$i][$j] = str_replace(":","",$Times[$i][$j]);
 	}
-	//print_r($Times[$i]);
-	//echo "<br />";
+	print_r($class_ID[$i]." ".$section[$i]." ".count($class_ID));
+	echo "<br />";
 }
 
 //echo "<br />";
-for ($i=0; $i < count($class_ID); $i++){
+for ($i=0; $i < count($class_ID)-1; $i++){
 	$sqlend = "select end from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query2 = $con->query($sqlend);
 	$result2 = mysqli_fetch_all($query2);
@@ -73,7 +95,7 @@ for ($i=0; $i < count($class_ID); $i++){
 }
 //echo "<br />";
 
-for ($i=0; $i < count($class_ID); $i++){
+for ($i=0; $i < count($class_ID)-1; $i++){
 	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query3 = $con->query($sqlDOW);
 	$result3 = mysqli_fetch_all($query3);
@@ -116,7 +138,7 @@ for ($j=0; $j<count($DOW); $j++){
 }
 
 $tempo = "";
-for ($j=0; $j<count($class_ID); $j++)
+for ($j=0; $j<count($class_ID)-1; $j++)
 {
 	$DOW[$j][2] = $DOW[$j][1];
 	
@@ -131,16 +153,16 @@ for ($j=0; $j<count($class_ID); $j++)
 }
 
 //Olivier Algorithm section
-$timebool = array();//for all five courses, if no conflic, put to true
-for ($i = 0; $i < count($class_ID); $i++)
+$timebool = array();//for all courses, if no conflic, put to true
+for ($i = 0; $i < count($class_ID)-1; $i++)
 {
 	$timebool = false;
 }
 
 //will check for the first 4 course
-for ($i = 0; $i < count($class_ID)-1; $i++)
+for ($i = 0; $i < count($class_ID)-2; $i++)
 {
-	for ($j = $i+1; $j < count($class_ID); $j++)
+	for ($j = $i+1; $j < count($class_ID)-1; $j++)
 	{
 		if ($DOW[$i][0] != $DOW[$j][0] && $DOW[$i][1] != $DOW[$j][0] && $DOW[$i][0] != $DOW[$j][1] && $DOW[$i][1] != $DOW[$j][1])//no common lectures DOW
 		{
@@ -202,60 +224,60 @@ for ($i = 0; $i < count($class_ID)-1; $i++)
 	}
 }
 //This is specifically for the fifth course
-for ($j = 0; $j < count($class_ID)-1; $j++)
+for ($j = 0; $j < count($class_ID)-2; $j++)
 {
-if ($DOW[4][0] != $DOW[$j][0] && $DOW[count($class_ID)][1] != $DOW[$j][0] && $DOW[count($class_ID)][0] != $DOW[$j][1] && $DOW[count($class_ID)][1] != $DOW[$j][1])//no common lectures DOW
+if ($DOW[4][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $DOW[count($class_ID)-1][0] != $DOW[$j][1] && $DOW[count($class_ID)-1][1] != $DOW[$j][1])//no common lectures DOW
 		{
-			if ($DOW[count($class_ID)][2] != $DOW[$j][2])//no common tutorial DOW
+			if ($DOW[count($class_ID)-1][2] != $DOW[$j][2])//no common tutorial DOW
 			{
-				$timebool[count($class_ID)] = true;
+				$timebool[count($class_ID)-1] = true;
 			}
 			else
 			{
-				if ((int)$Times[count($class_ID)][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
+				if ((int)$Times[count($class_ID)-1][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
 				{
-					$timebool[count($class_ID)] = true;
+					$timebool[count($class_ID)-1] = true;
 				}
-				else if ((int)$Times[count($class_ID)][2] < (int)$Timef[$j][2] && (int)$Times[count($class_ID)][2] > (int)$Times[$j][2])//starts in middle of other
+				else if ((int)$Times[count($class_ID)-1][2] < (int)$Timef[$j][2] && (int)$Times[count($class_ID)-1][2] > (int)$Times[$j][2])//starts in middle of other
 				{
-					$timebool[count($class_ID)] = false;
+					$timebool[count($class_ID)-1] = false;
 				}
-				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)][2])
+				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)-1][2])
 				{
-					$timebool[count($class_ID)] = true;
+					$timebool[count($class_ID)-1] = true;
 				}
 			}
 		}
 		else
 		{
-			if ((int)$Times[count($class_ID)][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
+			if ((int)$Times[count($class_ID)-1][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
 			{
-				$timebool[count($class_ID)] = true;
+				$timebool[count($class_ID)-1] = true;
 			}
-			else if ((int)$Times[count($class_ID)][0] < (int)$Timef[$j][0] && (int)$Times[count($class_ID)][0] > (int)$Times[$j][0])//starts in middle of other
+			else if ((int)$Times[count($class_ID)-1][0] < (int)$Timef[$j][0] && (int)$Times[count($class_ID)-1][0] > (int)$Times[$j][0])//starts in middle of other
 			{
-				$timebool[count($class_ID)] = false;
+				$timebool[count($class_ID)-1] = false;
 			}
-			else if ((int)$Times[$j][0] > (int)$Timef[count($class_ID)][0])
+			else if ((int)$Times[$j][0] > (int)$Timef[count($class_ID)-1][0])
 			{
-				$timebool[count($class_ID)] = true;
+				$timebool[count($class_ID)-1] = true;
 			}
 			//Have to check Tutorials again
-			if ($DOW[count($class_ID)][2] != $DOW[$j][2])//no common tutorial DOW
+			if ($DOW[count($class_ID)-1][2] != $DOW[$j][2])//no common tutorial DOW
 			{
 				//don't want to overwrite any previous conflicts
 			}
 			else
 			{
-				if ((int)$Times[count($class_ID)][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
+				if ((int)$Times[count($class_ID)-1][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
 				{
 					//don't want to overwrite any previous conflicts
 				}
-				else if ((int)$Times[count($class_ID)][2] < (int)$Timef[$j][2] && (int)$Times[count($class_ID)][2] > (int)$Times[$j][2])//starts in middle of other
+				else if ((int)$Times[count($class_ID)-1][2] < (int)$Timef[$j][2] && (int)$Times[count($class_ID)-1][2] > (int)$Times[$j][2])//starts in middle of other
 				{
-					$timebool[count($class_ID)] = false;
+					$timebool[count($class_ID)-1] = false;
 				}
-				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)][2])
+				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)-1][2])
 				{
 					//don't want to overwrite any previous conflicts
 				}
@@ -268,26 +290,26 @@ if (count($timebool) == 1)//in case user only puts in 1 class
 }
 $errorStr = "";
 
-for ($i = 0; $i < count($class_ID); $i++)
+for ($i = 0; $i < count($class_ID)-1; $i++)
 {
-	if ($timebool[$i] == true)
-	{
-		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."');";
-		//"select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
-		$query222 = $con->query($sql);
-		//echo $_REQUEST['chosen'];
-		//$temp = (mysqli_fetch_row($query));
-	//print_r("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
-	//echo "<br />";
-	}
-	
-	else
+	if ($timebool[$i] == false)
 	{
 		$qry = "select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
 		
 		$query = $con->query($qry);
 		$temp = (mysqli_fetch_row($query));
 		$errorStr .= ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
+		
+	}	
+	else
+	{
+		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."')";
+		//"select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
+		$query222 = $con->query($sql);
+		//echo $_REQUEST['chosen'];
+		//$temp = (mysqli_fetch_row($query));
+	//print_r("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
+	//echo "<br />";
 	}
 }
 if ($errorStr != "")
@@ -300,7 +322,7 @@ $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 
-header("Location: /index.php");
+//header("Location: /index.php");
 closeCon($con);
 
 //insert redirect header
