@@ -147,5 +147,34 @@
 		  <input type="submit" value="test" />
 	  </form>
       
-  </body>
+<!--div class="site-footer">
+
+        
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>FRONT END</h3></center><br>
+            <center>Julian Ippolito</center>
+            <center>Hasan Ahmed</center>
+            <center>Jordan Stern</center>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>BACK END</h3></center><br>
+            <center>Georges Mathieu</center>
+            <center>Olivier Cameron-Chevrier</center>
+            <center>Marc-Andre Dragon</center>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>DOCUMENTATION</h3></center><br>
+            <center>Stefano Pace</center>
+            <center>Adam Arcaro</center>
+            <center>Joey Tedeschi</center>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+        <center><h3>TESTING</h3></center><br>
+            <center>George Theophanous</center>
+
+        </div>
+
+            
+        </div-->
+</body>
 </html>

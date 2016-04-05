@@ -1,7 +1,6 @@
 <?php
 session_start();
 ?>
-<<<<<<< HEAD
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -227,7 +226,7 @@ and open the template in the editor.
 		<input type="submit" />
 	</form>
     
-            <div class="site-footer">
+            <!--div class="site-footer">
 
         
         <div class="col-xs-6 col-sm-3">
@@ -255,6 +254,6 @@ and open the template in the editor.
         </div>
 
             
-        </div>
+        </div-->
 </body>
 </html>
