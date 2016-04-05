@@ -1,6 +1,6 @@
 //Backgroundmotion      
 $(document).ready(function() {
-          var movementStrength = 15;
+          var movementStrength = 0;
           var height = movementStrength / $(window).height();
           var width = movementStrength / $(window).width();
           $("body").mousemove(function(e) {
@@ -11,3 +11,5 @@ $(document).ready(function() {
             $('body').css("background-position", newvalueX + "px     " + newvalueY + "px");
           });
         });
+        
+        
