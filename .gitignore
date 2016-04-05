@@ -3,3 +3,7 @@
 web.config
 /site/nbproject/private/
 /site/PHP/.metadata/
+
+
+site/js/.DS*
+site/.DS_Store

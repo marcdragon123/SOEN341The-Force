@@ -1,6 +1,22 @@
 //Javascript popup
 function popUpPass()
-{	
+{
+   
+//Validate email for the account tab
+ var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(email.value.match(mailformat))
+        {
+            return true;
+        }
+    else 
+    {
+        alert("Invalid email format!");
+        return false;
+ 
+  }
+    
+    
+//Validate password for the account tab
 var password = document.getElementById("pwd").value;
 var confirmPassword = document.getElementById("confpwd").value;
 var bool = true;
@@ -12,6 +28,7 @@ if (password != confirmPassword) {
 	}
 	return bool;
 }
+
 
 //Checking as user is typing 
 function checkPass()
@@ -39,3 +56,12 @@ function checkPass()
 		message.innerHTML = "Passwords Do Not Match!"
 	}
 }  
+function passLength()
+{
+    var pass1 = document.getElementById('pwd');
+    var passInt = parseInt(pass1.length);
+    if(passInt.length < 6){
+        alert("Password needs to be minimum 6 characters");
+        return false;
+	}
+}
