@@ -1,6 +1,6 @@
 <?php
 include "../functions.php";
-
+session_start();
 $con = getCon();
 $userId = $_SESSION['loginID'];
 //$class_ID = array(0=>'COMP 249', 1=>'SOEN 341', 2=>'ENGR 201', 3=>'SOEN 228', 4=>'ENGR 213');
@@ -300,6 +300,7 @@ $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 
+header("Location: /index.php");
 closeCon($con);
 
 //insert redirect header
