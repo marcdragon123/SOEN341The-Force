@@ -45,7 +45,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li><a href="Account.html">ACCOUNT</a></li>
-        <li><a href="#">SIGN OUT</a></li>
+        <li><a href="SignIn.html">SIGN OUT</a></li>
         
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -4,3 +4,4 @@ web.config
 /site/nbproject/private/
 
 site/js/.DS*
+site/.DS_Store
