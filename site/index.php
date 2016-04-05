@@ -83,7 +83,11 @@ and open the template in the editor.
 			   
 			      </h4>
 			    </div>
+<<<<<<< Updated upstream
 			    <form action="/PHP/Testing/ScheduleTimes.php" method="post">
+=======
+			    <form id="target" action="ScheduleTimes.php" method="post">
+>>>>>>> Stashed changes
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
 			      	<div class="col-md-6 checkboxDiv">
@@ -100,94 +104,79 @@ and open the template in the editor.
 						  });
 						  </script>-->
 			      	</div>
-			      	
-			      	
-			      	<div class="col-md-3">
+
+			      	<div class="col-md-4">
 			      		<h4> Add Unavailabilities </h4>
-			      		<div class="days">
-			      			
-								<div class="checkbox">
-														
-									<label class="checkbox-inline">	
-										<input type="checkbox" name="dow" id="dow" value="M" name="M"> M
-									</label>
+				            <div class="checkbox">
+				                              
+				                    <label class="checkbox-inline"> 
+				                      <input type="checkbox" name="dow[]" id="dow" value=" Mon " name="M"> M
+				                    </label>
 
-									<label class="checkbox-inline">
-										<input type="checkbox"  name="dow"id="dow" value="T" name="T"> T
-									</label>
+				                    <label class="checkbox-inline">
+				                      <input type="checkbox"  name="dow[]"id="dow" value=" Tues " name="T"> T
+				                    </label>
 
-									<label class="checkbox-inline">
-										<input type="checkbox" name="dow" id="dow" value="W" name="W"> W
-									</label>
-															
-									<label class="checkbox-inline">
-										<input type="checkbox" name="dow" id="dow" value="T" name="R"> T
-									</label>
+				                    <label class="checkbox-inline">
+				                      <input type="checkbox" name="dow[]" id="dow" value=" Wed " name="W"> W
+				                    </label>
+				                                
+				                    <label class="checkbox-inline">
+				                      <input type="checkbox" name="dow[]" id="dow" value=" Thur " name="R"> T
+				                    </label>
 
-									<label class="checkbox-inline">
-										<input type="checkbox" name="dow" id="dow" value="F" name="F"> F
-									</label>
-														
-								</div>
-						</div>
+				                    <label class="checkbox-inline">
+				                      <input type="checkbox" name="dow[]" id="dow" value=" Fri " name="F"> F
+				                    </label>
+				                              
+				            </div>
 
-					
-						
-						<div class="form-group" class="b1">
-							<input type="time" id="startTime" value="00:00:00">
-							to
-							<input type="time" id="endTime" value="00:00:00">
-							<div>
-                            	<input  onClick="displayUnavailability(this.form)"> Add </input>
-							</div>
-							<div id="fail_work_time_add" class="failUnavailabilityBlock" style="color:red;">
-								<ul id="unList">
+				            <input type="time" id="startTime" value="00:00:00">
+				            to
+				            <input type="time" id="endTime" value="00:00:00">
+				            <a onclick="addUnv()">Add</a>
+				            <ul id="myList"> </ul>
+				            
+				        <script>
+				        //function adds an unavailability to the html list.
+				        function addUnv() {
+				            var dow = new Array();
+				            var lastid = 0;
+				            
+				            //Use JQuery to retrieve values of checked checkboxes and store them in an array.
+				            $.each($("input[name='dow[]']:checked"), function() {
+				              dow.push($(this).val());
+				            });
 
-								</ul>
-							</div>
-						</div>
-						<script type="text/javascript">
-							function displayUnavailability(form){
-								var days =[];
-								var result = "";
-								for (var i in frm.dow) {
-							        if (frm.dow[i].checked) {
-							            days.push(frm.dow[i].value);
-							        }
-							    }
-								var startTime = document.getElementById("startTime").value;
-								var endTime = document.getElementById("endTime").value;
+				            var result = dow.toString();
+				            result = result.concat(" from ");
+				            var startTime = document.getElementById("startTime").value;
+				            var endTime = document.getElementById("endTime").value;
+				            result =  result.concat(startTime, " to ", endTime)
 
-								for (var i in days){
-									result = result.concat(var[i], " ");
-									
-									}
-								}
-								result.concat("from", startTime, " to ", endTime);
-								var node = document.createElement("LI");
-							    var textnode = document.createTextNode(result);
-							    node.appendChild(textnode);
-							    document.getElementById("unList").appendChild(node);
-							}
-						</script>
+				            var node = document.createElement("LI");
+				            var textnode = document.createTextNode(result);
+				            node.appendChild(textnode);
+				            node.setAttribute('id','item'+lastid);
+				            var removeButton = document.createElement('a');
+
+				            removeButton.appendChild(document.createTextNode("X"));
+				            removeButton.setAttribute('onClick','removeUnv("'+'item'+lastid+'")');
+				            removeButton.setAttribute('class', 'btn btn-link');
+				            node.appendChild(removeButton);
+				            lastid+=1;
+				            document.getElementById("myList").appendChild(node);
+				            
+				        }
+				        //function removes an unavailability from the html list when the remove button is pressed.
+				        function removeUnv(itemid){
+				          var item = document.getElementById(itemid);
+				          document.getElementById("myList").removeChild(item);
+				        }
+				        </script>
 					</div>
-					<div class="col-md-3">
-						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute Schedule" />
-					</div>
+						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute" />
 					</form>
-
-					<!-- calls php page without refresh -->
-					<script type="text/javascript">
-					    $("form").submit(function(){
-					        var str = $(this).serialize();
-					        $.ajax('/PHP/Testing/ScheduleTimes.php', str, function(result){
-					            alert(result); 
-					        }
-					        return(false);
-					    });
-					</script>
-			      	
-
 			      </div>
 			    </div>
 			  </div>
