@@ -32,32 +32,30 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-  
+      
+
       <ul id="myList">
       </ul>
-
-
-      
           <div class="checkbox">
                             
                   <label class="checkbox-inline"> 
-                    <input type="checkbox" name="dow" id="dow" value="M" name="M"> M
+                    <input type="checkbox" name="dow[]" id="dow" value=" Mon " name="M"> M
                   </label>
 
                   <label class="checkbox-inline">
-                    <input type="checkbox"  name="dow"id="dow" value="T" name="T"> T
+                    <input type="checkbox"  name="dow[]"id="dow" value=" Tues " name="T"> T
                   </label>
 
                   <label class="checkbox-inline">
-                    <input type="checkbox" name="dow" id="dow" value="W" name="W"> W
+                    <input type="checkbox" name="dow[]" id="dow" value=" Wed " name="W"> W
                   </label>
                               
                   <label class="checkbox-inline">
-                    <input type="checkbox" name="dow" id="dow" value="T" name="R"> T
+                    <input type="checkbox" name="dow[]" id="dow" value=" Thur " name="R"> T
                   </label>
 
                   <label class="checkbox-inline">
-                    <input type="checkbox" name="dow" id="dow" value="F" name="F"> F
+                    <input type="checkbox" name="dow[]" id="dow" value=" Fri " name="F"> F
                   </label>
                             
           </div>
@@ -65,42 +63,45 @@ and open the template in the editor.
           <input type="time" id="startTime" value="00:00:00">
           to
           <input type="time" id="endTime" value="00:00:00">
-          <button onclick="myFunction(dow)">Try it</button>
+          <button onclick="addUnv()">Try it</button>
       
 
       <script>
-      function myFunction(checkboxName) {
-        /**
-          var arr = [];
-          for (var i in frm.dow) {
-              if (frm.dow[i].checked) {
-                  arr.push(frm.dow[i].value);
-              }
-          }
-          var result = arr.toString();
-          result = result.concat(" from ");
-          */
-          var checkboxes = document.getElementsByName(checkboxName);
-          var dow = [];
-          for (var i=0; i<checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-              dow.push(checkboxes[i].value);
-            }
-          }
-
-          var result = dow.to();
-          alert(result);
+      //function adds an unavailability to the html list.
+      function addUnv() {
+          var dow = new Array();
+          var lastid = 0;
           
-          /*
+          //Use JQuery to retrieve values of checked checkboxes and store them in an array.
+          $.each($("input[name='dow[]']:checked"), function() {
+            dow.push($(this).val());
+          });
+
+          var result = dow.toString();
+          result = result.concat(" from ");
           var startTime = document.getElementById("startTime").value;
           var endTime = document.getElementById("endTime").value;
           result =  result.concat(startTime, " to ", endTime)
+
           var node = document.createElement("LI");
           var textnode = document.createTextNode(result);
           node.appendChild(textnode);
+          node.setAttribute('id','item'+lastid);
+          var removeButton = document.createElement('button');
+
+          removeButton.appendChild(document.createTextNode("remove"));
+          removeButton.setAttribute('onClick','removeUnv("'+'item'+lastid+'")');
+          removeButton.setAttribute('class', 'btn btn-link');
+          node.appendChild(removeButton);
+          lastid+=1;
           document.getElementById("myList").appendChild(node);
-          */
           
+      }
+
+      //function removes an unavailability from the html list when the remove button is pressed.
+      function removeUnv(itemid){
+        var item = document.getElementById(itemid);
+        document.getElementById("myList").removeChild(item);
       }
       </script>
 
