@@ -73,7 +73,7 @@ for ($i=0; $i < count($class_ID)-1; $i++){
 	$Times[$i][$j] = $Times[$i][$j][0];
 	$Times[$i][$j] = str_replace(":","",$Times[$i][$j]);
 	}
-	print_r($class_ID[$i]." ".$section[$i]." ".count($class_ID));
+	//print_r($Times[$i]);
 	echo "<br />";
 }
 
@@ -156,33 +156,38 @@ for ($j=0; $j<count($class_ID)-1; $j++)
 $timebool = array();//for all courses, if no conflic, put to true
 for ($i = 0; $i < count($class_ID)-1; $i++)
 {
-	$timebool = false;
+	$timebool[] = true;
 }
 
+if (count($class_ID)-1 > 1)
+{
+	
 //will check for the first 4 course
 for ($i = 0; $i < count($class_ID)-2; $i++)
 {
+	//print_r($Times[$i]." </br>");
 	for ($j = $i+1; $j < count($class_ID)-1; $j++)
 	{
 		if ($DOW[$i][0] != $DOW[$j][0] && $DOW[$i][1] != $DOW[$j][0] && $DOW[$i][0] != $DOW[$j][1] && $DOW[$i][1] != $DOW[$j][1])//no common lectures DOW
 		{
 			if ($DOW[$i][2] != $DOW[$j][2])//no common tutorial DOW
 			{
-				$timebool[$i] = true;
+				//if ($DOW[$i][0] != $DOW[$j][2] && $DOW[$i][1] != $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
+				//$timebool[$i] = true;
 			}
 			else
 			{
-				if ((int)$Times[$i][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
+				if ((int)$Times[$i][1] > (int)$Timef[$j][1])// start of one tutorial is after other, which is good
 				{
-					$timebool[$i] = true;
+					//$timebool[$i] = true;
 				}
-				else if ((int)$Times[$i][2] < (int)$Timef[$j][2] && (int)$Times[$i][2] > (int)$Times[$j][2])//starts in middle of other
+				else if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] > (int)$Times[$i][1])//starts in middle of other
 				{
 					$timebool[$i] = false;
 				}
-				else if ((int)$Times[$j][2] > (int)$Timef[$i][2])
+				else if ((int)$Times[$j][1] > (int)$Timef[$i][1])
 				{
-					$timebool[$i] = true;
+					//$timebool[$i] = true;
 				}
 			}
 		}
@@ -190,16 +195,17 @@ for ($i = 0; $i < count($class_ID)-2; $i++)
 		{
 			if ((int)$Times[$i][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
 			{
-				$timebool[$i] = true;
+				//$timebool[$i] = true;
 			}
-			else if ((int)$Times[$i][0] < (int)$Timef[$j][0] && (int)$Times[$i][0] > (int)$Times[$j][0])//starts in middle of other
+			else if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] > (int)$Times[$i][0])//starts in middle of other
 			{
 				$timebool[$i] = false;
 			}
 			else if ((int)$Times[$j][0] > (int)$Timef[$i][0])
 			{
-				$timebool[$i] = true;
+				//$timebool[$i] = true;
 			}
+
 			//Have to check Tutorials again
 			if ($DOW[$i][2] != $DOW[$j][2])//no common tutorial DOW
 			{
@@ -207,44 +213,72 @@ for ($i = 0; $i < count($class_ID)-2; $i++)
 			}
 			else
 			{
-				if ((int)$Times[$i][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
+				if ((int)$Times[$i][1] > (int)$Timef[$j][1])// start of one tutorial is after other, which is good
 				{
 					//don't want to overwrite any previous conflicts
 				}
-				else if ((int)$Times[$i][2] < (int)$Timef[$j][2] && (int)$Times[$i][2] > (int)$Times[$j][2])//starts in middle of other
+				else if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] > (int)$Times[$i][1])//starts in middle of other
 				{
 					$timebool[$i] = false;
 				}
-				else if ((int)$Times[$j][2] > (int)$Timef[$i][2])
+				else if ((int)$Times[$j][1] > (int)$Timef[$i][1])
 				{
 					//don't want to overwrite any previous conflicts
 				}
 			}
 		}
+			if ($DOW[$i][0] == $DOW[$j][2]) // ($DOW[$i][1] == $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
+			{
+				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] > (int)$Times[$i][0])//starts in middle of other
+				{
+					$timebool[$i] = false;
+				}
+			}
+			if ($DOW[$i][1] == $DOW[$j][2])
+			{
+				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] > (int)$Times[$i][0])//starts in middle of other
+				{
+					$timebool[$i] = false;
+				}
+			}
+			if ($DOW[$j][0] == $DOW[$i][2])
+				{
+					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] > (int)$Times[$i][0])//starts in middle of other
+					{
+						$timebool[$i] = false;
+					}
+				}
+			if ($DOW[$j][1] == $DOW[$i][2])
+				{
+					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] > (int)$Times[$i][0])//starts in middle of other
+					{
+						$timebool[$i] = false;
+					}
+				}
 	}
 }
 //This is specifically for the fifth course
 for ($j = 0; $j < count($class_ID)-2; $j++)
 {
-if ($DOW[4][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $DOW[count($class_ID)-1][0] != $DOW[$j][1] && $DOW[count($class_ID)-1][1] != $DOW[$j][1])//no common lectures DOW
+if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $DOW[count($class_ID)-1][0] != $DOW[$j][1] && $DOW[count($class_ID)-1][1] != $DOW[$j][1])//no common lectures DOW
 		{
 			if ($DOW[count($class_ID)-1][2] != $DOW[$j][2])//no common tutorial DOW
 			{
-				$timebool[count($class_ID)-1] = true;
+				//$timebool[count($class_ID)-1] = true;
 			}
 			else
 			{
 				if ((int)$Times[count($class_ID)-1][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
 				{
-					$timebool[count($class_ID)-1] = true;
+					//$timebool[count($class_ID)-1] = true;
 				}
-				else if ((int)$Times[count($class_ID)-1][2] < (int)$Timef[$j][2] && (int)$Times[count($class_ID)-1][2] > (int)$Times[$j][2])//starts in middle of other
+				else if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] > (int)$Times[count($class_ID)-1][2])//starts in middle of other
 				{
-					$timebool[count($class_ID)-1] = false;
+					$timebool[$j] = false;
 				}
 				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)-1][2])
 				{
-					$timebool[count($class_ID)-1] = true;
+					//$timebool[count($class_ID)-1] = true;
 				}
 			}
 		}
@@ -252,15 +286,15 @@ if ($DOW[4][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $
 		{
 			if ((int)$Times[count($class_ID)-1][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
 			{
-				$timebool[count($class_ID)-1] = true;
+				//$timebool[count($class_ID)-1] = true;
 			}
-			else if ((int)$Times[count($class_ID)-1][0] < (int)$Timef[$j][0] && (int)$Times[count($class_ID)-1][0] > (int)$Times[$j][0])//starts in middle of other
+			else if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][0] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
 			{
-				$timebool[count($class_ID)-1] = false;
+				$timebool[$j] = false;
 			}
 			else if ((int)$Times[$j][0] > (int)$Timef[count($class_ID)-1][0])
 			{
-				$timebool[count($class_ID)-1] = true;
+				//$timebool[count($class_ID)-1] = true;
 			}
 			//Have to check Tutorials again
 			if ($DOW[count($class_ID)-1][2] != $DOW[$j][2])//no common tutorial DOW
@@ -273,9 +307,9 @@ if ($DOW[4][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $
 				{
 					//don't want to overwrite any previous conflicts
 				}
-				else if ((int)$Times[count($class_ID)-1][2] < (int)$Timef[$j][2] && (int)$Times[count($class_ID)-1][2] > (int)$Times[$j][2])//starts in middle of other
+				else if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] > (int)$Times[count($class_ID)-1][2])//starts in middle of other
 				{
-					$timebool[count($class_ID)-1] = false;
+					$timebool[$j] = false;
 				}
 				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)-1][2])
 				{
@@ -283,15 +317,42 @@ if ($DOW[4][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $
 				}
 			}
 		}
+		if ($DOW[count($class_ID)-1][0] == $DOW[$j][2]) // ($DOW[$i][1] == $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
+		{
+			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			{
+				$timebool[$j] = false;
+			}
+		}
+		if ($DOW[count($class_ID)-1][1] == $DOW[$j][2])
+		{
+			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			{
+				$timebool[$j] = false;
+			}
+		}
+		if ($DOW[$j][0] == $DOW[count($class_ID)-1][2])
+		{
+			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			{
+				$timebool[$j] = false;
+			}
+		}
+		if ($DOW[$j][1] == $DOW[count($class_ID)-1][2])
+		{
+			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			{
+				$timebool[$j] = false;
+			}
+		}
 }
-if (count($timebool) == 1)//in case user only puts in 1 class
-{
-	$timebool[$i] = true;
 }
-$errorStr = "";
 
+$errorStr = "";
+print_r($timebool[0]." Boo");
 for ($i = 0; $i < count($class_ID)-1; $i++)
 {
+	
 	if ($timebool[$i] == false)
 	{
 		$qry = "select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
@@ -301,7 +362,7 @@ for ($i = 0; $i < count($class_ID)-1; $i++)
 		$errorStr .= ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
 		
 	}	
-	else
+	else if ($timebool[$i] == true)
 	{
 		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."')";
 		//"select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
@@ -322,7 +383,7 @@ $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 
-//header("Location: /index.php");
+header("Location: /index.php");
 closeCon($con);
 
 //insert redirect header
