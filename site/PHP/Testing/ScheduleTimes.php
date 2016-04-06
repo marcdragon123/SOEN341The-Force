@@ -177,34 +177,22 @@ for ($i = 0; $i < count($class_ID)-2; $i++)
 			}
 			else
 			{
-				if ((int)$Times[$i][1] > (int)$Timef[$j][1])// start of one tutorial is after other, which is good
-				{
-					//$timebool[$i] = true;
-				}
-				else if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] > (int)$Times[$i][1])//starts in middle of other
+				
+				if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] >= (int)$Times[$i][1])//starts in middle of other
 				{
 					$timebool[$i] = false;
 				}
-				else if ((int)$Times[$j][1] > (int)$Timef[$i][1])
-				{
-					//$timebool[$i] = true;
-				}
+				
 			}
 		}
 		else
 		{
-			if ((int)$Times[$i][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
-			{
-				//$timebool[$i] = true;
-			}
-			else if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] > (int)$Times[$i][0])//starts in middle of other
+			
+			if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])//starts in middle of other
 			{
 				$timebool[$i] = false;
 			}
-			else if ((int)$Times[$j][0] > (int)$Timef[$i][0])
-			{
-				//$timebool[$i] = true;
-			}
+			
 
 			//Have to check Tutorials again
 			if ($DOW[$i][2] != $DOW[$j][2])//no common tutorial DOW
@@ -213,44 +201,38 @@ for ($i = 0; $i < count($class_ID)-2; $i++)
 			}
 			else
 			{
-				if ((int)$Times[$i][1] > (int)$Timef[$j][1])// start of one tutorial is after other, which is good
-				{
-					//don't want to overwrite any previous conflicts
-				}
-				else if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] > (int)$Times[$i][1])//starts in middle of other
+				
+				if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] >= (int)$Times[$i][1])//starts in middle of other
 				{
 					$timebool[$i] = false;
 				}
-				else if ((int)$Times[$j][1] > (int)$Timef[$i][1])
-				{
-					//don't want to overwrite any previous conflicts
-				}
+				
 			}
 		}
 			if ($DOW[$i][0] == $DOW[$j][2]) // ($DOW[$i][1] == $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
 			{
-				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] > (int)$Times[$i][0])//starts in middle of other
+				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 				{
 					$timebool[$i] = false;
 				}
 			}
 			if ($DOW[$i][1] == $DOW[$j][2])
 			{
-				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] > (int)$Times[$i][0])//starts in middle of other
+				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 				{
 					$timebool[$i] = false;
 				}
 			}
 			if ($DOW[$j][0] == $DOW[$i][2])
 				{
-					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] > (int)$Times[$i][0])//starts in middle of other
+					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 					{
 						$timebool[$i] = false;
 					}
 				}
 			if ($DOW[$j][1] == $DOW[$i][2])
 				{
-					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] > (int)$Times[$i][0])//starts in middle of other
+					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 					{
 						$timebool[$i] = false;
 					}
@@ -268,34 +250,22 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 			}
 			else
 			{
-				if ((int)$Times[count($class_ID)-1][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
-				{
-					//$timebool[count($class_ID)-1] = true;
-				}
-				else if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] > (int)$Times[count($class_ID)-1][2])//starts in middle of other
+				
+				if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] >= (int)$Times[count($class_ID)-1][2])//starts in middle of other
 				{
 					$timebool[$j] = false;
 				}
-				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)-1][2])
-				{
-					//$timebool[count($class_ID)-1] = true;
-				}
+				
 			}
 		}
 		else
 		{
-			if ((int)$Times[count($class_ID)-1][0] > (int)$Timef[$j][0])// start of one lecture is after other, which is good
-			{
-				//$timebool[count($class_ID)-1] = true;
-			}
-			else if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][0] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			
+			if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][0] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
 			{
 				$timebool[$j] = false;
 			}
-			else if ((int)$Times[$j][0] > (int)$Timef[count($class_ID)-1][0])
-			{
-				//$timebool[count($class_ID)-1] = true;
-			}
+			
 			//Have to check Tutorials again
 			if ($DOW[count($class_ID)-1][2] != $DOW[$j][2])//no common tutorial DOW
 			{
@@ -303,44 +273,38 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 			}
 			else
 			{
-				if ((int)$Times[count($class_ID)-1][2] > (int)$Timef[$j][2])// start of one tutorial is after other, which is good
-				{
-					//don't want to overwrite any previous conflicts
-				}
-				else if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] > (int)$Times[count($class_ID)-1][2])//starts in middle of other
+				
+				if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] >= (int)$Times[count($class_ID)-1][2])//starts in middle of other
 				{
 					$timebool[$j] = false;
 				}
-				else if ((int)$Times[$j][2] > (int)$Timef[count($class_ID)-1][2])
-				{
-					//don't want to overwrite any previous conflicts
-				}
+				
 			}
 		}
 		if ($DOW[count($class_ID)-1][0] == $DOW[$j][2]) // ($DOW[$i][1] == $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
 		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
 			{
 				$timebool[$j] = false;
 			}
 		}
 		if ($DOW[count($class_ID)-1][1] == $DOW[$j][2])
 		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
 			{
 				$timebool[$j] = false;
 			}
 		}
 		if ($DOW[$j][0] == $DOW[count($class_ID)-1][2])
 		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
 			{
 				$timebool[$j] = false;
 			}
 		}
 		if ($DOW[$j][1] == $DOW[count($class_ID)-1][2])
 		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] > (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
 			{
 				$timebool[$j] = false;
 			}
