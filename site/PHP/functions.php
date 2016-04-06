@@ -123,16 +123,16 @@ function signIn(){
 	echo "didn't redirect";
 }
 //loads a list of classes takes a name to fill the name attribute of the input
-function loadClasses($nme){
+function loadClasses($nme,$msg){
 	$conn = getCon();
 	
 	$result = $conn->query("Select course_code, `number`, id from course_master_list order  by course_code, `number`;");
-	echo "<code>";
+	//echo "<code>";
 	//print_r(array_values($result->fetch_all()));
-	echo "</code>";
+	//echo "</code>";
 	$last = null;
 	echo "<div class='panel panel-default'>";
-    echo '<div class="panel-heading"></div>';
+    echo '<div class="panel-heading"><h5> '.$msg.' </h5> </div>';
     echo '<div class="panel-body">';
 	foreach($result->fetch_all() as $val){
 		if($last == null){

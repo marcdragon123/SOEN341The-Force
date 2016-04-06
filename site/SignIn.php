@@ -132,7 +132,7 @@
                                   <span class="help-block">Minimum of 6 characters</span>
                                 </div>
                                 <?php
-                                  echo loadClasses("finished");
+                                  echo loadClasses("finished", "Select the Course Your Have Already Passed");
                                 ?>
                               <div class="form-group">
                               <button type="submit" class="btnModal btn-primary">Create Account</button>
