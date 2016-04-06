@@ -253,7 +253,7 @@ function getDayStr($str){
 	//echo substr($res, 0, strlen($res)-1)."<br />";
 	return substr($res, 0, strlen($res)-1);
 }
-<<<<<<< HEAD
+
 //for time conflicts
 function getSection($class, $index)
 {
@@ -267,7 +267,7 @@ function getSection($class, $index)
 	//print_r($section[$i]." ");
 	//echo "<br />";
 	closeCon($con);
-=======
+
 
 //loads the table that includes student classes
 function loadTable(){
@@ -292,7 +292,6 @@ function loadTable(){
     echo '</table>';
 
 
->>>>>>> origin/server_side
 }
 /*
 function allClasses()
