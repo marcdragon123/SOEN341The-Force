@@ -267,7 +267,7 @@ function getSection($class, $index)
 	//print_r($section[$i]." ");
 	//echo "<br />";
 	closeCon($con);
-
+}
 
 //loads the table that includes student classes
 function loadTable(){
