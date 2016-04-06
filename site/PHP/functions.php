@@ -253,6 +253,7 @@ function getDayStr($str){
 	//echo substr($res, 0, strlen($res)-1)."<br />";
 	return substr($res, 0, strlen($res)-1);
 }
+<<<<<<< HEAD
 //for time conflicts
 function getSection($class, $index)
 {
@@ -266,6 +267,32 @@ function getSection($class, $index)
 	//print_r($section[$i]." ");
 	//echo "<br />";
 	closeCon($con);
+=======
+
+//loads the table that includes student classes
+function loadTable(){
+	$id = $_SESSION['loginID'];
+	$qry = "Select * from enrollment ";
+	$qry .= "left join timeslot on timeslot.Sections_Section = enrollment.Sections_Section ";
+	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id ";
+	$qry .= "left join course_Master_List on enrollment.Sections_course_Master_List_id = course_master_list.id ";
+	$qry .= "where ".$id." = enrollment.student_idstudent";
+
+	$conn = getCon();
+	
+	$res = $conn->query($qry);
+	echo '<table class="table table-bordered">';
+	while($rows = $res->fetch_assoc()){
+		foreach (explode(',', $rows['DOW']) as $val){
+			echo '<tr>'
+			     .'<td>'.$rows['Course_code'].' '.$rows['number'].'</td>'
+			     .'</tr>';
+		}
+    }
+    echo '</table>';
+
+
+>>>>>>> origin/server_side
 }
 /*
 function allClasses()
