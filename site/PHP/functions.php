@@ -253,6 +253,20 @@ function getDayStr($str){
 	//echo substr($res, 0, strlen($res)-1)."<br />";
 	return substr($res, 0, strlen($res)-1);
 }
+//for time conflicts
+function getSection($class, $index)
+{
+
+	$con = getCon();
+	$sql45 = "select Section from Sections where course_Master_List_id = '".$class."'";
+	$query45 = $con->query($sql45);
+	$resultsec = mysqli_fetch_all($query45);
+	$resultsec[$index] = $resultsec[$index][0];
+	return $resultsec[$index];
+	//print_r($section[$i]." ");
+	//echo "<br />";
+	closeCon($con);
+}
 /*
 function allClasses()
 {
