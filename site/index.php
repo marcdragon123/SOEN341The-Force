@@ -96,11 +96,11 @@ and open the template in the editor.
 			   
 			      </h4>
 			    </div>
-<<<<<<< Updated upstream
+
 			    <form action="/PHP/Testing/ScheduleTimes.php" method="post">
-=======
+
 			    <form id="target" action="ScheduleTimes.php" method="post">
->>>>>>> Stashed changes
+
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
 			      	<div class="col-md-6 checkboxDiv">
