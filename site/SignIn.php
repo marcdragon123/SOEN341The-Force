@@ -135,7 +135,7 @@
                                   echo loadClasses("finished", "Select the Course Your Have Already Passed");
                                 ?>
                               <div class="form-group">
-                              <button type="submit" class="btnModal btn-primary">Create Account</button>
+                              <button type="submit" onclick="validateEmail()" class="btnModal btn-primary">Create Account</button>
                               </div>
                           </form>
   
