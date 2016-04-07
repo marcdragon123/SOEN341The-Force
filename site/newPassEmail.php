@@ -28,7 +28,7 @@ for ($i = 0; $i < 10; $i++) {
 
 $encrypt = password($password);
 
-$updateQuery = "UPDATE student SET password = 'password($encrypt)' WHERE email = '$email'";
+$updateQuery = "UPDATE student SET password = '$encrypt' WHERE email = '$email'";
 mysqli_query($conn, $updateQuery);
 
 $to = $email;
