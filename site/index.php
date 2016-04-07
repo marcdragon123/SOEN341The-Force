@@ -65,7 +65,7 @@ and open the template in the editor.
 
 			  <ul class="nav navbar-nav navbar-right">
 				<li><a href="Account.html">ACCOUNT</a></li>
-				<li><a href="SignIn.html">SIGN OUT</a></li>
+				<li><a href="SignIn.php">SIGN OUT</a></li>
 				
 			  </ul>
 			</div><!-- /.navbar-collapse -->
