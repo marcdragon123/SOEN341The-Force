@@ -31,8 +31,7 @@ and open the template in the editor.
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		
-		<!-- Script for producing the table -->
-		<script src='js/ClassTable.js'></script>
+
 
 		<!-- Script for producing the schedule -->
 		<script src='js/schedule.js'></script>
@@ -198,6 +197,7 @@ and open the template in the editor.
 
 		<div class="row" class="schedule-content"> 
 			<div class="col-md-6 class-table"> 
+                                <?php loadTable()?>
 				<table class="table table-bordered class-list" id="class-table">
 
 				</table>
