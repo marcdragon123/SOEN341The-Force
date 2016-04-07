@@ -1,5 +1,5 @@
 //Valid email
-email = document.getElementById(email);
+email = document.getElementById("email");
 function validateEmail(inputText)  
 {  
 		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
