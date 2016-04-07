@@ -162,11 +162,13 @@ for ($j=0; $j<count($class_ID); $j++)
 if (count($class_ID) > 1)
 {
 //will check for the first 4 course
-for ($i = 0; $i < count($class_ID)-1; $i++)
+for ($i = 0; $i < count($class_ID); $i++)
 {
 	//print_r($Times[$i]." </br>");
-	for ($j = 1; $j < count($class_ID); $j++)
+	for ($j = 0; $j < count($class_ID); $j++)
 	{
+		if ($i != $j)
+		{
 		if ($DOW[$i][0] != $DOW[$j][0] && $DOW[$i][1] != $DOW[$j][0] && $DOW[$i][0] != $DOW[$j][1] && $DOW[$i][1] != $DOW[$j][1])//no common lectures DOW
 		{
 			if ($DOW[$i][2] != $DOW[$j][2])//no common tutorial DOW
@@ -240,6 +242,7 @@ for ($i = 0; $i < count($class_ID)-1; $i++)
 						$timebool[$i] = false;
 					}
 				}
+		}
 	}
 	if ($timebool[$i] == false)
 	{
@@ -258,6 +261,7 @@ for ($i = 0; $i < count($class_ID)-1; $i++)
 	}
 }
 //This is specifically for the fifth course
+/*
 for ($j = 0; $j < count($class_ID)-1; $j++)
 {
 if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $DOW[count($class_ID)-1][0] != $DOW[$j][1] && $DOW[count($class_ID)-1][1] != $DOW[$j][1])//no common lectures DOW
@@ -343,6 +347,7 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 			print_r("NIGGA </br>");
 		}
 }
+*/
 }
 }
 while (in_array(false,$timebool));
