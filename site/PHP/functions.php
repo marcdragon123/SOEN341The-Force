@@ -293,6 +293,11 @@ function loadTable(){
 
 
 }
+function accessGlobal($s){
+    $string = $s;
+    $result = $GLOBALS["'".$string."'"];
+    return $result;
+} 
 /*
 function allClasses()
 {
