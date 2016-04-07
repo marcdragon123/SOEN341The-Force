@@ -16,6 +16,14 @@
   	color: white !important;
   }
 
+.navbar-default .navbar-nav > li > a {
+    color: #D0D0D0;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: white;
+}
+
 h4 {
   font-weight: 400;
     font-size: 24px;
