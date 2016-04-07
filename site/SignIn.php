@@ -20,7 +20,8 @@
     <script type="text/javascript" src="js/custom.js"></script>
 <!--      Form validation-->
     <script type="text/javascript" src="js/validator.js"></script>  
-      
+      <!--      email and pass validation -->
+    <script type="text/javascript" src="js/emailValidSignUp.js"></script>
     
 
     <script>
