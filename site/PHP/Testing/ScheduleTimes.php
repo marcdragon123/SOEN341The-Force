@@ -19,14 +19,22 @@ print_r($userId." </br>");
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
 $queryEnr = $con->query($sqlEnr);
 $resultEnr = mysqli_fetch_all($queryEnr);
-$enrolled = array();
-for ($i = 0; $i < count($resultEnr)+1; $i++)
+
+if (!empty($resultEnr))
 {
-	print_r($resultEnr[$i][0]." </br>");
+for ($i = 0; $i < count($resultEnr); $i++)
+{
+	//print_r($resultEnr[$i][0]." </br>");
 	$class_ID[] = $resultEnr[$i][0]; 
 	//print_r($enrolled[count($class_ID)+$i]);
 }
-
+}
+$sqlDel = "delete from enrollment where Student_idStudent = '".$userId."'";
+if ($con->query($sqlDel)) {
+$queryDel =	$con->query($sqlDel);
+//$queryDel = $con->query($sqlDel);
+print_r("DELETED </br>");
+}
 //$class_ID = array_merge($class_ID, $enrolled);
 //stores ID of classes to be retrieved later
 /*
@@ -45,12 +53,11 @@ for ($i = 0; $i < count($class_ID); $i++){
 //echo "<br />";
 $timebool = array();//for all courses, if no conflic, put to true
 $index = array();
-for ($i = 0; $i < count($class_ID)-1; $i++)
+for ($i = 0; $i < count($class_ID); $i++)
 {
-	$timebool[] = true;
 	$index[$i] = 0;
 }
-for ($i = 0; $i < count($class_ID)-1; $i++)
+for ($i = 0; $i < count($class_ID); $i++)
 {
 	//$sql45 = "select Section from Sections where course_Master_List_id = '".$class_ID[$i]."'";
 	//$query45 = $con->query($sql45);
@@ -74,11 +81,11 @@ $section = array_merge($section, $enrolledSec);
 do
 
 {
-	for ($i = 0; $i < count($class_ID)-1; $i++)
+	for ($i = 0; $i < count($class_ID); $i++)
 	{
 		$timebool[$i] = true;
 	}
-for ($i=0; $i < count($class_ID)-1; $i++){
+for ($i=0; $i < count($class_ID); $i++){
 	$sqlstart = "select start from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query1 = $con->query($sqlstart);
 	$result1 = mysqli_fetch_all($query1);
@@ -90,11 +97,11 @@ for ($i=0; $i < count($class_ID)-1; $i++){
 	$Times[$i][$j] = str_replace(":","",$Times[$i][$j]);
 	}
 	//print_r($Times[$i]);
-	echo "<br />";
+	//echo "<br />";
 }
 
 //echo "<br />";
-for ($i=0; $i < count($class_ID)-1; $i++){
+for ($i=0; $i < count($class_ID); $i++){
 	$sqlend = "select end from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query2 = $con->query($sqlend);
 	$result2 = mysqli_fetch_all($query2);
@@ -111,7 +118,7 @@ for ($i=0; $i < count($class_ID)-1; $i++){
 }
 //echo "<br />";
 
-for ($i=0; $i < count($class_ID)-1; $i++){
+for ($i=0; $i < count($class_ID); $i++){
 	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query3 = $con->query($sqlDOW);
 	$result3 = mysqli_fetch_all($query3);
@@ -140,7 +147,7 @@ for($i=0; $i<count($TEMP); $i++){
 
 
 $tempo = "";
-for ($j=0; $j<count($class_ID)-1; $j++)
+for ($j=0; $j<count($class_ID); $j++)
 {
 	$DOW[$j][2] = $DOW[$j][1];
 	
@@ -157,15 +164,16 @@ for ($j=0; $j<count($class_ID)-1; $j++)
 //Olivier Algorithm section
 
 
-if (count($class_ID)-1 > 1)
+if (count($class_ID) > 1)
 {
-	
 //will check for the first 4 course
-for ($i = 0; $i < count($class_ID)-2; $i++)
+for ($i = 0; $i < count($class_ID); $i++)
 {
 	//print_r($Times[$i]." </br>");
-	for ($j = $i+1; $j < count($class_ID)-1; $j++)
+	for ($j = 0; $j < count($class_ID); $j++)
 	{
+		if ($i != $j)
+		{
 		if ($DOW[$i][0] != $DOW[$j][0] && $DOW[$i][1] != $DOW[$j][0] && $DOW[$i][0] != $DOW[$j][1] && $DOW[$i][1] != $DOW[$j][1])//no common lectures DOW
 		{
 			if ($DOW[$i][2] != $DOW[$j][2])//no common tutorial DOW
@@ -223,18 +231,23 @@ for ($i = 0; $i < count($class_ID)-2; $i++)
 			}
 			if ($DOW[$j][0] == $DOW[$i][2])
 				{
-					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
+					print_r("NIGGGA </br>");
+					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
+						//print_r("NIGGGA </br>");
 						$timebool[$i] = false;
 					}
 				}
 			if ($DOW[$j][1] == $DOW[$i][2])
 				{
-					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
+					//print_r("NIGGGA </br>");
+					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
+						//print_r("NIGGGA </br>");
 						$timebool[$i] = false;
 					}
 				}
+		}
 	}
 	if ($timebool[$i] == false)
 	{
@@ -243,17 +256,21 @@ for ($i = 0; $i < count($class_ID)-2; $i++)
 		print_r("Index :".$index[$i]." </br>");
 		if (($timebool[$i] == false) && (index[$i] == 3))
 		{
-			print_r("NIGGGA WUT </br>");
-				goto more;
-				print_r("NIGGGA WHY</br>");
+			//print_r("NIGGGA WUT </br>");
+				array_splice($timebool,$i,1);
+				array_splice($index,$i,1);
+				array_splice($class_ID,$i,1);
+				array_splice($section,$i,1);
+				//print_r("NIGGGA WHY</br>");
 		}
 		$section[$i] = getSection($class_ID[$i],$index[$i]);
-		print_r("section :".getSection($class_ID[$i],$index[$i])." </br>");
-		print_r("NIGGA </br>");
+		//print_r("section :".getSection($class_ID[$i],$index[$i])." </br>");
+		//print_r("NIGGA </br>");
 	}
 }
 //This is specifically for the fifth course
-for ($j = 0; $j < count($class_ID)-2; $j++)
+/*
+for ($j = 0; $j < count($class_ID)-1; $j++)
 {
 if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $DOW[count($class_ID)-1][0] != $DOW[$j][1] && $DOW[count($class_ID)-1][1] != $DOW[$j][1])//no common lectures DOW
 		{
@@ -264,7 +281,7 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 			else
 			{
 				
-				if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] >= (int)$Times[count($class_ID)-1][2])//starts in middle of other
+				if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
 				{
 					$timebool[$j] = false;
 				}
@@ -287,7 +304,7 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 			else
 			{
 				
-				if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] >= (int)$Times[count($class_ID)-1][2])//starts in middle of other
+				if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][2] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
 				{
 					$timebool[$j] = false;
 				}
@@ -310,14 +327,14 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 		}
 		if ($DOW[$j][0] == $DOW[count($class_ID)-1][2])
 		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][0] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
 			{
 				$timebool[$j] = false;
 			}
 		}
 		if ($DOW[$j][1] == $DOW[count($class_ID)-1][2])
 		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][0] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
 			{
 				$timebool[$j] = false;
 			}
@@ -337,15 +354,17 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 			print_r("section :".getSection($class_ID[$j],$index[$j])." </br>");
 			print_r("NIGGA </br>");
 		}
+		
 }
+*/
 }
 }
 while (in_array(false,$timebool));
 more:
 
-$errorStr = "";
+$Message = "";
 print_r($timebool[0]." Boo");
-for ($i = 0; $i < count($class_ID)-1; $i++)
+for ($i = 0; $i < count($class_ID); $i++)
 {
 	
 	if ($timebool[$i] == false)
@@ -354,7 +373,7 @@ for ($i = 0; $i < count($class_ID)-1; $i++)
 		
 		$query = $con->query($qry);
 		$temp = (mysqli_fetch_row($query));
-		$errorStr .= ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
+		$Message .= ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
 		
 	}	
 	else if ($timebool[$i] == true)
@@ -368,17 +387,20 @@ for ($i = 0; $i < count($class_ID)-1; $i++)
 	//echo "<br />";
 	}
 }
-if ($errorStr != "")
-{
-	echo $errorStr;
-}
+
 
 $GLOBALS['Times']=$Times;
 $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
+$_SESSION['Message'] = $Message;
 
+//echo $Message;
+//echo "<script>setTimeout(\"location.href = ' /index.php';\",1500);</script>";
 header("Location: /index.php");
+//print '<script type="text/javascript">'; 
+//print 'alert('.$Message.')'; 
+//print '</script>'; 
 closeCon($con);
 
 //insert redirect header
