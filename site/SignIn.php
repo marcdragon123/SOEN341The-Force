@@ -80,8 +80,8 @@
                   </div>
                   <div class="form-group">
                       <input type="password" data-minlength="6" class="form-control" name="inputPassword" placeholder="Password" required>
-                      <span class="help-block">Minimum of 6 characters</span>
-                     <a  href="#foo" data-toggle="modal" data-target="#forgotPasswordModal">Forgot your password?</a>
+                    <div class="help-block with-errors"></div>
+                      <a  href="#foo" data-toggle="modal" data-target="#forgotPasswordModal">Forgot your password?</a>
 
                   </div>
                     
