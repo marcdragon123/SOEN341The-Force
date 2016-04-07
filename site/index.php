@@ -57,7 +57,7 @@ and open the template in the editor.
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			  </button>
-			  <a class="navbar-brand" href="index.html">THE FORCE</a>
+			  <a class="navbar-brand" href="index.php">THE FORCE</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
