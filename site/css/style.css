@@ -16,6 +16,13 @@
 	color: white !important;
 }
 
+.navbar-default .navbar-nav > li > a {
+    color: #D0D0D0;
+}
+.navbar-default .navbar-nav > li > a:hover {
+    color: white;
+}
+
 body{
 	background-color: #e6e6e6;
 }

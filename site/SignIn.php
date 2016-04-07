@@ -20,8 +20,15 @@
     <script type="text/javascript" src="js/custom.js"></script>
 <!--      Form validation-->
     <script type="text/javascript" src="js/validator.js"></script>  
-      
-    
+      <!--      email and pass validation -->
+    <script type="text/javascript" src="js/emailValidSignUp.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/validator.js"></script>  
+      <script type="text/javascript" src="js/custom.js"></script>  
+
 
     <script>
       <?php
@@ -38,12 +45,9 @@
     <![endif]-->
   </head>
   <body>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/validator.js"></script>  
-      <script type="text/javascript" src="js/custom.js"></script>  
 
       <div id="top-image"></div>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -80,7 +84,9 @@
                   </div>
                   <div class="form-group">
                       <input type="password" data-minlength="6" class="form-control" name="inputPassword" placeholder="Password" required>
-                      <span class="help-block">Minimum of 6 characters</span>
+                    <div class="help-block with-errors"></div>
+                      <a  href="#foo" data-toggle="modal" data-target="#forgotPasswordModal">Forgot your password?</a>
+
                   </div>
                     
                   <div class="form-group">
@@ -97,7 +103,7 @@
                   <li>Designed specifically for the Software Engineering program.</li>
                   <li>Build your academic record.</li>
                   <li>Select your schedule preferences.</li>
-                <li>Create an optimized schdule automatically.</li>
+                <li>Create an optimized schedule automatically.</li>
                 </ul>
                 <a  href="#foo" data-toggle="modal" data-target="#myModal">Don’t have an account? Create one now.</a>
             </div>  
@@ -124,7 +130,7 @@
                                  <input type="text" class="form-control" name="InputLastName" placeholder="Last Name*" required>
                               </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                                <input type="email" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
                                 <div class="help-block with-errors"></div>
                               </div>
                               <div class="form-group">
@@ -135,7 +141,7 @@
                                   echo loadClasses("finished", "Select the Course Your Have Already Passed");
                                 ?>
                               <div class="form-group">
-                              <button type="submit" class="btnModal btn-primary">Create Account</button>
+                              <button type="submit" onclick="validateEmail()" class="btnModal btn-primary">Create Account</button>
                               </div>
                           </form>
   
@@ -143,38 +149,43 @@
                     </div>
                   </div>
                 </div>
+      
+      <!-- Forgot password Modal code -->
+                <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Reset Your Password</h4>
+                      </div>
+                      <div class="modal-body">
+                          
+                          <form id="resetPassword" data-toggle="validator" role="form" method="post" action="PHP/signin_up.php">
+							<input type="hidden" value="signup" name="reason" />
+                            <div class="form-group">
+                                <input type="email" id = "email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                                <div class="help-block with-errors"></div>
+                              </div>
+                              <ul>
+                                  <li>An email will be sent to the address associated with your account.</li>
+                                  <li>It will include a temporary password.</li>
+                                  <li>You must then log in and change your password in your account settings.</li>
+                              </ul>
+                              <div class="form-group">
+                              <button type="submit" class="btnModal btn-primary">Reset Password</button>
+                              </div>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+      
+      
       <form action="PHP/geotest.php" method="POST">
 		  <input type="submit" value="test" />
 	  </form>
       
-<!--div class="site-footer">
 
-        
-        <div class="col-xs-6 col-sm-3">
-        <center><h3>FRONT END</h3></center><br>
-            <center>Julian Ippolito</center>
-            <center>Hasan Ahmed</center>
-            <center>Jordan Stern</center>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-        <center><h3>BACK END</h3></center><br>
-            <center>Georges Mathieu</center>
-            <center>Olivier Cameron-Chevrier</center>
-            <center>Marc-Andre Dragon</center>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-        <center><h3>DOCUMENTATION</h3></center><br>
-            <center>Stefano Pace</center>
-            <center>Adam Arcaro</center>
-            <center>Joey Tedeschi</center>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-        <center><h3>TESTING</h3></center><br>
-            <center>George Theophanous</center>
-
-        </div>
-
-            
-        </div-->
 </body>
 </html>

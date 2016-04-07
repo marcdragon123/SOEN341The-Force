@@ -51,6 +51,10 @@ h3 {
     width: 20%;
 }
 
+.label{
+    font-weight: 300;
+}
+
 .checkbox-inline+.checkbox-inline{
     margin: 0px;
 }

@@ -3,10 +3,17 @@
     margin-top: 20px;
     background-color: #232B40;
     font-size: 120%;
-    color: aliceblue;
     padding: 30px;
-    height: 200px;
+    height: 150px;
+    color: #B2BDCF;
+    font-size: 1em;
 }
-h2{
+
+.site-footer h3{
+    font-weight: 400;
     font-size: 20px;
+    line-height: 5px;
+    margin: 0px;
+    letter-spacing: 0.6px;
+    color: aliceblue;
 }
