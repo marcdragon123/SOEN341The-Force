@@ -51,6 +51,7 @@ for ($i = 0; $i < count($class_ID); $i++){
 */
 //pick a section
 //echo "<br />";
+$errorSSS = array();
 $timebool = array();//for all courses, if no conflic, put to true
 $index = array();
 for ($i = 0; $i < count($class_ID); $i++)
@@ -77,7 +78,7 @@ for ($i = 0; $i < count($resultEnrSec); $i++)
 }
 $section = array_merge($section, $enrolledSec);
 */
-
+//$errors = array();
 do
 
 {
@@ -174,47 +175,42 @@ for ($i = 0; $i < count($class_ID); $i++)
 	{
 		if ($i != $j)
 		{
-		if ($DOW[$i][0] != $DOW[$j][0] && $DOW[$i][1] != $DOW[$j][0] && $DOW[$i][0] != $DOW[$j][1] && $DOW[$i][1] != $DOW[$j][1])//no common lectures DOW
-		{
-			if ($DOW[$i][2] != $DOW[$j][2])//no common tutorial DOW
+		
+			if ($DOW[$i][0] == $DOW[$j][0])
 			{
-				//if ($DOW[$i][0] != $DOW[$j][2] && $DOW[$i][1] != $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
-				//$timebool[$i] = true;
-			}
-			else
-			{
-				
-				if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] >= (int)$Times[$i][1])//starts in middle of other
+				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
 					$timebool[$i] = false;
 				}
-				
 			}
-		}
-		else
-		{
-			
-			if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])//starts in middle of other
+			if ($DOW[$i][1] == $DOW[$j][0])
 			{
-				$timebool[$i] = false;
-			}
-			
-
-			//Have to check Tutorials again
-			if ($DOW[$i][2] != $DOW[$j][2])//no common tutorial DOW
-			{
-				//don't want to overwrite any previous conflicts
-			}
-			else
-			{
-				
-				if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] >= (int)$Times[$i][1])//starts in middle of other
+				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
 					$timebool[$i] = false;
 				}
-				
 			}
-		}
+			if ($DOW[$i][0] == $DOW[$j][1])
+			{
+				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
+				{
+					$timebool[$i] = false;
+				}
+			}
+			if ($DOW[$i][1] == $DOW[$j][1])
+			{
+				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
+				{
+					$timebool[$i] = false;
+				}	
+			}
+			if ($DOW[$i][2] == $DOW[$j][2])
+			{
+				if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] >= (int)$Times[$i][1])
+				{
+					$timebool[$i] = false;
+				}
+			}
 			if ($DOW[$i][0] == $DOW[$j][2]) // ($DOW[$i][1] == $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
 			{
 				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
@@ -231,7 +227,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 			}
 			if ($DOW[$j][0] == $DOW[$i][2])
 				{
-					print_r("NIGGGA </br>");
+					//print_r("NIGGGA </br>");
 					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
 						//print_r("NIGGGA </br>");
@@ -251,19 +247,30 @@ for ($i = 0; $i < count($class_ID); $i++)
 	}
 	if ($timebool[$i] == false)
 	{
-		print_r("NIGGGA </br>");
+		//print_r("NIGGGA </br>");
 		$index[$i] += 1;
 		print_r("Index :".$index[$i]." </br>");
-		if (($timebool[$i] == false) && (index[$i] == 3))
+		if (($timebool[$i] == false) && ($index[$i] == 3))
 		{
-			//print_r("NIGGGA WUT </br>");
+			$tempy = count($class_ID);
+				$errorSSS[] = $class_ID[$i];
+				print_r("Here be class_ID: ".$class_ID[$i]."</br>");
+				print_r("Here be index: ".$index[$i]."</br>");
+				print_r("Here be section: ".$section[$i]."</br>");
+				print_r("Here be count: ".$tempy."</br>");
 				array_splice($timebool,$i,1);
 				array_splice($index,$i,1);
 				array_splice($class_ID,$i,1);
 				array_splice($section,$i,1);
-				//print_r("NIGGGA WHY</br>");
+				print_r("Here be class_ID: ".$class_ID[$i]." AFTER </br>");
+				print_r("Here be index: ".$index[$i]." AFTER </br>");
+				print_r("Here be section: ".$section[$i]." AFTER </br>");
+				$tempy = count($class_ID);
+				print_r("Here be count: ".$tempy." AFTER </br>");
 		}
+		else {
 		$section[$i] = getSection($class_ID[$i],$index[$i]);
+		}
 		//print_r("section :".getSection($class_ID[$i],$index[$i])." </br>");
 		//print_r("NIGGA </br>");
 	}
@@ -364,19 +371,20 @@ more:
 
 $Message = "";
 print_r($timebool[0]." Boo");
-for ($i = 0; $i < count($class_ID); $i++)
+for ($i = 0; $i < count($errorSSS); $i++)
 {
 	
-	if ($timebool[$i] == false)
-	{
-		$qry = "select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
+	
+		$qry = "select Course_code, number from course_Master_List where id = '".$errorSSS[$i]."'";
 		
 		$query = $con->query($qry);
 		$temp = (mysqli_fetch_row($query));
 		$Message .= ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
 		
-	}	
-	else if ($timebool[$i] == true)
+}		
+for ($i = 0; $i < count($class_ID); $i++)
+{
+	
 	{
 		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."')";
 		//"select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
@@ -387,20 +395,25 @@ for ($i = 0; $i < count($class_ID); $i++)
 	//echo "<br />";
 	}
 }
-
-
+for ($i = 0; $i < count($errorSSS); $i++)
+{
+print_r($errorSSS[$i]."</br>");
+}
+//print_r($Message);
 $GLOBALS['Times']=$Times;
 $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 $_SESSION['Message'] = $Message;
-
+//print_r($Message);
+print_r($_SESSION['Message']);
 //echo $Message;
 //echo "<script>setTimeout(\"location.href = ' /index.php';\",1500);</script>";
 header("Location: /index.php");
 //print '<script type="text/javascript">'; 
 //print 'alert('.$Message.')'; 
 //print '</script>'; 
+$_SESSION['Message'] = $Message;
 closeCon($con);
 
 //insert redirect header
