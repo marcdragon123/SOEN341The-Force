@@ -110,7 +110,7 @@ and open the template in the editor.
 			      		<!-- JQUery for autocomplete class list -->
 			      		<!--  <script>
 						  $(function() {
-							  var availableTags = <?php //echo allClasses() ?>
+							  var availableTags = 
 						    $( "#tags" ).autocomplete({
 						      source: availableTags
 						    });
@@ -189,6 +189,15 @@ and open the template in the editor.
 				        </script>
 					</div>
 						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute" />
+						<?php 
+						$Error = $_SESSION['Message'];
+						if (!empty($Error))
+						{
+							print '<script type="text/javascript">';
+							print 'alert('.$Error.')';
+							print '</script>';
+						}
+						?>
 					</form>
 			      </div>
 			    </div>
