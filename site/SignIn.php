@@ -81,6 +81,8 @@
                   <div class="form-group">
                       <input type="password" data-minlength="6" class="form-control" name="inputPassword" placeholder="Password" required>
                       <span class="help-block">Minimum of 6 characters</span>
+                     <a  href="#foo" data-toggle="modal" data-target="#forgotPasswordModal">Forgot your password?</a>
+
                   </div>
                     
                   <div class="form-group">
@@ -143,38 +145,43 @@
                     </div>
                   </div>
                 </div>
+      
+      <!-- Forgot password Modal code -->
+                <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Reset Your Password</h4>
+                      </div>
+                      <div class="modal-body">
+                          
+                          <form id="resetPassword" data-toggle="validator" role="form" method="post" action="PHP/signin_up.php">
+							<input type="hidden" value="signup" name="reason" />
+                            <div class="form-group">
+                                <input type="email" id = "email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                                <div class="help-block with-errors"></div>
+                              </div>
+                              <ul>
+                                  <li>An email will be sent to the address associated with your account.</li>
+                                  <li>It will include a temporary password.</li>
+                                  <li>You must then log in and change your password in your account settings.</li>
+                              </ul>
+                              <div class="form-group">
+                              <button type="submit" onclick="validateEmail()"class="btnModal btn-primary">Reset Password</button>
+                              </div>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+      
+      
       <form action="PHP/geotest.php" method="POST">
 		  <input type="submit" value="test" />
 	  </form>
       
-<!--div class="site-footer">
 
-        
-        <div class="col-xs-6 col-sm-3">
-        <center><h3>FRONT END</h3></center><br>
-            <center>Julian Ippolito</center>
-            <center>Hasan Ahmed</center>
-            <center>Jordan Stern</center>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-        <center><h3>BACK END</h3></center><br>
-            <center>Georges Mathieu</center>
-            <center>Olivier Cameron-Chevrier</center>
-            <center>Marc-Andre Dragon</center>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-        <center><h3>DOCUMENTATION</h3></center><br>
-            <center>Stefano Pace</center>
-            <center>Adam Arcaro</center>
-            <center>Joey Tedeschi</center>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-        <center><h3>TESTING</h3></center><br>
-            <center>George Theophanous</center>
-
-        </div>
-
-            
-        </div-->
 </body>
 </html>
