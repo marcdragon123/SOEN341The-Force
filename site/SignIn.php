@@ -22,7 +22,13 @@
     <script type="text/javascript" src="js/validator.js"></script>  
       <!--      email and pass validation -->
     <script type="text/javascript" src="js/emailValidSignUp.js"></script>
-    
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/validator.js"></script>  
+      <script type="text/javascript" src="js/custom.js"></script>  
+
 
     <script>
       <?php
@@ -39,12 +45,9 @@
     <![endif]-->
   </head>
   <body>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/validator.js"></script>  
-      <script type="text/javascript" src="js/custom.js"></script>  
 
       <div id="top-image"></div>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -127,7 +130,7 @@
                                  <input type="text" class="form-control" name="InputLastName" placeholder="Last Name*" required>
                               </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                                <input type="email" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
                                 <div class="help-block with-errors"></div>
                               </div>
                               <div class="form-group">

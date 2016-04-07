@@ -258,7 +258,7 @@ function getDayStr($str){
 	return substr($res, 0, strlen($res)-1);
 }
 
-<<<<<<< HEAD
+
 //converts number to full day of week
 function getFullDay($str){
     $res="";
@@ -280,7 +280,7 @@ function getFullDay($str){
 			$res .= " Sudnay";
 		}
                 return $res;
-=======
+
 //for time conflicts
 function getSection($class, $index)
 {
@@ -294,7 +294,7 @@ function getSection($class, $index)
 	//print_r($section[$i]." ");
 	//echo "<br />";
 	closeCon($con);
->>>>>>> origin/server_side
+
 }
 
 //loads the table that includes student classes
@@ -334,15 +334,13 @@ function loadTable(){
 }
 
 
-<<<<<<< HEAD
-=======
 }
 function accessGlobal($s){
     $string = $s;
     $result = $GLOBALS["'".$string."'"];
     return $result;
 } 
->>>>>>> origin/server_side
+
 /*
 function allClasses()
 {
