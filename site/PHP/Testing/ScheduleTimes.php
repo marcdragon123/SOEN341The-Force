@@ -20,11 +20,14 @@ $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_i
 $queryEnr = $con->query($sqlEnr);
 $resultEnr = mysqli_fetch_all($queryEnr);
 $enrolled = array();
-for ($i = 0; $i < count($resultEnr)+1; $i++)
+if (!empty($resultEnr))
+{
+for ($i = 0; $i < count($resultEnr); $i++)
 {
 	print_r($resultEnr[$i][0]." </br>");
 	$class_ID[] = $resultEnr[$i][0]; 
 	//print_r($enrolled[count($class_ID)+$i]);
+}
 }
 
 //$class_ID = array_merge($class_ID, $enrolled);
@@ -45,12 +48,11 @@ for ($i = 0; $i < count($class_ID); $i++){
 //echo "<br />";
 $timebool = array();//for all courses, if no conflic, put to true
 $index = array();
-for ($i = 0; $i < count($class_ID)-1; $i++)
+for ($i = 0; $i < count($class_ID); $i++)
 {
-	$timebool[] = true;
 	$index[$i] = 0;
 }
-for ($i = 0; $i < count($class_ID)-1; $i++)
+for ($i = 0; $i < count($class_ID); $i++)
 {
 	//$sql45 = "select Section from Sections where course_Master_List_id = '".$class_ID[$i]."'";
 	//$query45 = $con->query($sql45);
@@ -74,11 +76,11 @@ $section = array_merge($section, $enrolledSec);
 do
 
 {
-	for ($i = 0; $i < count($class_ID)-1; $i++)
+	for ($i = 0; $i < count($class_ID); $i++)
 	{
 		$timebool[$i] = true;
 	}
-for ($i=0; $i < count($class_ID)-1; $i++){
+for ($i=0; $i < count($class_ID); $i++){
 	$sqlstart = "select start from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query1 = $con->query($sqlstart);
 	$result1 = mysqli_fetch_all($query1);
@@ -94,7 +96,7 @@ for ($i=0; $i < count($class_ID)-1; $i++){
 }
 
 //echo "<br />";
-for ($i=0; $i < count($class_ID)-1; $i++){
+for ($i=0; $i < count($class_ID); $i++){
 	$sqlend = "select end from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query2 = $con->query($sqlend);
 	$result2 = mysqli_fetch_all($query2);
@@ -111,7 +113,7 @@ for ($i=0; $i < count($class_ID)-1; $i++){
 }
 //echo "<br />";
 
-for ($i=0; $i < count($class_ID)-1; $i++){
+for ($i=0; $i < count($class_ID); $i++){
 	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query3 = $con->query($sqlDOW);
 	$result3 = mysqli_fetch_all($query3);
@@ -140,7 +142,7 @@ for($i=0; $i<count($TEMP); $i++){
 
 
 $tempo = "";
-for ($j=0; $j<count($class_ID)-1; $j++)
+for ($j=0; $j<count($class_ID); $j++)
 {
 	$DOW[$j][2] = $DOW[$j][1];
 	
@@ -150,21 +152,20 @@ for ($j=0; $j<count($class_ID)-1; $j++)
 	$DOW[$j][1] = substr($tempo, strpos($tempo, ',')+1);
 	
 	
-	//print_r($DOW[$j]);
-	//echo "<br />";
+	print_r($DOW[$j]);
+	echo "<br />";
 }
 
 //Olivier Algorithm section
 
 
-if (count($class_ID)-1 > 1)
+if (count($class_ID) > 1)
 {
-	
 //will check for the first 4 course
-for ($i = 0; $i < count($class_ID)-2; $i++)
+for ($i = 0; $i < count($class_ID)-1; $i++)
 {
 	//print_r($Times[$i]." </br>");
-	for ($j = $i+1; $j < count($class_ID)-1; $j++)
+	for ($j = 1; $j < count($class_ID); $j++)
 	{
 		if ($DOW[$i][0] != $DOW[$j][0] && $DOW[$i][1] != $DOW[$j][0] && $DOW[$i][0] != $DOW[$j][1] && $DOW[$i][1] != $DOW[$j][1])//no common lectures DOW
 		{
@@ -223,15 +224,19 @@ for ($i = 0; $i < count($class_ID)-2; $i++)
 			}
 			if ($DOW[$j][0] == $DOW[$i][2])
 				{
-					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
+					print_r("NIGGGA </br>");
+					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
+						print_r("NIGGGA </br>");
 						$timebool[$i] = false;
 					}
 				}
 			if ($DOW[$j][1] == $DOW[$i][2])
 				{
-					if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
+					print_r("NIGGGA </br>");
+					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
+						print_r("NIGGGA </br>");
 						$timebool[$i] = false;
 					}
 				}
@@ -253,7 +258,7 @@ for ($i = 0; $i < count($class_ID)-2; $i++)
 	}
 }
 //This is specifically for the fifth course
-for ($j = 0; $j < count($class_ID)-2; $j++)
+for ($j = 0; $j < count($class_ID)-1; $j++)
 {
 if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $DOW[count($class_ID)-1][0] != $DOW[$j][1] && $DOW[count($class_ID)-1][1] != $DOW[$j][1])//no common lectures DOW
 		{
@@ -264,7 +269,7 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 			else
 			{
 				
-				if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] >= (int)$Times[count($class_ID)-1][2])//starts in middle of other
+				if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
 				{
 					$timebool[$j] = false;
 				}
@@ -287,7 +292,7 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 			else
 			{
 				
-				if ((int)$Times[$j][2] < (int)$Timef[count($class_ID)-1][2] && (int)$Times[$j][2] >= (int)$Times[count($class_ID)-1][2])//starts in middle of other
+				if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][2] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
 				{
 					$timebool[$j] = false;
 				}
@@ -310,14 +315,14 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 		}
 		if ($DOW[$j][0] == $DOW[count($class_ID)-1][2])
 		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][0] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
 			{
 				$timebool[$j] = false;
 			}
 		}
 		if ($DOW[$j][1] == $DOW[count($class_ID)-1][2])
 		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
+			if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][0] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
 			{
 				$timebool[$j] = false;
 			}
@@ -345,7 +350,7 @@ more:
 
 $errorStr = "";
 print_r($timebool[0]." Boo");
-for ($i = 0; $i < count($class_ID)-1; $i++)
+for ($i = 0; $i < count($class_ID); $i++)
 {
 	
 	if ($timebool[$i] == false)
