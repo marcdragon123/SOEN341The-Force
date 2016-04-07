@@ -258,6 +258,7 @@ function getDayStr($str){
 	return substr($res, 0, strlen($res)-1);
 }
 
+<<<<<<< HEAD
 //converts number to full day of week
 function getFullDay($str){
     $res="";
@@ -279,6 +280,21 @@ function getFullDay($str){
 			$res .= " Sudnay";
 		}
                 return $res;
+=======
+//for time conflicts
+function getSection($class, $index)
+{
+
+	$con = getCon();
+	$sql45 = "select Section from Sections where course_Master_List_id = '".$class."'";
+	$query45 = $con->query($sql45);
+	$resultsec = mysqli_fetch_all($query45);
+	$resultsec[$index] = $resultsec[$index][0];
+	return $resultsec[$index];
+	//print_r($section[$i]." ");
+	//echo "<br />";
+	closeCon($con);
+>>>>>>> origin/server_side
 }
 
 //loads the table that includes student classes
