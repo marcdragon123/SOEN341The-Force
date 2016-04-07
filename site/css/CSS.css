@@ -24,6 +24,10 @@
     color: white;
 }
 
+body{
+    background-color: #ECECEC;
+}
+
 h4 {
   font-weight: 400;
     font-size: 24px;
@@ -123,15 +127,12 @@ a:link, a:visited, a:active, a:hover, a{
 
 .has-error, .form-group{
     /* Rectangle 3: */
-    background-color: rgba(255,255,255,0.8);
     box-shadow: rgba(0, 0, 0, 0)
     border: 1px solid #D6D6D6;
     border-radius: 5px;
     /* Text*: */
     font-weight: 300;
     font-size: 15px;
-    color: #7A7A7A;
-    letter-spacing: 1.2px;
     margin: 15px;
     width: 95%;
 }
