@@ -97,7 +97,7 @@
                   <li>Designed specifically for the Software Engineering program.</li>
                   <li>Build your academic record.</li>
                   <li>Select your schedule preferences.</li>
-                <li>Create an optimized schdule automatically.</li>
+                <li>Create an optimized schedule automatically.</li>
                 </ul>
                 <a  href="#foo" data-toggle="modal" data-target="#myModal">Don’t have an account? Create one now.</a>
             </div>  
