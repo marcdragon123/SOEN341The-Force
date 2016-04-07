@@ -56,7 +56,7 @@ and open the template in the editor.
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			  </button>
-			  <a class="navbar-brand" href="index.html">THE FORCE</a>
+			  <a class="navbar-brand" href="index.php">THE FORCE</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -64,7 +64,7 @@ and open the template in the editor.
 
 			  <ul class="nav navbar-nav navbar-right">
 				<li><a href="Account.html">ACCOUNT</a></li>
-				<li><a href="SignIn.html">SIGN OUT</a></li>
+				<li><a href="SignIn.php">SIGN OUT</a></li>
 				
 			  </ul>
 			</div><!-- /.navbar-collapse -->
@@ -109,7 +109,7 @@ and open the template in the editor.
 			      		<!-- JQUery for autocomplete class list -->
 			      		<!--  <script>
 						  $(function() {
-							  var availableTags = <?php //echo allClasses() ?>
+							  var availableTags = 
 						    $( "#tags" ).autocomplete({
 						      source: availableTags
 						    });
@@ -188,6 +188,15 @@ and open the template in the editor.
 				        </script>
 					</div>
 						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute" />
+						<?php 
+						$Error = $_SESSION['Message'];
+						if (!empty($Error))
+						{
+							print '<script type="text/javascript">';
+							print 'alert('.$Error.')';
+							print '</script>';
+						}
+						?>
 					</form>
 			      </div>
 			    </div>

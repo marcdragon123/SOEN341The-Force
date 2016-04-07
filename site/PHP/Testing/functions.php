@@ -1,4 +1,3 @@
-
 <?php
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -228,10 +227,6 @@ function loadSchedule() {
 	echo "]});});";
 	
 }
-//counts nubmer of capital letters in a string, to count how many days a class takes place
-function count_capitals($s) {
-  return strlen(preg_replace('![^A-Z]+!', '', $s));
-}
 //converts day of week from letters to numbers
 function getDayStr($str){
 	//$tokens = explode(',', $str);
@@ -258,29 +253,6 @@ function getDayStr($str){
 	return substr($res, 0, strlen($res)-1);
 }
 
-<<<<<<< HEAD
-//converts number to full day of week
-function getFullDay($str){
-    $res="";
-    $val=$str;
-    
-    if($val == "1"){
-			$res .= " Monday";
-		}elseif ($val == "2") {
-			$res .= " Tuesday";
-		}elseif ($val == "3"){
-			$res .= " Wednesday";
-		}elseif ($val == "4"){
-			$res .= " Thursday";
-		}elseif ($val == "5"){
-			$res .= " Friday";
-		}elseif ($val == "6"){
-			$res .= " Saturday";
-		}elseif ($val == "7"){
-			$res .= " Sudnay";
-		}
-                return $res;
-=======
 //for time conflicts
 function getSection($class, $index)
 {
@@ -294,7 +266,6 @@ function getSection($class, $index)
 	//print_r($section[$i]." ");
 	//echo "<br />";
 	closeCon($con);
->>>>>>> origin/server_side
 }
 
 //loads the table that includes student classes
@@ -310,39 +281,32 @@ function loadTable(){
 	
 	$res = $conn->query($qry);
 	echo '<table class="table table-bordered">';
-	while($row = $res->fetch_assoc()){
-            //if 2, echo course c+n, then lectures
-            //if 1, echo tuts
-            
-            //DOW is array of days (either 2 or 1)
-            $DOW = explode(',', $row['DOW']);
-            
-            if (count($DOW)==2){
-                //course code + num and then lectures
-                echo '<tr>'
-                .'<td rowspan=2>'.$row['Course_code'].' '.$row['number'].'</td>'
-                . '<td>Lecture:'.getFullDay(getDayStr($DOW[0])).getFullDay(getDayStr($DOW[1])).'-'.$row['start'].'-'.$row['end'].'</td>';
-            }
-            elseif (count($DOW)==1) {
-                //tutorial
-                echo '<tr>'
-                .'<td>Tutorial:'.getFullDay(getDayStr($DOW[0])).'-'.$row['start'].'-'.$row['end'].'</td>'
-                .'</tr>';
-            }
-}
+	while($rows = $res->fetch_assoc()){
+		foreach (explode(',', $rows['DOW']) as $val){
+			echo '<tr>'
+			     .'<td>'.$rows['Course_code'].' '.$rows['number'].'</td>'
+			     .'</tr>';
+		}
+    }
     echo '</table>';
-}
 
 
-<<<<<<< HEAD
-=======
 }
 function accessGlobal($s){
     $string = $s;
-    $result = $GLOBALS["'".$string."'"];
+    $result = $GLOBALS[$string];
     return $result;
 } 
->>>>>>> origin/server_side
+
+function accessPost($s){
+    $string = $s;
+    $result = $_POST["'".$string."'"];
+    return $result;
+}
+
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
 /*
 function allClasses()
 {
