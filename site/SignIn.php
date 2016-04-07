@@ -168,7 +168,7 @@
                                   <li>You must then log in and change your password in your account settings.</li>
                               </ul>
                               <div class="form-group">
-                              <button type="submit" onclick="validateEmail()"class="btnModal btn-primary">Reset Password</button>
+                              <button type="submit" class="btnModal btn-primary">Reset Password</button>
                               </div>
                           </form>
                       </div>
