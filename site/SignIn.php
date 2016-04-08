@@ -160,7 +160,7 @@
                       </div>
                       <div class="modal-body">
                           
-                          <form id="resetPassword" data-toggle="validator" role="form" method="post" action="PHP/signin_up.php">
+                          <form id="resetPassword" data-toggle="validator" role="form" method="post" action="PHP/newPassEmail.php">
 							<input type="hidden" value="signup" name="reason" />
                             <div class="form-group">
                                 <input type="email" id = "email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
