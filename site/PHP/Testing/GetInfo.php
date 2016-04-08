@@ -14,7 +14,7 @@ $lname = accessPost('lname');
 $password = accessPost('pass');
 
 if($GLOBALS['passchange'] == true){
-    $sql = "update password('".$password."')= password from Student where FirstName = ".$fname." and LastName = ".$lname;
+    $sql = "update Student set password = password('".$password."') where FirstName = ".$fname." and LastName = ".$lname;
     $result = $con->query($sql);
     phpAlert("Password has been updated.");   
 }
