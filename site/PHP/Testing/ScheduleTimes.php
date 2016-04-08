@@ -14,7 +14,11 @@ $TEMP = array();
 $NC = array();
 $val = 0;
 $val2 = 0;
-print_r($userId." </br>");
+print_r("User ".$userId." </br>");
+for($i = 0; $i < count($class_ID); $i++)
+{
+	print_r("Course are ".$class_ID[$i]." </br>");
+}
 //for if he enrolled in classes before
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
 $queryEnr = $con->query($sqlEnr);
@@ -35,6 +39,7 @@ $queryDel =	$con->query($sqlDel);
 //$queryDel = $con->query($sqlDel);
 print_r("DELETED </br>");
 }
+print_r("Nigga 1 </br>");
 //$class_ID = array_merge($class_ID, $enrolled);
 //stores ID of classes to be retrieved later
 /*
@@ -54,17 +59,21 @@ for ($i = 0; $i < count($class_ID); $i++){
 $errorSSS = array();
 $timebool = array();//for all courses, if no conflic, put to true
 $index = array();
+print_r("Nigga 2 </br>");
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	$index[$i] = 0;
+	print_r("Nigga 3 </br>");
 }
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	//$sql45 = "select Section from Sections where course_Master_List_id = '".$class_ID[$i]."'";
 	//$query45 = $con->query($sql45);
 	//$resultsec = mysqli_fetch_array($query45);
+	print_r("Nigga 4 </br>");
 	$section[$i] = getSection($class_ID[$i],$index[$i]);
 	print_r("section :".$section[$i]." </br>");
+	print_r("Nigga 5 </br>");
 	//print_r($section[$i]." ");
 	//echo "<br />";
 }

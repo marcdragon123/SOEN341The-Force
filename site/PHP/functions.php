@@ -280,6 +280,7 @@ function getFullDay($str){
 			$res .= " Sudnay";
 		}
                 return $res;
+}
 
 //for time conflicts
 function getSection($class, $index)
@@ -298,6 +299,7 @@ function getSection($class, $index)
 }
 
 //loads the table that includes student classes
+
 function loadTable(){
 	$id = $_SESSION['loginID'];
 	$qry = "Select * from enrollment ";
@@ -334,7 +336,8 @@ function loadTable(){
 }
 
 
-}
+
+
 function accessGlobal($s){
     $string = $s;
     $result = $GLOBALS["'".$string."'"];

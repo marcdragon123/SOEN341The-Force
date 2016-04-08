@@ -24,8 +24,7 @@ and open the template in the editor.
 		<script src='js/lib/jquery.min.js'></script>
 		<!--script src='js/fullcalendar.min.js'></script-->
 		<script src='js/fullcalendar.js'></script>
-		<!-- Script for producing the table -->
-		<script src='js/ClassTable.js'></script>
+
 
 		<!-- Jquery UI -->
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -34,7 +33,7 @@ and open the template in the editor.
 
 
 		<!-- Script for producing the schedule -->
-		<script src='js/schedule.js'></script>
+		<!--<script src='js/schedule.js'></script> -->
 				
 		<script>
 			<?php
@@ -103,7 +102,7 @@ and open the template in the editor.
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
 			      	<div class="col-md-6 checkboxDiv">
-			      		<h4> Add Classes</h1>
+			      		<h4> Add Classes</h4>
 			      		<!--  <input id="tags" type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">-->
 			      		<?php loadClassesIndex("chosen");?>
 			      		<!-- JQUery for autocomplete class list -->
@@ -151,6 +150,7 @@ and open the template in the editor.
 				            
 				        <script>
 				        //function adds an unavailability to the html list.
+				        
 				        function addUnv() {
 				            var dow = new Array();
 				            var lastid = 0;
@@ -188,14 +188,15 @@ and open the template in the editor.
 				        </script>
 					</div>
 						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute" />
-						<?php 
+						
+						<?php /*
 						$Error = $_SESSION['Message'];
 						if (!empty($Error))
 						{
 							print '<script type="text/javascript">';
 							print 'alert('.$Error.')';
 							print '</script>';
-						}
+						}*/
 						?>
 					</form>
 			      </div>
@@ -206,7 +207,7 @@ and open the template in the editor.
 
 		<div class="row" class="schedule-content"> 
 			<div class="col-md-6 class-table"> 
-                                <?php loadTable()?>
+                                <?php  loadTable()?>
 				<table class="table table-bordered class-list" id="class-table">
 
 				</table>
