@@ -2,19 +2,7 @@
 function popUpPass()
 {
    
-//Validate email for the account tab
- var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(email.value.match(mailformat))
-        {
-            return true;
-        }
-    else 
-    {
-        alert("Invalid email format!");
-        return false;
- 
-  }
-    
+
     
 //Validate password for the account tab
 var password = document.getElementById("pwd").value;
