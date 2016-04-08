@@ -33,6 +33,7 @@
     <script>
       <?php
         include 'PHP/functions.php';                           
+		echo "var tmp;";
       ?>
     </script>
             
