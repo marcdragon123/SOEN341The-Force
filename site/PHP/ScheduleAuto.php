@@ -73,6 +73,7 @@ $index = array();
 print_r("Nigga 2 </br>");
 for ($i = 0; $i < count($class_ID); $i++)
 {
+	print_r("Nigga 3.5 </br>");
 	$index[$i] = 0;
 	print_r("Nigga 3 </br>");
 }
@@ -83,7 +84,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 	print_r("section :".$section[$i]." </br>");
 	print_r("Nigga 5 </br>");
 }
-
+/*
 do
 {
 	while (count($class_ID) <= 5)
@@ -327,7 +328,7 @@ $GLOBALS['timebool'] = $timebool;
 $_SESSION['Message'] = $Message;
 print_r($_SESSION['Message']);
 //header("Location: /index.php");
-
+*/
 $_SESSION['Message'] = $Message;
 closeCon($con);
 
