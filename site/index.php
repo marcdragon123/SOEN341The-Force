@@ -224,13 +224,6 @@ and open the template in the editor.
 			</div>
 		</div>
 	</div>
-	<form action = "/PHP/geotest.php">
-	<input type="submit" />
-	<input type = 'text' id = "test" />
-	</form>
-	<form action="test.php">
-		<input type="submit" />
-	</form>
     
             <!--div class="site-footer">
 
