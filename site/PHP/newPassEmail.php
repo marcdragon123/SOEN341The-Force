@@ -31,6 +31,11 @@ $encrypt = password($password);
 $updateQuery = "UPDATE student SET password = '$encrypt' WHERE email = '$email'";
 mysqli_query($conn, $updateQuery);
 
+echo $to."<br>";
+echo $subject."<br>";
+echo $emailText."<br>";
+echo $from;
+
 $to = $email;
 $subject = "Password reset!";
 $emailText = "Your password has been reset to the following : ". $encrypt."\n
