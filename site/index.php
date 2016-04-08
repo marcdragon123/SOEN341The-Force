@@ -187,8 +187,7 @@ and open the template in the editor.
 				        }
 				        </script>
 					</div>
-						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute" />
-						
+						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute"/> 						
 						<?php /*
 						$Error = $_SESSION['Message'];
 						if (!empty($Error))
@@ -199,6 +198,14 @@ and open the template in the editor.
 						}*/
 						?>
 					</form>
+                      
+                      
+                      <form id="target" action="/PHP/ScheduleAuto.php" method="post">
+                            <input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Auto Generate"/>
+                    </form>
+                      
+                      
+                      
 			      </div>
 			    </div>
 			  </div>
