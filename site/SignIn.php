@@ -179,13 +179,5 @@
                     </div>
                   </div>
                 </div>
-      
-      
-      
-      <form action="PHP/geotest.php" method="POST">
-		  <input type="submit" value="test" />
-	  </form>
-      
-
 </body>
 </html>
