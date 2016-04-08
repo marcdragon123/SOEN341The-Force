@@ -1,5 +1,5 @@
 <?php
-include "../functions.php";
+include "functions.php";
 session_start();
 $con = getCon();
 $userId = $_SESSION['loginID'];
@@ -28,22 +28,27 @@ if (!empty($resultEnr))
 	}
 }
 $resultComp = array();
-$sqlComp = "select Completed, Enrollment_Sections_course_Master_List_id, from transcripts where Enrollment_Student_course_Master_List_id = '".$userId."'";
+$sqlComp = "select Completed, Enrollment_Sections_course_Master_List_id from transcripts where Enrollment_Student_idStudent = '".$userId."'";
 $queryComp = $con->query($sqlComp);
 $resultComp = mysqli_fetch_all($queryComp);
+print_r("BOO </br>");
 for ($i = 0; $i < count($resultComp); $i++)
 {
 	for ($j = 0; $j < count($resultComp); $j++)
 	{
-	$resultComp[$i][$j] = $resultComp[$i][$j][0]; 
-	print_r($resultComp." </br>");
+	$resultComp[$i][$j] = $resultComp[$i][$j][0];
+ 	
+	}
+	print_r("BOOP </br>");
+	print_r($resultComp[$i][1]." </br>");
+	print_r("BOOP </br>");
 	
 	if ($resultComp[$i][0] == false)
 	{
 		$class_ID[] = $resultComp[$i][1];
 	}
-	}
 }
+
 $k = 1;
 $done = array();
 for ($i = 0; $i < count($resultComp); $i++)
@@ -321,7 +326,7 @@ $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 $_SESSION['Message'] = $Message;
 print_r($_SESSION['Message']);
-header("Location: /index.php");
+//header("Location: /index.php");
 
 $_SESSION['Message'] = $Message;
 closeCon($con);
