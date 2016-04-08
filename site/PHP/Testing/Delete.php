@@ -15,7 +15,7 @@ $queryresult = $con->query($queryforclass);
 $result = mysqli_fetch_all($queryresult);
 
 if ($GLOBALS['Delete'] == TRUE){
-    $query = "Delete * from Enrollment where Sections_course_Master_List_id =".$result." and id =".$SID." limit 1";
+    $query = "Delete from Enrollment where Sections_course_Master_List_id =".$result." and id =".$SID." limit 1";
     $con->$query;
 }
 closeCon($con);
