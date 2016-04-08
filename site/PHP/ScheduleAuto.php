@@ -14,7 +14,7 @@ $NC = array();
 $val = 0;
 $val2 = 0;
 print_r("User ".$userId." </br>");
-
+$condition = false;
 //for if he enrolled in classes before
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
 $queryEnr = $con->query($sqlEnr);
@@ -22,6 +22,7 @@ $resultEnr = mysqli_fetch_all($queryEnr);
 
 if (!empty($resultEnr))
 {
+	print_r("BOOBIES </br>");
 	for ($i = 0; $i < count($resultEnr); $i++)
 	{
 		$class_ID[] = $resultEnr[$i][0];
@@ -71,31 +72,33 @@ $errorSSS = array();
 $timebool = array();//for all courses, if no conflic, put to true
 $index = array();
 print_r("Nigga 2 </br>");
-for ($i = 0; $i < count($class_ID); $i++)
-{
-	print_r("Nigga 3.5 </br>");
-	$index[$i] = 0;
-	print_r("Nigga 3 </br>");
-}
-for ($i = 0; $i < count($class_ID); $i++)
-{
-	print_r("Nigga 4 </br>");
-	$section[$i] = getSection($class_ID[$i],$index[$i]);
-	print_r("section :".$section[$i]." </br>");
-	print_r("Nigga 5 </br>");
-}
-/*
+
+
 do
 {
-	while (count($class_ID) <= 5)
+	while (count($class_ID) < 5)
 	{
-		for ($i = 0; $i < count($resultComp); $i++)
-		{
+		
 			if (!in_array($k,$done))
 			{
 				$class_ID[] = $k;
 			}
-		}
+			$k++;
+		
+	}
+	print_r("length is: ".count($class_ID)." </br>");
+	while (count($index) < 5)
+	{
+		print_r("Nigga 3.5 </br>");
+		$index[] = 0;
+		print_r("Nigga 3 </br>");
+	}
+	for ($i=(count($section)); $i < count($class_ID); $i++)
+	{
+		print_r("Nigga 4 </br>");
+		$section[$i] = getSection($class_ID[$i],$index[$i]);
+		print_r("section :".$section[$i]." </br>");
+		print_r("Nigga 5 </br>");
 	}
 	for ($i = 0; $i < count($class_ID); $i++)
 	{
@@ -180,8 +183,7 @@ do
 	//Olivier Algorithm section
 
 
-	if (count($class_ID) > 1)
-	{
+	
 		//will check for the first 4 course
 		for ($i = 0; $i < count($class_ID); $i++)
 		{
@@ -260,8 +262,13 @@ do
 					}
 				}
 			}
+		}
+			for ($i = 0; $i < count($class_ID); $i++)
+			{
 			if ($timebool[$i] == false)
 			{
+				if ($i != 0)
+				{
 				//print_r("NIGGGA </br>");
 				$index[$i] += 1;
 				print_r("Index :".$index[$i]." </br>");
@@ -286,12 +293,44 @@ do
 				else {
 					$section[$i] = getSection($class_ID[$i],$index[$i]);
 				}
+				}
+				else 
+				{
+					$index[$i] += 1;
+					if (($timebool[$i] == false) && ($index[$i] == 3))
+					{
+						
+						$errorSSS[] = $class_ID[$i];
+						
+						unset($timebool[0]);
+						$timebool2 = array_values($timebool);
+						$timebool = array_values($timebool2);
+						unset($index[0]);
+						$index2 = array_values($index);
+						$index = array_values($index2);
+						unset($class_ID[0]);
+						$class_ID2 = array_values($class_ID);
+						$class_ID = array_values($class_ID2);
+						unset($section[0]);
+						$section2 = array_values($section);
+						$section = array_values($section2);
+						
+						
+					}
+					else {
+						$section[$i] = getSection($class_ID[$i],$index[$i]);
+					}
+				}
 			}
 		}
+		if (!in_array(false,$timebool) && count($class_ID) == 5)
+		{
+			$condition = true;
+		}
 		
-	}
+	
 }
-while (in_array(false,$timebool) && count($class_ID) != 5);
+while ($condition == false || $k > 31);
 more:
 
 $Message = "";
@@ -327,8 +366,8 @@ $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 $_SESSION['Message'] = $Message;
 print_r($_SESSION['Message']);
-//header("Location: /index.php");
-*/
+header("Location: /index.php");
+
 $_SESSION['Message'] = $Message;
 closeCon($con);
 

@@ -23,7 +23,7 @@ for($i = 0; $i < count($class_ID); $i++)
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
 $queryEnr = $con->query($sqlEnr);
 $resultEnr = mysqli_fetch_all($queryEnr);
-
+$condition = false;
 if (!empty($resultEnr))
 {
 for ($i = 0; $i < count($resultEnr); $i++)
@@ -254,35 +254,63 @@ for ($i = 0; $i < count($class_ID); $i++)
 				}
 		}
 	}
-	if ($timebool[$i] == false)
-	{
-		//print_r("NIGGGA </br>");
-		$index[$i] += 1;
-		print_r("Index :".$index[$i]." </br>");
-		if (($timebool[$i] == false) && ($index[$i] == 3))
-		{
-			$tempy = count($class_ID);
-				$errorSSS[] = $class_ID[$i];
-				print_r("Here be class_ID: ".$class_ID[$i]."</br>");
-				print_r("Here be index: ".$index[$i]."</br>");
-				print_r("Here be section: ".$section[$i]."</br>");
-				print_r("Here be count: ".$tempy."</br>");
-				array_splice($timebool,$i,1);
-				array_splice($index,$i,1);
-				array_splice($class_ID,$i,1);
-				array_splice($section,$i,1);
-				print_r("Here be class_ID: ".$class_ID[$i]." AFTER </br>");
-				print_r("Here be index: ".$index[$i]." AFTER </br>");
-				print_r("Here be section: ".$section[$i]." AFTER </br>");
-				$tempy = count($class_ID);
-				print_r("Here be count: ".$tempy." AFTER </br>");
-		}
-		else {
-		$section[$i] = getSection($class_ID[$i],$index[$i]);
-		}
-		//print_r("section :".getSection($class_ID[$i],$index[$i])." </br>");
-		//print_r("NIGGA </br>");
-	}
+if ($timebool[$i] == false)
+			{
+				if ($i != 0)
+				{
+				//print_r("NIGGGA </br>");
+				$index[$i] += 1;
+				print_r("Index :".$index[$i]." </br>");
+				if (($timebool[$i] == false) && ($index[$i] == 3))
+				{
+					$tempy = count($class_ID);
+					$errorSSS[] = $class_ID[$i];
+					print_r("Here be class_ID: ".$class_ID[$i]."</br>");
+					print_r("Here be index: ".$index[$i]."</br>");
+					print_r("Here be section: ".$section[$i]."</br>");
+					print_r("Here be count: ".$tempy."</br>");
+					array_splice($timebool,$i,1);
+					array_splice($index,$i,1);
+					array_splice($class_ID,$i,1);
+					array_splice($section,$i,1);
+					print_r("Here be class_ID: ".$class_ID[$i]." AFTER </br>");
+					print_r("Here be index: ".$index[$i]." AFTER </br>");
+					print_r("Here be section: ".$section[$i]." AFTER </br>");
+					$tempy = count($class_ID);
+					print_r("Here be count: ".$tempy." AFTER </br>");
+				}
+				else {
+					$section[$i] = getSection($class_ID[$i],$index[$i]);
+				}
+				}
+				else 
+				{
+					$index[$i] += 1;
+					if (($timebool[$i] == false) && ($index[$i] == 3))
+					{
+						
+						$errorSSS[] = $class_ID[$i];
+						
+						unset($timebool[0]);
+						$timebool2 = array_values($timebool);
+						$timebool = array_values($timebool2);
+						unset($index[0]);
+						$index2 = array_values($index);
+						$index = array_values($index2);
+						unset($class_ID[0]);
+						$class_ID2 = array_values($class_ID);
+						$class_ID = array_values($class_ID2);
+						unset($section[0]);
+						$section2 = array_values($section);
+						$section = array_values($section2);
+						
+						
+					}
+					else {
+						$section[$i] = getSection($class_ID[$i],$index[$i]);
+					}
+				}
+			}
 }
 //This is specifically for the fifth course
 /*
@@ -374,8 +402,14 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 }
 */
 }
+if (!in_array(false,$timebool))
+		{
+			$condition = true;
+		}
+		
+	
 }
-while (in_array(false,$timebool));
+while ($condition == false);
 more:
 
 $Message = "";
