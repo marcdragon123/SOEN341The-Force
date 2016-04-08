@@ -31,7 +31,7 @@ $encrypt = password($password);
 $updateQuery = "UPDATE student SET password = '$encrypt' WHERE email = '$email'";
 mysqli_query($conn, $updateQuery);
 
-echo $to."<br>";
+//echo $to."<br>";
 echo $subject."<br>";
 echo $emailText."<br>";
 echo $from;
