@@ -225,7 +225,7 @@ and open the template in the editor.
 		</div>
 	</div>
     
-            <!--div class="site-footer">
+    <div class="site-footer">
 
         
         <div class="col-xs-6 col-sm-3">
@@ -253,6 +253,6 @@ and open the template in the editor.
         </div>
 
             
-        </div-->
+        </div
 </body>
 </html>
