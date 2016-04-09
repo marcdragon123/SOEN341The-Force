@@ -10,6 +10,11 @@
 		<link rel="stylesheet" type="text/css" href="css/CSS.css">
         <link rel="stylesheet" type="text/css" href="css/footer.css">
            
+        <!--      Form validation-->
+    <script type="text/javascript" src="js/validator.js"></script>
+ <!--      email and pass validation -->
+    <script type="text/javascript" src="js/emailValidSignUp.js"></script>
+        
 		<title>My Account</title>
 	</head>
 	<body>
@@ -38,10 +43,34 @@
   </div><!-- /.container-fluid -->
 </nav>
         
-
+<!--
+<form id="signup" data-toggle="validator" role="form" method="post" action="PHP/signin_up.php">
+							<input type="hidden" value="signup" name="reason" />
+                            <div class="form-group">
+                                 <input type="text" class="form-control" name="InputFirstName" placeholder="First Name*" required>
+                              </div>
+							  <div class="form-group">
+                                 <input type="text" class="form-control" name="InputLastName" placeholder="Last Name*" required>
+                              </div>
+                            <div class="form-group">
+                                <input type="email" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                                <div class="help-block with-errors"></div>
+                              </div>
+                              <div class="form-group">
+                                  <input type="password" data-minlength="6" class="form-control" name="InputPassword" placeholder="Password*" required>
+                                  <span class="help-block">Minimum of 6 characters</span>
+                                </div>
+                                <?php
+                                  echo loadClasses("finished", "Select the Course Your Have Already Passed");
+                                ?>
+                              <div class="form-group">
+                              <button type="submit" onclick="validateEmail()" class="btnModal btn-primary">Create Account</button>
+                              </div>
+                          </form>
+-->
         
         
-        <form role="form"> 
+        <form role="form" data-toggle="validator" method="post"> 
             <h2>My Account</h2>
         <div class="rowTabs">
         <div class="col-md-4">
@@ -49,23 +78,18 @@
                 
 				<div class="form-group">
 					<label for="name">First Name</label>
-					<input type="name" class="form-control" id="fname" placeholder="Enter your first name">
+					<input type="name" class="form-control" id="fname" placeholder="First name">
 				</div>
 				<div class="form-group">
 					<label for="name">Last Name</label>
-					<input type="name" class="form-control" id="lname" placeholder="Enter your last name">
+					<input type="name" class="form-control" id="lname" placeholder="Last name">
 				</div>
 				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" class="form-control" id="email" placeholder="Enter your email">
-				</div>
-				<div class="form-group">
-					<label for="pwd">New Password</label>
-					<input type="password" class="form-control" id="pwd" placeholder="Enter your new password">
-				</div>
-				<div class="form-group">
-					<label for="pwd">Confirm Password</label>
-					<input type="password" class="form-control" id="confpwd" placeholder="Confirm your password" onkeyup="checkPass(); return false;">
+                    <label for="name">Email</label>
+                        <input type="email" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+				
 					<span id="confirmMessage" class="confirmMessage"></span>
 				</div>
 			
@@ -157,17 +181,15 @@
           </div> 
             
       </div>
-       <button type="submit" class="btnModal btn-primary" onclick="popUpPass();validateEmail();passLength()">Submit Changes</button>
+       <div class="form-group">
+            <button type="submit" onclick="validateEmail()" class="btnModal btn-primary">Submit Changes</button>
+        </div>
 
 
         </form>
-            
-        <link rel="stylesheet" type="text/css" href="footer.css">
-        <div class="page-wrap">
-        </div>
+
 
         <div class="site-footer">
-
         
         <div class="col-xs-6 col-sm-3">
         <center><h3>FRONT END</h3></center><br>
