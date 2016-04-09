@@ -28,19 +28,19 @@ for ($i = 0; $i < 10; $i++) {
 
 $encrypt = password($password);
 
-$updateQuery = "UPDATE student SET password = '$encrypt' WHERE email = '$email'";
-mysqli_query($conn, $updateQuery);
-
-//echo $to."<br>";
-echo $subject."<br>";
-echo $emailText."<br>";
-echo $from;
+//$updateQuery = "UPDATE student SET password = '$encrypt' WHERE email = '$email'";
+//mysqli_query($conn, $updateQuery);
 
 $to = $email;
 $subject = "Password reset!";
 $emailText = "Your password has been reset to the following : ". $encrypt."\n
 Please be sure to update your password yourself in the Accounts page, or remember this one!";
 $from = "theforce341@gmail.com";
+
+echo $to."<br>";
+echo $subject."<br>";
+echo $emailText."<br>";
+echo $from;
 
 mail($to, $subject, $emailText, $from);
 
