@@ -31,7 +31,7 @@ $resultComp = array();
 $sqlComp = "select Completed, Enrollment_Sections_course_Master_List_id from transcripts where Enrollment_Student_idStudent = '".$userId."'";
 $queryComp = $con->query($sqlComp);
 $resultComp = mysqli_fetch_all($queryComp);
-//print_r("BOO </br>");
+
 for ($i = 0; $i < count($resultComp); $i++)
 {
 	for ($j = 0; $j < count($resultComp); $j++)
@@ -39,9 +39,7 @@ for ($i = 0; $i < count($resultComp); $i++)
 	$resultComp[$i][$j] = $resultComp[$i][$j][0];
  	
 	}
-	//print_r("BOOP </br>");
 	print_r($resultComp[$i][1]." </br>");
-	//print_r("BOOP </br>");
 	
 	if ($resultComp[$i][0] == false)
 	{
@@ -75,12 +73,42 @@ do
 {
 	while (count($class_ID) < 5)
 	{
-		
+		$sqlPre = "select PrereqCourseID from prereq where MainCourseID = '".$k."'";
+		$queryPre = $con->query($sqlPre);
+		$resultPre = mysqli_fetch_all($queryPre);
+		for ($i = 0; $i < count($resultPre); $i++)
+		{
+			$resultPre[$i] = $resultPre[$i][0];
+		}
+		if (!empty($resultPre))
+		{
+		for ($i = 0; $i < count($resultComp); $i++)
+		{
+			for ($j = 0; $j < count($resultPre); $j++)
+			{
+				if ($resultComp[$i][1] == $resultPre[$j])
+				{
+					if ($resultComp[$i][0] == true)
+					{
+					if (!in_array($k,$done))
+					{	
+						$class_ID[] = $k;
+					}
+					}
+					
+				}
+			}
+		}
+		$k++;
+		}
+		else 
+		{
 			if (!in_array($k,$done))
 			{
 				$class_ID[] = $k;
 			}
 			$k++;
+		}
 		
 	}
 	print_r("length is: ".count($class_ID)." </br>");

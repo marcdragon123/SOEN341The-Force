@@ -4,7 +4,8 @@ session_start();
 $con = getCon();
 $userId = $_SESSION['loginID'];
 //$class_ID = array(0=>'COMP 249', 1=>'SOEN 341', 2=>'ENGR 201', 3=>'SOEN 228', 4=>'ENGR 213');
-$class_ID = $_REQUEST['chosen'];
+$class_ID_clone = $_REQUEST['chosen'];
+$class_ID = array();
 $section = array();
 $IDs = array();
 $Times = array();
@@ -15,10 +16,7 @@ $NC = array();
 $val = 0;
 $val2 = 0;
 print_r("User ".$userId." </br>");
-for($i = 0; $i < count($class_ID); $i++)
-{
-	print_r("Course are ".$class_ID[$i]." </br>");
-}
+
 //for if he enrolled in classes before
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
 $queryEnr = $con->query($sqlEnr);
@@ -36,56 +34,86 @@ for ($i = 0; $i < count($resultEnr); $i++)
 $sqlDel = "delete from enrollment where Student_idStudent = '".$userId."'";
 if ($con->query($sqlDel)) {
 $queryDel =	$con->query($sqlDel);
-//$queryDel = $con->query($sqlDel);
-//print_r("DELETED </br>");
+
 }
-//$class_ID = array_merge($class_ID, $enrolled);
-//stores ID of classes to be retrieved later
-/*
-for ($i = 0; $i < count($class_ID); $i++){
-	$subs = substr($class_ID[$i],0,4);
-	$subs1 = substr($class_ID[$i],5,3);
-	$sql = "select id from course_Master_List where Course_code = '".$subs."' and number = ".$subs1;
-	$query = $con->query($sql);
-	$result = mysqli_fetch_array($query);
-	$IDs[$i] = $result[0];
-	var_dump($IDs[$i]." ");
-	echo "<br />";
+$resultComp = array();
+$sqlComp = "select Completed, Enrollment_Sections_course_Master_List_id from transcripts where Enrollment_Student_idStudent = '".$userId."'";
+$queryComp = $con->query($sqlComp);
+$resultComp = mysqli_fetch_all($queryComp);
+
+for ($i = 0; $i < count($resultComp); $i++)
+{
+	for ($j = 0; $j < count($resultComp); $j++)
+	{
+		$resultComp[$i][$j] = $resultComp[$i][$j][0];
+	}
+	
 }
-*/
-//pick a section
-//echo "<br />";
+$done = array();
+for ($i = 0; $i < count($resultComp); $i++)
+{
+	if ($resultComp[$i][0] == true)
+	{
+		$done[] = $resultComp[$i][1];
+	}
+}
+
 $errorSSS = array();
 $timebool = array();//for all courses, if no conflic, put to true
 $index = array();
+for ($k = 0; $k < count($class_ID_clone); $k++)
+{
+	$sqlPre = "select PrereqCourseID from prereq where MainCourseID = '".$class_ID_clone[$k]."'";
+	$queryPre = $con->query($sqlPre);
+	$resultPre = mysqli_fetch_all($queryPre);
+	for ($i = 0; $i < count($resultPre); $i++)
+	{
+		$resultPre[$i] = $resultPre[$i][0];
+	}
+	if (!empty($resultPre))
+	{
+		for ($i = 0; $i < count($resultComp); $i++)
+		{
+			for ($j = 0; $j < count($resultPre); $j++)
+			{
+				if ($resultComp[$i][1] == $resultPre[$j])
+				{
+					if ($resultComp[$i][0] == true)
+					{
+						if (!in_array($class_ID_clone[$k],$done))
+						{
+							$class_ID[] = $class_ID_clone[$k];
+						}
+					}
+
+				}
+			}
+		}
+	}
+	else
+	{
+		if (!in_array($class_ID_clone[$k],$done))
+		{
+			$class_ID[] = $class_ID_clone[$k];
+		}
+	}
+}
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	$index[$i] = 0;
 }
 for ($i = 0; $i < count($class_ID); $i++)
 {
-	//$sql45 = "select Section from Sections where course_Master_List_id = '".$class_ID[$i]."'";
-	//$query45 = $con->query($sql45);
-	//$resultsec = mysqli_fetch_array($query45);
+	
 	$section[$i] = getSection($class_ID[$i],$index[$i]);
 	print_r("section :".$section[$i]." </br>");
-	//print_r($section[$i]." ");
-	//echo "<br />";
+	
 }
-/*$sqlEnrSec = "select Sections_Section from enrollment where Student_idStudent = '".$userId."'";
-$queryEnrSec = $con->query($sqlEnrSec);
-$resultEnrSec = mysqli_fetch_array($queryEnrSec);
-$enrolledSec = array();
-for ($i = 0; $i < count($resultEnrSec); $i++)
-{
-	$enrolledSec[count($section)+$i] = $resultEnrSec;
-}
-$section = array_merge($section, $enrolledSec);
-*/
-//$errors = array();
+
 do
 
 {
+	
 	for ($i = 0; $i < count($class_ID); $i++)
 	{
 		$timebool[$i] = true;
