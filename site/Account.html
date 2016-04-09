@@ -3,18 +3,18 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="js/AccountJS.js"></script>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/CSS.css">
         <link rel="stylesheet" type="text/css" href="css/footer.css">
            
-        <!--      Form validation-->
+        <!--Form validation-->
     <script type="text/javascript" src="js/validator.js"></script>
- <!--      email and pass validation -->
-    <script type="text/javascript" src="js/emailValidSignUp.js"></script>
-        
+	<!-- Pass checker -->}
+	<script type="text/javascript" src="js/AccountJS.js"></script>
+
+       
 		<title>My Account</title>
 	</head>
 	<body>
@@ -66,12 +66,12 @@
                     </div>
 				<div class="form-group">
                     <label for="name">New Password</label>
-                    <input type="password" data-minlength="6" class="form-control" name="InputPassword" placeholder="Password*" required>
+                    <input type="password" data-minlength="6" class="form-control" id = "pwd" name="InputPassword" placeholder="Password*" required>
                                   <span class="help-block">Minimum of 6 characters</span>
                                 </div>
                 <div class="form-group">
                     <label for="name">Confirm New Password</label>
-                                  <input type="password" data-minlength="6" class="form-control" name="InputPassword" placeholder="Password*" required>
+                                  <input type="password" data-minlength="6" class="form-control" id = "confpwd" name="InputPassword" onkeyup="checkPass(); return false;" placeholder="Password*" required>
                                 </div>
 					<span id="confirmMessage" class="confirmMessage"></span>
 				</div>
@@ -165,7 +165,7 @@
             
       </div>
        <div class="form-group">
-            <button type="submit" onclick="validateEmail()" class="btnModal btn-primary">Submit Changes</button>
+            <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary">Submit Changes</button>
         </div>
 
 

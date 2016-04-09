@@ -1,16 +1,3 @@
-function validateEmail()  
-{  
-	var email = document.getElementById("email").value;
-	var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	
-	if(!mailFormat.test(email))
-	{
-        alert("Wrong email format! Please enter a valid email.");
-        return false;
-    }
-
-}  
-
 //Javascript popup
 function popUpPass()
 {
