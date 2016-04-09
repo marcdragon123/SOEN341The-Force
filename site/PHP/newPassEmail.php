@@ -1,5 +1,5 @@
 <?php
-
+require 'PHPMailer/PHPMailerAutoload.php';
 $email = $_POST["InputEmail"];
 
 $servernamelocal = "192.168.2.36";
@@ -26,22 +26,27 @@ for ($i = 0; $i < 10; $i++) {
     $password .= $characters[rand(0, $charactersLength - 1)];
 }
 
-$encrypt = password($password);
 
-//$updateQuery = "UPDATE student SET password = '$encrypt' WHERE email = '$email'";
-//mysqli_query($conn, $updateQuery);
+$mail = new PHPMailer();
+ 
+$mail->Host = "smtp.gmail.com";
+$mail->Port = 465;
+$mail->isSMTP();
+//$mail->SMTPDebug = 1;
+$mail->SMTPAuth = true;
+$mail->SMTPSecure = 'ssl';
+$mail->IsHTML(true);
+$mail->Username = "theforce341@gmail.com";
+$mail->Password = "force341";
+$mail->setFrom("theforce341@gmail.com");
+$mail->Subject = "So you forgot your password?";
+$mail->Body = "Your password has been reset to".$password."\n be sure to change it in your \"Accounts\" page as soon as possible!";
+$mail->AddAddress($email);
 
-$to = $email;
-$subject = "Password reset!";
-$emailText = "Your password has been reset to the following : ". $encrypt."\n
-Please be sure to update your password yourself in the Accounts page, or remember this one!";
-$from = "theforce341@gmail.com";
+$mail->Send();
 
-echo $to."<br>";
-echo $subject."<br>";
-echo $emailText."<br>";
-echo $from;
+$updateQuery = "UPDATE student SET password = '$password' WHERE email = '$email'";
+mysqli_query($conn, $updateQuery);
 
-mail($to, $subject, $emailText, $from);
-
+header("Location: ../SignIn.php");
 ?>
