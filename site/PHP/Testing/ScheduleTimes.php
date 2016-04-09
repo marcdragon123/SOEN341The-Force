@@ -37,9 +37,8 @@ $sqlDel = "delete from enrollment where Student_idStudent = '".$userId."'";
 if ($con->query($sqlDel)) {
 $queryDel =	$con->query($sqlDel);
 //$queryDel = $con->query($sqlDel);
-print_r("DELETED </br>");
+//print_r("DELETED </br>");
 }
-print_r("Nigga 1 </br>");
 //$class_ID = array_merge($class_ID, $enrolled);
 //stores ID of classes to be retrieved later
 /*
@@ -59,21 +58,17 @@ for ($i = 0; $i < count($class_ID); $i++){
 $errorSSS = array();
 $timebool = array();//for all courses, if no conflic, put to true
 $index = array();
-print_r("Nigga 2 </br>");
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	$index[$i] = 0;
-	print_r("Nigga 3 </br>");
 }
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	//$sql45 = "select Section from Sections where course_Master_List_id = '".$class_ID[$i]."'";
 	//$query45 = $con->query($sql45);
 	//$resultsec = mysqli_fetch_array($query45);
-	print_r("Nigga 4 </br>");
 	$section[$i] = getSection($class_ID[$i],$index[$i]);
 	print_r("section :".$section[$i]." </br>");
-	print_r("Nigga 5 </br>");
 	//print_r($section[$i]." ");
 	//echo "<br />";
 }
@@ -236,19 +231,15 @@ for ($i = 0; $i < count($class_ID); $i++)
 			}
 			if ($DOW[$j][0] == $DOW[$i][2])
 				{
-					//print_r("NIGGGA </br>");
 					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
-						//print_r("NIGGGA </br>");
 						$timebool[$i] = false;
 					}
 				}
 			if ($DOW[$j][1] == $DOW[$i][2])
 				{
-					//print_r("NIGGGA </br>");
 					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
-						//print_r("NIGGGA </br>");
 						$timebool[$i] = false;
 					}
 				}
@@ -265,19 +256,19 @@ if ($timebool[$i] == false)
 				{
 					$tempy = count($class_ID);
 					$errorSSS[] = $class_ID[$i];
-					print_r("Here be class_ID: ".$class_ID[$i]."</br>");
+					/*print_r("Here be class_ID: ".$class_ID[$i]."</br>");
 					print_r("Here be index: ".$index[$i]."</br>");
 					print_r("Here be section: ".$section[$i]."</br>");
-					print_r("Here be count: ".$tempy."</br>");
+					print_r("Here be count: ".$tempy."</br>");*/
 					array_splice($timebool,$i,1);
 					array_splice($index,$i,1);
 					array_splice($class_ID,$i,1);
 					array_splice($section,$i,1);
-					print_r("Here be class_ID: ".$class_ID[$i]." AFTER </br>");
+					/*print_r("Here be class_ID: ".$class_ID[$i]." AFTER </br>");
 					print_r("Here be index: ".$index[$i]." AFTER </br>");
 					print_r("Here be section: ".$section[$i]." AFTER </br>");
 					$tempy = count($class_ID);
-					print_r("Here be count: ".$tempy." AFTER </br>");
+					print_r("Here be count: ".$tempy." AFTER </br>");*/
 				}
 				else {
 					$section[$i] = getSection($class_ID[$i],$index[$i]);
@@ -390,13 +381,10 @@ if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] !=
 			print_r("Index :".$index[$j]." </br>");
 			if (($timebool[$j]) == false && (index[$j] == 3))
 			{
-				print_r("NIGGGA WUT </br>");
 				goto more;
-				print_r("NIGGGA WHY</br>");
 			}
 			$section[$j] = getSection($class_ID[$j],$index[$j]);
 			print_r("section :".getSection($class_ID[$j],$index[$j])." </br>");
-			print_r("NIGGA </br>");
 		}
 		
 }
@@ -413,7 +401,7 @@ while ($condition == false);
 more:
 
 $Message = "";
-print_r($timebool[0]." Boo");
+//print_r($timebool[0]." Boo");
 for ($i = 0; $i < count($errorSSS); $i++)
 {
 	
@@ -456,7 +444,6 @@ header("Location: /index.php");
 //print '<script type="text/javascript">'; 
 //print 'alert('.$Message.')'; 
 //print '</script>'; 
-$_SESSION['Message'] = $Message;
 closeCon($con);
 
 //insert redirect header

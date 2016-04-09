@@ -22,7 +22,6 @@ $resultEnr = mysqli_fetch_all($queryEnr);
 
 if (!empty($resultEnr))
 {
-	print_r("BOOBIES </br>");
 	for ($i = 0; $i < count($resultEnr); $i++)
 	{
 		$class_ID[] = $resultEnr[$i][0];
@@ -32,7 +31,7 @@ $resultComp = array();
 $sqlComp = "select Completed, Enrollment_Sections_course_Master_List_id from transcripts where Enrollment_Student_idStudent = '".$userId."'";
 $queryComp = $con->query($sqlComp);
 $resultComp = mysqli_fetch_all($queryComp);
-print_r("BOO </br>");
+//print_r("BOO </br>");
 for ($i = 0; $i < count($resultComp); $i++)
 {
 	for ($j = 0; $j < count($resultComp); $j++)
@@ -40,9 +39,9 @@ for ($i = 0; $i < count($resultComp); $i++)
 	$resultComp[$i][$j] = $resultComp[$i][$j][0];
  	
 	}
-	print_r("BOOP </br>");
+	//print_r("BOOP </br>");
 	print_r($resultComp[$i][1]." </br>");
-	print_r("BOOP </br>");
+	//print_r("BOOP </br>");
 	
 	if ($resultComp[$i][0] == false)
 	{
@@ -64,14 +63,12 @@ $sqlDel = "delete from enrollment where Student_idStudent = '".$userId."'";
 if ($con->query($sqlDel)) {
 	$queryDel =	$con->query($sqlDel);
 	//$queryDel = $con->query($sqlDel);
-	print_r("DELETED </br>");
+	//print_r("DELETED </br>");
 }
-print_r("Nigga 1 </br>");
 
 $errorSSS = array();
 $timebool = array();//for all courses, if no conflic, put to true
 $index = array();
-print_r("Nigga 2 </br>");
 
 
 do
@@ -89,16 +86,12 @@ do
 	print_r("length is: ".count($class_ID)." </br>");
 	while (count($index) < 5)
 	{
-		print_r("Nigga 3.5 </br>");
 		$index[] = 0;
-		print_r("Nigga 3 </br>");
 	}
 	for ($i=(count($section)); $i < count($class_ID); $i++)
 	{
-		print_r("Nigga 4 </br>");
 		$section[$i] = getSection($class_ID[$i],$index[$i]);
 		print_r("section :".$section[$i]." </br>");
-		print_r("Nigga 5 </br>");
 	}
 	for ($i = 0; $i < count($class_ID); $i++)
 	{
@@ -244,19 +237,15 @@ do
 					}
 					if ($DOW[$j][0] == $DOW[$i][2])
 					{
-						//print_r("NIGGGA </br>");
 						if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 						{
-							//print_r("NIGGGA </br>");
 							$timebool[$i] = false;
 						}
 					}
 					if ($DOW[$j][1] == $DOW[$i][2])
 					{
-						//print_r("NIGGGA </br>");
 						if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 						{
-							//print_r("NIGGGA </br>");
 							$timebool[$i] = false;
 						}
 					}
@@ -271,24 +260,24 @@ do
 				{
 				//print_r("NIGGGA </br>");
 				$index[$i] += 1;
-				print_r("Index :".$index[$i]." </br>");
+				//print_r("Index :".$index[$i]." </br>");
 				if (($timebool[$i] == false) && ($index[$i] == 3))
 				{
 					$tempy = count($class_ID);
 					$errorSSS[] = $class_ID[$i];
-					print_r("Here be class_ID: ".$class_ID[$i]."</br>");
+					/*print_r("Here be class_ID: ".$class_ID[$i]."</br>");
 					print_r("Here be index: ".$index[$i]."</br>");
 					print_r("Here be section: ".$section[$i]."</br>");
-					print_r("Here be count: ".$tempy."</br>");
+					print_r("Here be count: ".$tempy."</br>");*/
 					array_splice($timebool,$i,1);
 					array_splice($index,$i,1);
 					array_splice($class_ID,$i,1);
 					array_splice($section,$i,1);
-					print_r("Here be class_ID: ".$class_ID[$i]." AFTER </br>");
+					/*print_r("Here be class_ID: ".$class_ID[$i]." AFTER </br>");
 					print_r("Here be index: ".$index[$i]." AFTER </br>");
 					print_r("Here be section: ".$section[$i]." AFTER </br>");
 					$tempy = count($class_ID);
-					print_r("Here be count: ".$tempy." AFTER </br>");
+					print_r("Here be count: ".$tempy." AFTER </br>");*/
 				}
 				else {
 					$section[$i] = getSection($class_ID[$i],$index[$i]);
@@ -356,19 +345,17 @@ for ($i = 0; $i < count($class_ID); $i++)
 		
 	}
 }
-for ($i = 0; $i < count($errorSSS); $i++)
+//for ($i = 0; $i < count($errorSSS); $i++)
 {
-	print_r($errorSSS[$i]."</br>");
+	//print_r($errorSSS[$i]."</br>");
 }
 $GLOBALS['Times']=$Times;
 $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 $_SESSION['Message'] = $Message;
-print_r($_SESSION['Message']);
 header("Location: /index.php");
 
-$_SESSION['Message'] = $Message;
 closeCon($con);
 
 ?>
