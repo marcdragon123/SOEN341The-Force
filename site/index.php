@@ -170,8 +170,14 @@ and open the template in the editor.
 				            node.appendChild(textnode);
 				            node.setAttribute('id','item'+lastid);
 				            var removeButton = document.createElement('a');
+                            var icon = document.createElement('span');
 
-				            removeButton.appendChild(document.createTextNode("X"));
+                            // add the class to the 'span'
+
+                            icon.className = 'glyphicon glyphicon-remove';
+                            removeButton.appendChild(icon);
+
+                            removeButton.className = 'glyphicon glyphicon-remove';
 				            removeButton.setAttribute('onClick','removeUnv("'+'item'+lastid+'")');
 				            removeButton.setAttribute('class', 'btn btn-link');
 				            node.appendChild(removeButton);
