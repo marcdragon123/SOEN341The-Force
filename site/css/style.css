@@ -26,6 +26,9 @@ a[id*='ENGR']{
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    display: inline-table;
+    background-color: transparent;
+    border-style: none;
+    font-size: 0px;
 }
 
 .delete:hover{
