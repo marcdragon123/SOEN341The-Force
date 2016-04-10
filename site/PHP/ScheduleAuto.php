@@ -81,6 +81,8 @@ do
 	{
 	while (count($class_ID) < 5)
 	{
+		if (!in_array($k,$class_ID))
+		{
 		$sqlPre = "select PrereqCourseID from prereq where MainCourseID = '".$k."'";
 		$queryPre = $con->query($sqlPre);
 		$resultPre = mysqli_fetch_all($queryPre);
@@ -117,7 +119,9 @@ do
 			}
 			$k++;
 		}
-		
+		}
+		else 
+			$k++;
 	}
 	}
 	print_r("length is: ".count($class_ID)." </br>");
