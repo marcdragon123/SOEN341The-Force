@@ -1,12 +1,32 @@
-
+a[id*='COMP']{
+    background-color: #3FA51D;
+    border-color: #3A941C;
+}
+a[id*='ELEC']{
+    background-color: #C12626;
+    border-color: #A73232;
+}
+a[id*='ENCS']{
+    background-color: #6B5FB2;
+    border-color: #6B5FB2;
+}
+a[id*='SOEN']{
+    background-color: #378AC5;
+    border-color: #378AC5;
+}
+a[id*='ENGR']{
+    background-color: #D25D18;
+    border-color: #D25D18;
+}
 .delete {
-   width: 20px; /*width of your image*/
-   height:27px; /*height of your image*/
+   width: 17px; /*width of your image*/
+   height: 23px; /*height of your image*/
    background-image:url("../Assets/trash.png");
    background-size: 100% 100%;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    display: inline-table;
+    top: 50%;
 }
 
 .delete:hover{
