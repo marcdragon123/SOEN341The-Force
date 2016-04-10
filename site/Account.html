@@ -41,14 +41,12 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-        
-        
-        <form id = "accountForm" name = "accountForm" role="form" data-toggle="validator" method="post"> 
+
+        <form id = "accountForm" name = "accountForm" role="form" data-toggle="validator" method="post" action = "PHP/changePassword.php"> 
             <h2>My Account</h2>
             <div class="rowTabs">
                 <div class="col-md-4">
                     <div class="contain">
-                
                         <div class="form-group">
                             <label for="name">First Name</label>
                             <input type="name" class="form-control" id="fname" placeholder="First name">
@@ -158,13 +156,11 @@
                 </div>
             </div> 
             <div class="form-group">
-                <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary">Submit Changes</button>
+                <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary" id = "accountSubmit">Submit Changes</button>
             </div>
         </form>
 
-
         <div class="site-footer">
-        
             <div class="col-xs-6 col-sm-3">
                 <center><h3>FRONT END</h3></center><br>
                 <center>Julian Ippolito</center>
