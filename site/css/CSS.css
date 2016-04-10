@@ -41,6 +41,7 @@ h3 {
     line-height: 5px;
     margin: 0px;
     letter-spacing: 0.6px;
+    margin-bottom: 20px;
 }
 
 h2{
@@ -56,6 +57,10 @@ h2{
 
 .course-list label{
     width: 15%;
+}
+
+label{
+    font-weight: 400;
 }
 
 .checkbox-inline+.checkbox-inline{
@@ -176,4 +181,9 @@ h1{
 
 hr {
   margin: 40px;
+}
+.checkboxList{
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
 }
