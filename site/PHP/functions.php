@@ -217,7 +217,7 @@ function loadSchedule() {
 		
 		foreach (explode(',', $rows['DOW']) as $val){
 			echo '{'
-				.'title:"'.$rows['Course_code'].' '.$rows['number'].'",'
+				.'title:"'.$rows['Course_code'].' '.$rows['number'].' - '.$rows['Sections_Section'].'",'
 				.'start:"'.$rows['start'].'",'
 				.'end: "'.$rows['end'].'",'
 				.'dow: ['.getDayStr($val).'] '
