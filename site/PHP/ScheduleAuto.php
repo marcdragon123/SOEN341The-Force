@@ -73,7 +73,7 @@ do
 {
 	if (count($class_ID) < 5 )
 	{
-	while (count($class_ID) < 6)
+	while (count($class_ID) < 5)
 	{
 		$sqlPre = "select PrereqCourseID from prereq where MainCourseID = '".$k."'";
 		$queryPre = $con->query($sqlPre);
@@ -115,7 +115,7 @@ do
 	}
 	}
 	print_r("length is: ".count($class_ID)." </br>");
-	while (count($index) < 6)
+	while (count($index) < count($class_ID))
 	{
 		$index[] = 0;
 	}
@@ -296,12 +296,19 @@ do
 				{
 					$tempy = count($class_ID);
 					$errorSSS[] = $class_ID[$i];
-					
+					/*print_r("Here be class_ID: ".$class_ID[$i]."</br>");
+					print_r("Here be index: ".$index[$i]."</br>");
+					print_r("Here be section: ".$section[$i]."</br>");
+					print_r("Here be count: ".$tempy."</br>");*/
 					array_splice($timebool,$i,1);
 					array_splice($index,$i,1);
 					array_splice($class_ID,$i,1);
 					array_splice($section,$i,1);
-					
+					/*print_r("Here be class_ID: ".$class_ID[$i]." AFTER </br>");
+					print_r("Here be index: ".$index[$i]." AFTER </br>");
+					print_r("Here be section: ".$section[$i]." AFTER </br>");
+					$tempy = count($class_ID);
+					print_r("Here be count: ".$tempy." AFTER </br>");*/
 				}
 				else {
 					$section[$i] = getSection($class_ID[$i],$index[$i]);
