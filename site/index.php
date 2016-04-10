@@ -62,7 +62,7 @@ and open the template in the editor.
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 			  <ul class="nav navbar-nav navbar-right">
-				<li><a href="Account.html">ACCOUNT</a></li>
+				<li><a href="Account.php">ACCOUNT</a></li>
 				<li><a href="SignIn.php">SIGN OUT</a></li>
 				
 			  </ul>
