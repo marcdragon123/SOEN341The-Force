@@ -102,7 +102,7 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 }
 for ($i = 0; $i < count($class_ID); $i++)
 {
-	$index[$i] = 0;
+	$index[] = 0;
 }
 for ($i = 0; $i < count($class_ID); $i++)
 {
@@ -113,8 +113,63 @@ for ($i = 0; $i < count($class_ID); $i++)
 }
 
 do
-
 {
+	if (count($class_ID) > 1)
+	{
+	for ($i = 0; $i < count($class_ID); $i++)
+	{
+	if ($timebool[$i] == false)
+	{
+		if ($i != 0)
+		{
+			//print_r("NIGGGA </br>");
+			$index[$i] += 1;
+			print_r("Index :".$index[$i]." </br>");
+			if (($timebool[$i] == false) && ($index[$i] == 3))
+			{
+				$tempy = count($class_ID);
+				$errorSSS[] = $class_ID[$i];
+	
+				array_splice($timebool,$i,1);
+				array_splice($index,$i,1);
+				array_splice($class_ID,$i,1);
+				array_splice($section,$i,1);
+	
+			}
+			else {
+				$section[$i] = getSection($class_ID[$i],$index[$i]);
+			}
+		}
+		else
+		{
+			$index[$i] += 1;
+			if (($timebool[$i] == false) && ($index[$i] == 3))
+			{
+	
+				$errorSSS[] = $class_ID[$i];
+	
+				unset($timebool[0]);
+				$timebool2 = array_values($timebool);
+				$timebool = array_values($timebool2);
+				unset($index[0]);
+				$index2 = array_values($index);
+				$index = array_values($index2);
+				unset($class_ID[0]);
+				$class_ID2 = array_values($class_ID);
+				$class_ID = array_values($class_ID2);
+				unset($section[0]);
+				$section2 = array_values($section);
+				$section = array_values($section2);
+	
+	
+			}
+			else {
+				$section[$i] = getSection($class_ID[$i],$index[$i]);
+			}
+		}
+	}
+	}
+	}
 	
 	for ($i = 0; $i < count($class_ID); $i++)
 	{
@@ -130,6 +185,8 @@ for ($i=0; $i < count($class_ID); $i++){
 	{
 	$Times[$i][$j] = $Times[$i][$j][0];
 	$Times[$i][$j] = str_replace(":","",$Times[$i][$j]);
+
+	print_r("Times for ".$class_ID[$i]." is: ".$Times[$i][$j]." </br>");
 	}
 	//print_r($Times[$i]);
 	//echo "<br />";
@@ -147,6 +204,7 @@ for ($i=0; $i < count($class_ID); $i++){
 	{
 	$Timef[$i][$j] = $Timef[$i][$j][0];
 	$Timef[$i][$j] = str_replace(":","",$Timef[$i][$j]);
+	print_r("Timef for ".$class_ID[$i]." is: ".$Timef[$i][$j]." </br>");
 	}
 	//print_r($Timef[$i]);
 	//echo "<br />";
@@ -162,6 +220,7 @@ for ($i=0; $i < count($class_ID); $i++){
 	for($j = 0; $j < 2; $j++)
 	{
 	$TEMP[$i][$j] = $TEMP[$i][$j][0];
+	print_r("DOW for ".$class_ID[$i]." is: ".$TEMP[$i][$j]." </br>");
 	}
 	//print_r($TEMP[$i]);
 	//echo "<br />";
@@ -201,7 +260,7 @@ for ($j=0; $j<count($class_ID); $j++)
 
 if (count($class_ID) > 1)
 {
-//will check for the first 4 course
+
 for ($i = 0; $i < count($class_ID); $i++)
 {
 	//print_r($Times[$i]." </br>");
@@ -214,6 +273,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 			{
 				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
+					if ($timebool[$i] == true)
 					$timebool[$i] = false;
 				}
 			}
@@ -221,6 +281,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 			{
 				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
+					if ($timebool[$i] == true)
 					$timebool[$i] = false;
 				}
 			}
@@ -228,6 +289,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 			{
 				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
+					if ($timebool[$i] == true)
 					$timebool[$i] = false;
 				}
 			}
@@ -235,6 +297,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 			{
 				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
+					if ($timebool[$i] == true)
 					$timebool[$i] = false;
 				}	
 			}
@@ -242,6 +305,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 			{
 				if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] >= (int)$Times[$i][1])
 				{
+					if ($timebool[$i] == true)
 					$timebool[$i] = false;
 				}
 			}
@@ -249,6 +313,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 			{
 				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 				{
+					if ($timebool[$i] == true)
 					$timebool[$i] = false;
 				}
 			}
@@ -256,6 +321,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 			{
 				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 				{
+					if ($timebool[$i] == true)
 					$timebool[$i] = false;
 				}
 			}
@@ -263,18 +329,21 @@ for ($i = 0; $i < count($class_ID); $i++)
 				{
 					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
-						$timebool[$i] = false;
+						if ($timebool[$i] == true)
+					$timebool[$i] = false;
 					}
 				}
 			if ($DOW[$j][1] == $DOW[$i][2])
 				{
 					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
-						$timebool[$i] = false;
+						if ($timebool[$i] == true)
+					$timebool[$i] = false;
 					}
 				}
 		}
 	}
+	/*
 if ($timebool[$i] == false)
 			{
 				if ($i != 0)
@@ -286,19 +355,12 @@ if ($timebool[$i] == false)
 				{
 					$tempy = count($class_ID);
 					$errorSSS[] = $class_ID[$i];
-					/*print_r("Here be class_ID: ".$class_ID[$i]."</br>");
-					print_r("Here be index: ".$index[$i]."</br>");
-					print_r("Here be section: ".$section[$i]."</br>");
-					print_r("Here be count: ".$tempy."</br>");*/
+				
 					array_splice($timebool,$i,1);
 					array_splice($index,$i,1);
 					array_splice($class_ID,$i,1);
 					array_splice($section,$i,1);
-					/*print_r("Here be class_ID: ".$class_ID[$i]." AFTER </br>");
-					print_r("Here be index: ".$index[$i]." AFTER </br>");
-					print_r("Here be section: ".$section[$i]." AFTER </br>");
-					$tempy = count($class_ID);
-					print_r("Here be count: ".$tempy." AFTER </br>");*/
+				
 				}
 				else {
 					$section[$i] = getSection($class_ID[$i],$index[$i]);
@@ -332,93 +394,9 @@ if ($timebool[$i] == false)
 					}
 				}
 			}
+			*/
 }
-//This is specifically for the fifth course
-/*
-for ($j = 0; $j < count($class_ID)-1; $j++)
-{
-if ($DOW[count($class_ID)-1][0] != $DOW[$j][0] && $DOW[count($class_ID)-1][1] != $DOW[$j][0] && $DOW[count($class_ID)-1][0] != $DOW[$j][1] && $DOW[count($class_ID)-1][1] != $DOW[$j][1])//no common lectures DOW
-		{
-			if ($DOW[count($class_ID)-1][2] != $DOW[$j][2])//no common tutorial DOW
-			{
-				//$timebool[count($class_ID)-1] = true;
-			}
-			else
-			{
-				
-				if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
-				{
-					$timebool[$j] = false;
-				}
-				
-			}
-		}
-		else
-		{
-			
-			if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][0] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
-			{
-				$timebool[$j] = false;
-			}
-			
-			//Have to check Tutorials again
-			if ($DOW[count($class_ID)-1][2] != $DOW[$j][2])//no common tutorial DOW
-			{
-				//don't want to overwrite any previous conflicts
-			}
-			else
-			{
-				
-				if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][2] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
-				{
-					$timebool[$j] = false;
-				}
-				
-			}
-		}
-		if ($DOW[count($class_ID)-1][0] == $DOW[$j][2]) // ($DOW[$i][1] == $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
-		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
-			{
-				$timebool[$j] = false;
-			}
-		}
-		if ($DOW[count($class_ID)-1][1] == $DOW[$j][2])
-		{
-			if ((int)$Times[$j][1] < (int)$Timef[count($class_ID)-1][0] && (int)$Times[$j][1] >= (int)$Times[count($class_ID)-1][0])//starts in middle of other
-			{
-				$timebool[$j] = false;
-			}
-		}
-		if ($DOW[$j][0] == $DOW[count($class_ID)-1][2])
-		{
-			if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][0] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
-			{
-				$timebool[$j] = false;
-			}
-		}
-		if ($DOW[$j][1] == $DOW[count($class_ID)-1][2])
-		{
-			if ((int)$Times[$j][0] < (int)$Timef[count($class_ID)-1][1] && (int)$Times[$j][0] >= (int)$Times[count($class_ID)-1][1])//starts in middle of other
-			{
-				$timebool[$j] = false;
-			}
-		}
-		if ($timebool[$j] == false)
-		{
-		
-			$index[$j] += 1;
-			print_r("Index :".$index[$j]." </br>");
-			if (($timebool[$j]) == false && (index[$j] == 3))
-			{
-				goto more;
-			}
-			$section[$j] = getSection($class_ID[$j],$index[$j]);
-			print_r("section :".getSection($class_ID[$j],$index[$j])." </br>");
-		}
-		
-}
-*/
+
 }
 if (!in_array(false,$timebool))
 		{
