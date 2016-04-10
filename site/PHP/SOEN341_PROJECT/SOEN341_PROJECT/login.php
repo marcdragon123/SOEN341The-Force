@@ -10,7 +10,7 @@ $result = $link->query($link, $query1 = "select email, password( ' + $pass + ') 
 $errorstr = "Sorry could not login, invalid password or username. Please resubmit with the right login.";
 
 if($result){
-	link($target = "../Account.html" , $link = "Account");
+	link($target = "../Account.php" , $link = "Account");
 }
 else{
 	$_POST['error_msg'] = $errorstr;

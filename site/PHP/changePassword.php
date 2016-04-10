@@ -9,5 +9,5 @@ $newPass = $_POST["InputPassword"];
 $updateQuery = "UPDATE Student SET password = PASSWORD( '" . $newPass . "') WHERE idstudent = '$userId'";
 mysqli_query($conn,$updateQuery);
 
-header("Location: ../Account.html");
+header("Location: ../Account.php");
 ?>

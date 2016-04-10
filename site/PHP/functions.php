@@ -108,7 +108,7 @@ function signIn(){
 	//echo "<br />";
 	//echo $result->num_rows;*/
 	if($row[2] == '1' && $result->num_rows == 1){
-		//link($target = "../Account.html" , $link = "Account");
+		//link($target = "../Account.php" , $link = "Account");
 		$_SESSION['loginID'] = $row[0];
 		//var_dump($_SESSION);
 

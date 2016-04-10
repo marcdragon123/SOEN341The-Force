@@ -52,7 +52,7 @@ and open the template in the editor.
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="Account.html">Account</a></li>
+            <li><a href="Account.php">Account</a></li>
             <li class="active"><a href="./">Sign out <span class="sr-only">(current)</span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
