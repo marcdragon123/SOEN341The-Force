@@ -71,7 +71,9 @@ $index = array();
 
 do
 {
-	while (count($class_ID) < 5)
+	if (count($class_ID) < 5 )
+	{
+	while (count($class_ID) < 6)
 	{
 		$sqlPre = "select PrereqCourseID from prereq where MainCourseID = '".$k."'";
 		$queryPre = $con->query($sqlPre);
@@ -111,8 +113,9 @@ do
 		}
 		
 	}
+	}
 	print_r("length is: ".count($class_ID)." </br>");
-	while (count($index) < 5)
+	while (count($index) < 6)
 	{
 		$index[] = 0;
 	}

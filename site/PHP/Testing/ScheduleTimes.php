@@ -80,8 +80,9 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 				{
 					if ($resultComp[$i][0] == true)
 					{
-						if (!in_array($class_ID_clone[$k],$done))
+						if (!in_array($class_ID_clone[$k],$done))//not already done
 						{
+							if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
 							$class_ID[] = $class_ID_clone[$k];
 						}
 					}
@@ -94,7 +95,8 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 	{
 		if (!in_array($class_ID_clone[$k],$done))
 		{
-			$class_ID[] = $class_ID_clone[$k];
+			if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
+							$class_ID[] = $class_ID_clone[$k];
 		}
 	}
 }
