@@ -312,8 +312,10 @@ function loadTable(){
 		if (count($DOW)==2){
 			//course code + num and then lectures
 			echo '<tr>'
-			.'<td rowspan=2><div class = "delete" input type = "submit"></div> &nbsp;'.$row['Course_code'].' '.$row['number'].'</td>'
-			. '<td>Lecture:'.getFullDay(getDayStr($DOW[0])).getFullDay(getDayStr($DOW[1])).'-'.$row['start'].'-'.$row['end'].'</td>';
+			.'<form action="/PHP/Delete.php" id="Delete" method="post"><td rowspan=2><input type = "submit"> &nbsp;'.$row['Course_code'].' '.$row['number'].'</td>'
+			. '<td>Lecture:'.getFullDay(getDayStr($DOW[0])).getFullDay(getDayStr($DOW[1])).'-'.$row['start'].'-'.$row['end'].'</td>'
+			.'<input type = "hidden" value = "'.$row['Course_code'].'" name = "Course_code" /> '
+			.'<input type = "hidden" value = "'.$row['number'].'" name = "number" /> </form>';
 		}
 		elseif (count($DOW)==1) {
 			//tutorial
