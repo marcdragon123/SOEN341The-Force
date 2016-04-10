@@ -83,7 +83,7 @@ body{
     letter-spacing: 0.25px;
     text-decoration: none;
 }
-.main-body a:hover{
+.main-body a:hover:not(.fc-event){
     color: #3375c1;
 }
 
