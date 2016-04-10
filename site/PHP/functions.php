@@ -117,7 +117,7 @@ function signIn(){
 	}
 	else{
 		$_POST['error_msg'] = $errorstr;
-		header('Location: ../SignIn.html');
+		header('Location: ../SignIn.php');
 	}
 	echo "didn't redirect";
 }

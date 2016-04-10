@@ -8,7 +8,7 @@ $port = 3306;
 $username = "SOEN341user";
 $password = "G3tR3ck3dS0n";
 $schema = "soen341";
-	
+
 $conn = new mysqli($servernameremote, $username, $password, $schema, $port);
 	
 if($conn->connect_error){
@@ -19,7 +19,7 @@ if($conn->connect_error){
 }
 
 //Create random, 10 characters long, password
-$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*';
 $charactersLength = strlen($characters);
 $password = '';
 for ($i = 0; $i < 10; $i++) {
