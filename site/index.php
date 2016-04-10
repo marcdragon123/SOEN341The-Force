@@ -90,7 +90,7 @@ and open the template in the editor.
 			  <div class="panel panel-default">
 			    <div class="panel-heading">
 			      <h4 class="panel-title">
-			        <a data-toggle="collapse" href="#collapse1"><center>Modify Schedule</center></a>
+			        <a data-toggle="collapse" href="#collapse1"><center><h4>MODIFY SCHEDULE</h4></center></a>
 			   
 			      </h4>
 			    </div>
@@ -187,7 +187,9 @@ and open the template in the editor.
 				        }
 				        </script>
 					</div>
-						<input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Recompute"/> 						
+                            <button type="submit" id="new_worktime" class="btn btn-submit btn-primary recomputeBtn">
+                                <span class="glyphicon glyphicon-refresh"></span> Recompute
+                            </button>
 						<?php /*
 						$Error = $_SESSION['Message'];
 						if (!empty($Error))
@@ -199,12 +201,11 @@ and open the template in the editor.
 						?>
 					</form>
                       
-                      
                       <form id="target" action="/PHP/ScheduleAuto.php" method="post">
-                            <input type="submit" id="new_worktime" class="btn btn-submit btn-danger recomputeBtn" value = "Auto Generate"/>
+                          <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn">
+                                <span class="glyphicon glyphicon-calendar"></span> Auto Generate
+                            </button>
                     </form>
-                      
-                      
                       
 			      </div>
 			    </div>
