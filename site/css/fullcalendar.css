@@ -46,7 +46,7 @@ body .fc { /* extra precedence to overcome jqui */
 }
 
 .fc-unthemed .fc-today {
-	background: #fcf8e3;
+	background: #E6F0FF;
 }
 
 .fc-highlight { /* when user is selecting cells */
@@ -376,6 +376,7 @@ hr.fc-divider {
 	border-collapse: collapse;
 	border-spacing: 0;
 	font-size: 1em; /* normalize cross-browser */
+        background-color: #E9E9E9;
 }
 
 .fc th {
@@ -686,7 +687,7 @@ a.fc-more:hover {
 
 .fc-toolbar {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 0em;
 }
 
 .fc-toolbar .fc-left {
