@@ -82,7 +82,7 @@
             <div class="col-md-8">
                 <div class="contain">
                         <?php
-                                  echo loadClasses("finished", "Courses Your Have Already Passed");
+                                  echo loadClasses("finished", "Courses You Have Already Passed");
                                 ?>
                 </div>
             </div> 
