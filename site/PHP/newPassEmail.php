@@ -45,7 +45,7 @@ $mail->AddAddress($email);
 
 $mail->Send();
 
-$updateQuery = "UPDATE student SET password = '$password' WHERE email = '$email'";
+$updateQuery = "UPDATE student SET password = PASSWORD( '" . $password . "') WHERE email = '$email'";
 mysqli_query($conn, $updateQuery);
 
 header("Location: ../SignIn.php");
