@@ -24,7 +24,10 @@ if (!empty($resultEnr))
 {
 	for ($i = 0; $i < count($resultEnr); $i++)
 	{
+		if (count($class_ID) < 5 )
+		{
 		$class_ID[] = $resultEnr[$i][0];
+		}
 	}
 }
 $resultComp = array();
@@ -43,7 +46,10 @@ for ($i = 0; $i < count($resultComp); $i++)
 	
 	if ($resultComp[$i][0] == false)
 	{
+		if (count($class_ID) < 5 )
+		{
 		$class_ID[] = $resultComp[$i][1];
+		}
 	}
 }
 
