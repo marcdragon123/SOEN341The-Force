@@ -8,15 +8,23 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/CSS.css">
         <link rel="stylesheet" type="text/css" href="css/footer.css">
+        <link rel="stylesheet" type="text/css" href="css/admin.css">
            
         <!--Form validation-->
-    <script type="text/javascript" src="js/validator.js"></script>
-	<!-- Pass checker -->
-	<script type="text/javascript" src="js/AccountJS.js"></script>
+        <script type="text/javascript" src="js/validator.js"></script>
+        <!-- Pass checker -->
+        <script type="text/javascript" src="js/AccountJS.js"></script>
+        <script>
+            <?php
+            include 'PHP/accessAccountInfo.php';
+            //include 'PHP/functions.php';  
+            echo "var tmp;";
+            ?>
+        </script>
 
        
-		<title>My Account</title>
-	</head>
+        <title>My Account</title>
+    </head>
 	<body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -35,7 +43,6 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.php">SCHEDULE</a></li>
                         <li><a href="SignIn.php">SIGN OUT</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -49,15 +56,15 @@
                     <div class="contain">
                         <div class="form-group">
                             <label for="name">First Name</label>
-                            <input type="name" class="form-control" id="fname" placeholder="First name">
+                            <input type="text" class="form-control" id="fname" placeholder="First name" value = "<?php echo $first; ?>">
                         </div>
                         <div class="form-group">
                             <label for="name">Last Name</label>
-                            <input type="name" class="form-control" id="lname" placeholder="Last name">
+                            <input type="text" class="form-control" id="lname" placeholder="Last name" value = "<?php echo $last; ?>">
                         </div>
                         <div class="form-group">
                             <label for="name">Email</label>
-                            <input type="email" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                            <input type="text" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." value = "<?php echo $email; ?>" required>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
@@ -75,7 +82,7 @@
             </div>
             <div class="col-md-8">
                 <div class="contain">
-                    <div class="panel panel-default">
+                   <div class="panel panel-default">
                         <div class="panel-heading">View Student Page as Administrator</div>
                         <div class="panel-body">
                             <div class="col-md-6">
