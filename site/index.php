@@ -97,7 +97,7 @@ and open the template in the editor.
 
 			    <form action="/PHP/Testing/ScheduleTimes.php" method="post">
 
-			    <form id="target" action="ScheduleTimes.php" method="post">
+<!--			    <form id="target" action="ScheduleTimes.php" method="post">-->
 
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
