@@ -49,18 +49,18 @@
             </div><!-- /.container-fluid -->
         </nav>
 
-        <form id = "accountForm" name = "accountForm" role="form" data-toggle="validator" method="post" action = "PHP/changePassword.php"> 
+        <form id = "accountForm" name = "accountForm" role="form" data-toggle="validator" method="post" action = "PHP/editUserInfo.php"> 
             <h2>My Account</h2>
             <div class="rowTabs">
                 <div class="col-md-4">
                     <div class="contain">
                         <div class="form-group">
                             <label for="name">First Name</label>
-                            <input type="text" class="form-control" id="fname" placeholder="First name" value = "<?php echo $first; ?>">
+                            <input type="text" class="form-control" id="fname" name = "fname" placeholder="First name" value = "<?php echo $first; ?>">
                         </div>
                         <div class="form-group">
                             <label for="name">Last Name</label>
-                            <input type="text" class="form-control" id="lname" placeholder="Last name" value = "<?php echo $last; ?>">
+                            <input type="text" class="form-control" id="lname" name = "lname" placeholder="Last name" value = "<?php echo $last; ?>">
                         </div>
                         <div class="form-group">
                             <label for="name">Email</label>
@@ -69,12 +69,12 @@
                         </div>
                         <div class="form-group">
                             <label for="name">New Password</label>
-                            <input type="password" data-minlength="6" class="form-control" id = "pwd" name="InputPassword" placeholder="Password*" required>
+                            <input type="password" data-minlength="6" class="form-control" id = "pwd" name="InputPassword" placeholder="Password*" value = "<?php echo $password; ?>" >
                             <span class="help-block">Minimum of 6 characters</span>
                         </div>
                         <div class="form-group">
                             <label for="name">Confirm New Password</label>
-                            <input type="password" data-minlength="6" class="form-control" id = "confpwd" name="ConfInputPassword" onkeyup="checkPass(); return false;" placeholder="Password*" required>
+                            <input type="password" data-minlength="6" class="form-control" id = "confpwd" name="ConfInputPassword" onkeyup="checkPass(); return false;" placeholder="Password*" value = "<?php echo $password; ?>" >
                         </div>
                         <span id="confirmMessage" class="confirmMessage"></span>
                     </div>
