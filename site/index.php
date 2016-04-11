@@ -193,16 +193,10 @@ and open the template in the editor.
 				        }
 				        </script>
                         
-                    <script>
-                    function errorMessage()
-                    {
-                    var message = "<php Print($_SESSION['Message']); ?>";
-                    alert(message);
-                    }
-                    </script>
+                  
                         
 					</div>
-						<button type="submit" id="new_worktime" onclick="errorMessage()" class="btn btn-submit btn-primary recomputeBtn">
+						<button type="submit" id="new_worktime" class="btn btn-submit btn-primary recomputeBtn">
                                 <span class="glyphicon glyphicon-refresh"></span> Recompute
                             </button> 						
 						<?php /*
