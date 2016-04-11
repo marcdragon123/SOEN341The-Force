@@ -67,18 +67,18 @@ function signUp(){
 	$res2 = $conn->query($qry);
 	
 	$tmp = $res2->fetch_row();
-	var_dump($tmp[0]);
+//	var_dump($res);
 	$_SESSION['loginID'] = $tmp[0];
 	
-	echo "<br />".$_SESSION['loginID']."<br />";
+//	echo "<br />".$_SESSION['loginID']."<br />";
 	
 	foreach($_POST["finished"] as $val){
 		$qry = "insert into transcripts "
 		. "(Enrollment_Student_idStudent, Enrollment_Sections_course_Master_List_id, completed) "
 		. "values (".$_SESSION["loginID"].", ".$val.", true)";
-		echo $qry."<br/>";
+//		echo $qry."<br/>";
 		$res3= $conn->query($qry);
-		var_dump($res3);
+//		var_dump($res3);
 	}
 	
 	closeCon($conn);
@@ -86,8 +86,10 @@ function signUp(){
 		header('Location: ../index.php');
 		echo("result worked <br />");
 	}
-	//header('Location: ../index.php');
-	echo "didn't redirect";
+    else {
+        header('Location: ../SignIn.php');
+        echo "didn't redirect";
+    }
 }
 //signs the user in with POST data
 function signIn(){
@@ -121,6 +123,7 @@ function signIn(){
 	}
 	echo "didn't redirect";
 }
+
 //loads a list of classes takes a name to fill the name attribute of the input
 function loadClasses($nme,$msg){
 	$conn = getCon();
@@ -147,6 +150,48 @@ function loadClasses($nme,$msg){
 	echo "</div></div></div>";
 	
 	closeCon($conn);
+}
+
+//Load classes which were already completed on Account page
+//Should be uneditable checkboxes
+function loadCompletedClasses($nme,$msg){
+	$conn = getCon();
+    $id = $_SESSION["loginID"];
+    
+	$result = $conn->query("Select course_code, number, id from course_master_list order  by course_code, number;");
+    
+    $completedQuery = "SELECT Enrollment_Sections_course_Master_List_id FROM transcripts WHERE Enrollment_Student_idStudent = '$id'";
+    $completed = mysqli_query($conn, $completedQuery);
+    $arrayCompleted = mysqli_fetch_all($completed);
+	//echo "<code>";
+	//print_r(array_values($result->fetch_all()));
+	//echo "</code>";
+	$last = null;
+	echo "<div class='panel panel-default'>";
+    echo '<div class="panel-heading"><h5> '.$msg.' </h5> </div>';
+    echo '<div class="panel-body">';
+    
+    //Create normal array containing ids of taken courses
+    $array = array();
+    for($i = 0; $i < count($arrayCompleted); $i++) {
+        $array[] = $arrayCompleted[$i][0];
+    }
+    
+	foreach($result->fetch_all() as $val){
+		if($last == null){
+			$last = $val[0];
+			echo '<h3>'.$val[0].'</h3><div class="checkboxList">';
+		}
+		else if($last != $val[0]){
+			echo "</div></div><div class='panel-body'><h3>$val[0]</h3><div class='checkboxList'>";
+			$last = $val[0];
+		}
+        if(in_array($val[2], $array))
+            echo "<label><input id='cbcourse".$val[2]."' type='checkbox' name='".$nme."[]' value='".$val[2]."' checked disabled/> ".$val[0]." ".$val[1]."</label><br/>";
+        else
+            echo "<label><input id='cbcourse".$val[2]."' type='checkbox' name='".$nme."[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
+	}
+	echo "</div></div></div>";
 }
 
 //A modified version of loadClasses() with the appropriate styling adjustments for the index.php

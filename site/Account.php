@@ -15,8 +15,8 @@
         <script type="text/javascript" src="js/AccountJS.js"></script>
         <script>
             <?php
-            include 'PHP/functions.php';  
             include 'PHP/accessAccountInfo.php';
+            //include 'PHP/functions.php';  
             echo "var tmp;";
             ?>
         </script>
@@ -56,11 +56,11 @@
                     <div class="contain">
                         <div class="form-group">
                             <label for="name">First Name</label>
-                            <input type="text" class="form-control" id="fname" placeholder="First name" value = "<?php echo $first; ?>" readonly>
+                            <input type="text" class="form-control" id="fname" placeholder="First name" value = "<?php echo $first; ?>">
                         </div>
                         <div class="form-group">
                             <label for="name">Last Name</label>
-                            <input type="text" class="form-control" id="lname" placeholder="Last name" value = "<?php echo $last; ?>" readonly>
+                            <input type="text" class="form-control" id="lname" placeholder="Last name" value = "<?php echo $last; ?>">
                         </div>
                         <div class="form-group">
                             <label for="name">Email</label>
@@ -82,9 +82,9 @@
             </div>
             <div class="col-md-8">
                 <div class="contain">
-                        <?php
-                                  echo loadClasses("finished", "Courses You Have Already Passed");
-                                ?>
+                    <?php
+                    echo loadCompletedClasses("finished", "Courses You Have Already Passed");
+                    ?>
                 </div>
             </div> 
             <div class="form-group">

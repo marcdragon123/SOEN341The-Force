@@ -1,6 +1,6 @@
 <?php
-//include "functions.php";
 session_start();
+include "functions.php";
 $conn = getCon();
 
 $userId = $_SESSION["loginID"];
