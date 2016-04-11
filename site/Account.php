@@ -10,19 +10,20 @@
         <link rel="stylesheet" type="text/css" href="css/footer.css">
            
         <!--Form validation-->
-    <script type="text/javascript" src="js/validator.js"></script>
-	<!-- Pass checker -->
-	<script type="text/javascript" src="js/AccountJS.js"></script>
+        <script type="text/javascript" src="js/validator.js"></script>
+        <!-- Pass checker -->
+        <script type="text/javascript" src="js/AccountJS.js"></script>
         <script>
-      <?php
-        include 'PHP/functions.php';                           
-		echo "var tmp;";
-      ?>
-    </script>
+            <?php
+            include 'PHP/functions.php';  
+            include 'PHP/accessAccountInfo.php';
+            echo "var tmp;";
+            ?>
+        </script>
 
        
-		<title>My Account</title>
-	</head>
+        <title>My Account</title>
+    </head>
 	<body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -55,15 +56,15 @@
                     <div class="contain">
                         <div class="form-group">
                             <label for="name">First Name</label>
-                            <input type="name" class="form-control" id="fname" placeholder="First name">
+                            <input type="text" class="form-control" id="fname" placeholder="First name" value = "<?php echo $first; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="name">Last Name</label>
-                            <input type="name" class="form-control" id="lname" placeholder="Last name">
+                            <input type="text" class="form-control" id="lname" placeholder="Last name" value = "<?php echo $last; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="name">Email</label>
-                            <input type="email" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." required>
+                            <input type="text" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." value = "<?php echo $email; ?>" required readonly>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
