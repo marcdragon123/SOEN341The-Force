@@ -64,7 +64,7 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Email</label>
-                            <input type="text" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." value = "<?php echo $email; ?>" required readonly>
+                            <input type="text" id="email" class="form-control" name="InputEmail" placeholder="Email*" data-error="That email address is invalid." value = "<?php echo $email; ?>" required>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
