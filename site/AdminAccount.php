@@ -21,6 +21,24 @@
             echo "var tmp;";
             ?>
         </script>
+        <script type = "text/javascript">
+            var auto = {};
+            $("#studentName").on('keydown', function() {
+                var autoStudent = <?php include('PHP/autoCompleteStudent.php'); ?>;
+                auto = {
+                    source: function( request, resp ) {
+                        var reg = $.ui.autocomplete.escapeRegex( request.term );
+                        var matcher = new RegExp(reg, "i");
+
+                        //Call function on each term in echoed array, if matched then return
+                        resp($.grep(autoStudent, function(item, index){
+                            return matcher.test(item);
+                        }) );
+                    }
+                };
+                $("#studentName").autocomplete(auto);
+            });
+        </script>
 
        
         <title>My Account</title>
@@ -87,7 +105,7 @@
                         <div class="panel-body">
                             <div class="col-md-6">
 			      		    <h4> Search for a student</h1>
-			      		    <input type="text" class="form-control seach-text" placeholder="Ex: John Doe" name="q">
+			      		    <input type="text" class="form-control seach-text" placeholder="Ex: John Doe" id = "studentName" name="studentName">
 			      	</div>
                         </div>
                     </div>
