@@ -12,11 +12,11 @@ $queryforclass = "select id from course_Master_List where Course_code = '".$_POS
 $queryresult = $con->query($queryforclass);
 $result = mysqli_fetch_row($queryresult);
 
-echo $subs." ".$subs1." ".$GLOBALS['Delete']."<br>".$queryforclass."<br>";
+//echo $subs." ".$subs1." ".$GLOBALS['Delete']."<br>".$queryforclass."<br>";
 var_dump($result);
     $query = "Delete from Enrollment where Sections_course_Master_List_id ='".$result[0]."' and Student_idStudent = '".$userId."'";
-	echo $query;
+//	echo $query;
     $con->query($query);
-header("Location: /index.php");
+header("Location: ../index.php");
 closeCon($con);
 ?>
