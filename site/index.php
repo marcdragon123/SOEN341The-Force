@@ -79,6 +79,7 @@ and open the template in the editor.
 			    <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				<li><a href="#">Summer</a></li>
 			    <li><a href="#">Winter</a></li>
 			    <li><a href="#">Fall</a></li>
 			  </ul>
