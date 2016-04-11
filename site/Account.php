@@ -49,7 +49,7 @@
             </div><!-- /.container-fluid -->
         </nav>
 
-        <form id = "accountForm" name = "accountForm" role="form" data-toggle="validator" method="post" action = "PHP/editUserInfo.php"> 
+        <form id = "accountForm" name = "accountForm" role="form" data-toggle="validator" method="post" action = "PHP/editStudentInfo.php"> 
             <h2>My Account</h2>
             <div class="rowTabs">
                 <div class="col-md-4">
