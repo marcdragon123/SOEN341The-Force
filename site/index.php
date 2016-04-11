@@ -197,7 +197,7 @@ and open the template in the editor.
                         
 					</div>
 						<button type="submit" id="new_worktime" class="btn btn-submit btn-primary recomputeBtn">
-                                <span class="glyphicon glyphicon-refresh"></span> Recompute
+                                <span class="glyphicon glyphicon-refresh"></span> Compute
                             </button> 						
 						<?php /*
 						$Error = $_SESSION['Message'];
