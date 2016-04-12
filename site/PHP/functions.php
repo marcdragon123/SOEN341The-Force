@@ -207,6 +207,8 @@ function loadClassesIndex($nme){
 
     echo '<div class="panel-body">';
 	foreach($result->fetch_all() as $val){
+		//store sections for each class
+ 		$sections = array(getSection($val[2],0), getSection($val[2],1), getSection($val[2],2));
 		if($last == null){
 			$last = $val[0];
 			echo '<a data-toggle="collapse" href="#'.$collapseID.'"><h5>'.$val[0].'</h5></a><div class="panel-collapse collapse checkboxList" id="'.$collapseID.'">';
@@ -218,6 +220,12 @@ function loadClassesIndex($nme){
 			$collapseID++;
 		}
 		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
+		echo "<div><form id='".$val[2]."Section'>";
+ 			echo "<input type='radio' name='".$val[2]."' value='".$sections[0]."'> ".$sections[0]." <br>";
+ 			echo "<input type='radio' name='".$val[2]."' value='".$sections[1]."'> ".$sections[1]." <br>";
+ 			echo "<input type='radio' name='".$val[2]."' value='".$sections[2]."'> ".$sections[2]." <br><br>";
+ 
+ 		echo "</form></div>";
 	}
 	echo "</div></div>";
 	
