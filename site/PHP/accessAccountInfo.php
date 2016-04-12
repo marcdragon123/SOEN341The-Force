@@ -5,6 +5,7 @@ $conn = getCon();
 
 $userId = $_SESSION["loginID"];
 
+$pass = "";
 $accessQuery = "SELECT * FROM Student WHERE idStudent = '$userId'";
 $result = mysqli_query($conn, $accessQuery);
 $row = mysqli_fetch_array($result);

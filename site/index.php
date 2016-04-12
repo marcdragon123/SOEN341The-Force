@@ -29,6 +29,9 @@ and open the template in the editor.
 		<!-- Jquery UI -->
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+  		<!-- script for for displaying sections -->
+  		<script src='js/displaySections.js'> </script>
 		
 
 
@@ -192,9 +195,12 @@ and open the template in the editor.
 				          document.getElementById("myList").removeChild(item);
 				        }
 				        </script>
+                        
+                  
+                        
 					</div>
 						<button type="submit" id="new_worktime" class="btn btn-submit btn-primary recomputeBtn">
-                                <span class="glyphicon glyphicon-refresh"></span> Recompute
+                                <span class="glyphicon glyphicon-refresh"></span> Compute
                             </button> 						
 						<?php /*
 						$Error = $_SESSION['Message'];
@@ -206,8 +212,9 @@ and open the template in the editor.
 						}*/
 						?>
 					</form>
-                      
-                      
+                    
+    
+                    
                       <form id="target" action="/PHP/ScheduleAuto.php" method="post">
                             <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn">
                                 <span class="glyphicon glyphicon-calendar"></span> Auto Generate
@@ -263,6 +270,6 @@ and open the template in the editor.
         </div>
 
             
-        </div
+        </div>
 </body>
 </html>
