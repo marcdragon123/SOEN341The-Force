@@ -79,16 +79,21 @@
                         <span id="confirmMessage" class="confirmMessage"></span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary" id = "accountSubmit">Submit Account Changes</button>
+                </div>
             </div>
+        </form>
+        <form>
             <div class="col-md-8">
                 <div class="contain">
                     <?php
                     echo loadCompletedClasses("finished", "Courses You Have Already Passed");
                     ?>
                 </div>
-            </div> 
-            <div class="form-group">
-                <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary" id = "accountSubmit">Submit Changes</button>
+            </div>
+            <div class = "form-group">
+                <button type = "submit" class = "btnModal btn-primary" id = "saveCourses">Save Completed Courses</button>
             </div>
         </form>
 
