@@ -97,7 +97,7 @@ and open the template in the editor.
                         <li><a onclick="this.form.submit()">Fall</a></li>
                     </ul>
 -->
-                    <div>Current Semester: <?php echo $_SESSION['semester'];?></div>
+                    <div>Current Semester: <strong><?php echo $_SESSION['semester'];?></strong></div>
                     <select id = "semesters" name = "semesters" onchange="this.form.submit();">
                         <option value="Summer">Summer</option>
                         <option value="Fall">Fall</option>
