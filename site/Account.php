@@ -84,11 +84,11 @@
                 </div>
             </div>
         </form>
-        <form>
+        <form id = "coursesForm" name = "coursesForm" role="form" data-toggle="validator" method="post" action = "PHP/saveCourses.php">
             <div class="col-md-8">
                 <div class="contain">
                     <?php
-                    echo loadCompletedClasses("finished", "Courses You Have Already Passed");
+                    echo loadCompletedClasses("Courses You Have Already Passed");
                     ?>
                 </div>
             </div>

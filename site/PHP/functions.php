@@ -154,7 +154,7 @@ function loadClasses($nme,$msg){
 
 //Load classes which were already completed on Account page
 //Should be uneditable checkboxes
-function loadCompletedClasses($nme,$msg){
+function loadCompletedClasses($msg){
 	$conn = getCon();
     $id = $_SESSION["loginID"];
     
@@ -187,9 +187,9 @@ function loadCompletedClasses($nme,$msg){
 			$last = $val[0];
 		}
         if(in_array($val[2], $array))
-            echo "<label><input id='cbcourse".$val[2]."' type='checkbox' name='".$nme."[]' value='".$val[2]."' checked disabled/> ".$val[0]." ".$val[1]."</label><br/>";
+            echo "<label><input id='cbcourse".$val[2]."' type='checkbox' name='courses[]' value='".$val[2]."' checked disabled/> ".$val[0]." ".$val[1]."</label><br/>";
         else
-            echo "<label><input id='cbcourse".$val[2]."' type='checkbox' name='".$nme."[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
+            echo "<label><input id='cbcourse".$val[2]."' type='checkbox' name='courses[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
 	}
 	echo "</div></div></div>";
 }
