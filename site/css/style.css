@@ -78,7 +78,7 @@ body{
     background-color: #e6e6e6;
 }
 
-.main-body a:link, a:visited, a:active, a{
+.main-body a:link, a:visited, a:active, a:not(.nav-bar-brand){
     color: #449BFF;
     letter-spacing: 0.25px;
     text-decoration: none;
