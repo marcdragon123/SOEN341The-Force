@@ -171,30 +171,38 @@ and open the template in the editor.
 				            $.each($("input[name='dow[]']:checked"), function() {
 				              dow.push($(this).val());
 				            });
+							
 				            var result = dow.toString();
 				            result = result.concat(" from ");
 				            var startTime = document.getElementById("startTime").value;
 				            var endTime = document.getElementById("endTime").value;
-				            result =  result.concat(startTime, " to ", endTime)
-				            var node = document.createElement("LI");
-				            var textnode = document.createTextNode(result);
-				            node.appendChild(textnode);
-				            node.setAttribute('id','item'+lastid);
-				            var removeButton = document.createElement('a');
-                            var icon = document.createElement('span');
-                            // add the class to the 'span'
-                            icon.className = 'glyphicon glyphicon-remove';
-                            removeButton.appendChild(icon);
-                            removeButton.className = 'glyphicon glyphicon-remove';
-				            removeButton.setAttribute('onClick','removeUnv("'+'item'+lastid+'")');
-				            removeButton.setAttribute('class', 'btn btn-link');
-				            node.appendChild(removeButton);
-				            lastid+=1;
-				            document.getElementById("myList").appendChild(node);
-				            
+				            result =  result.concat(startTime, " to ", endTime);
+                            var generatedID = result + '%' + startTime  + '%' + endTime; 
+							//From the line under to the end of the function encapsulate within an if statement if 
+                            if (document.getElementById(generatedID) == null){
+                                var node = document.createElement("LI");
+                                var textnode = document.createTextNode(result);
+                                node.appendChild(textnode);
+                                node.setAttribute('id','item'+lastid);
+                                var removeButton = document.createElement('a');
+                                var icon = document.createElement('span');
+
+                                // add the class to the 'span'
+
+                                icon.className = 'glyphicon glyphicon-remove';
+                                removeButton.appendChild(icon);
+                                removeButton.className = 'glyphicon glyphicon-remove';
+                                removeButton.setAttribute('onClick','removeUnv("'+'item'+lastid+'","'+generatedID+'")');
+                                removeButton.setAttribute('class', 'btn btn-link');
+                                node.appendChild(removeButton);
+                                lastid+=1;
+                                document.getElementById("myList").appendChild(node);
+                                //Generate ID based on startTime/Endtime
+                                $("#unav").append("<input id='"+generatedID+"' type='hidden' value = '" + dow + '%' + startTime + '%' + endTime + "' />");
+                            }
 				        }
 				        //function removes an unavailability from the html list when the remove button is pressed.
-				        function removeUnv(itemid){
+				        function removeUnv(itemid, tagid){
 				          var item = document.getElementById(itemid);
 				          document.getElementById("myList").removeChild(item);
 				        }
