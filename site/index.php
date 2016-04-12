@@ -40,7 +40,8 @@ and open the template in the editor.
 				
 		<script>
 			<?php
-				include "PHP/functions.php";
+            
+            include "PHP/functions.php";
 			// put your code here
 			loadSchedule();
 			?>
@@ -65,7 +66,15 @@ and open the template in the editor.
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 			  <ul class="nav navbar-nav navbar-right">
-				<li><a href="Account.php">ACCOUNT</a></li>
+                  
+                  <?php 
+                  session_start();
+                  if($_SESSION['adminID'] != "")
+                      echo "<li><a href = 'AdminAccount.php'>ACCOUNT</a></li>";
+                  else
+                      echo "<li><a href='Account.php'>ACCOUNT</a></li>";
+                  ?>
+			<!--	<li><a href="Account.php">ACCOUNT</a></li> -->
 				<li><a href="SignIn.php">SIGN OUT</a></li>
 				
 			  </ul>

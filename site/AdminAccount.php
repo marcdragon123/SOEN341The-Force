@@ -18,7 +18,7 @@
         <script type="text/javascript" src="js/AccountJS.js"></script>
         <script>
             <?php
-            include 'PHP/accessAccountInfo.php';
+            include 'PHP/accessAdminInfo.php';
             //include 'PHP/functions.php';  
             echo "var tmp;";
             ?>
@@ -116,7 +116,7 @@
 			      		    <h4> Search for a student</h4>
 			      		    <input type="text" class="form-control seach-text" placeholder="Ex: John Doe" id = "studentName" name="studentName">
                                 <button type="submit" class="btnModal btn-primary" id = "viewStudent">View Student Schedules</button>
-			      	</div>
+                            </div>
                         </div>
                     </div>
                 </div>

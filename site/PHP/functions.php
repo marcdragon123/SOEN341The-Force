@@ -97,8 +97,13 @@ function signIn(){
 	//var_dump($_POST);
 	$email = $_POST['inputEmail'];
 	$pass = $_POST['inputPassword'];
+    
 	$qry = "select idStudent, email, password( '" . $pass . "') = password from student where '" . $email . "' = email " ;
 	$result = $link->query($qry);
+    
+    $qryAdmin = "select adminID, email, password( '" . $pass . "') = password from admin where '" . $email . "' = email " ;
+    $resultAdmin = $link->query($qryAdmin);
+    
 	$errorstr = "Sorry could not login, invalid password or username. Please resubmit with the right login.";
 	//echo $qry."<br />";
 	//$res = $conn->query($qry);
@@ -106,10 +111,12 @@ function signIn(){
 	//echo "select email, password( '" . $pass . "') = password from student where '" . $email . "' = email; " ;
 	closeCon($link);
 	$row = $result->fetch_row();
+    $rowAdmin = $resultAdmin->fetch_row();
+    
 	//var_dump($row);
 	//echo "<br />";
 	//echo $result->num_rows;*/
-	if($row[2] == '1' && $result->num_rows == 1){
+	if($row[2] == '1' && $result->num_rows == 1) {
 		//link($target = "../Account.php" , $link = "Account");
 		$_SESSION['loginID'] = $row[0];
 		//var_dump($_SESSION);
@@ -117,7 +124,12 @@ function signIn(){
 		header('Location: ../index.php');
 		//echo("result worked <br />");
 	}
-	else{
+	else if ($rowAdmin[2] == '1' && $resultAdmin->num_rows == 1) {
+        
+        $_SESSION['adminID'] = $rowAdmin[0];
+        header('Location: ../AdminAccount.php');
+    }
+    else {
 		$_POST['error_msg'] = $errorstr;
 		header('Location: ../SignIn.php');
 	}

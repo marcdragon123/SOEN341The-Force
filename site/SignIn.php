@@ -32,6 +32,9 @@
 
     <script>
       <?php
+        session_start();
+        $_SESSION['adminID'] = "";
+        $_SESSION['loginID'] = "";
         include 'PHP/functions.php';                           
 		echo "var tmp;";
       ?>
