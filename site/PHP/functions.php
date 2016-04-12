@@ -333,6 +333,20 @@ function getSection($class, $index)
 	//echo "<br />";
 	closeCon($con);
 }
+function getSectionAll($class)
+{
+
+	$con = getCon();
+	$sql45 = "select Section from Sections where course_Master_List_id = '".$class."'";
+	$query45 = $con->query($sql45);
+	$resultsec = mysqli_fetch_all($query45);
+	for ($i = 0; $i < count($resultsec);$i++)
+	$resultsec[$i] = $resultsec[$i][0];
+	return $resultsec;
+	//print_r($section[$i]." ");
+	//echo "<br />";
+	closeCon($con);
+}
 
 //loads the table that includes student classes
 function loadTable(){
