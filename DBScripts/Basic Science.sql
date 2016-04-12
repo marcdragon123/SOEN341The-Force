@@ -1,0 +1,14 @@
+use soen341;
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('BIOL', 206, 'Elementary genetics', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('BIOL', 261, 'Molecular and General Genetics', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('CHEM', 217, 'Introductory Analytic Chemistry I', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('CHEM', 221, 'Introductory Organic Chemsitry', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('CIVI', 231, 'Geology for Civil Engineers', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('ELEC', 321, 'Introduction to Semiconductor Materials and Devices', 3.5);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('ENGR', 242, 'Statics', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('ENGR', 251, 'Thermodynamics I', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('ENGR', 361, 'Fluid Mechanics I', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('MECH', 221, 'Materials Science', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('PHYS', 252, 'Optics', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('PHYS', 384, 'Introduction to Astronomy', 3);
+INSERT INTO course_master_list(Course_code, `number`, Description, Credits) VALUES ('PHYS', 385, 'Astrophysics', 3);
