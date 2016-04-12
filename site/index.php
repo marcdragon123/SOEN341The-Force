@@ -211,7 +211,7 @@ and open the template in the editor.
                                       <button type="submit" id="new_worktime" class="btn btn-submit btn-primary recomputeBtn">
                                             <span class="glyphicon glyphicon-refresh"></span> Compute
                                     </button> 
-                                      <div class="explainer">*Compute refreshes and optimizes your schedule with unavailabilities and manually added classes.</div>
+                                      <div class="explainer">*Compute refreshes and optimizes your schedule with manually added classes.</div>
                                 </div>
                             <?php /*
                             $Error = $_SESSION['Message'];
@@ -233,7 +233,6 @@ and open the template in the editor.
                             </form>
                             
                         </form>
-
                           
                     </div>  
                       
