@@ -44,7 +44,7 @@
             });
         </script>
 
-        <title>My Account</title>
+        <title>Account Admin</title>
     </head>
 	<body>
         <nav class="navbar navbar-default">
@@ -70,18 +70,18 @@
             </div><!-- /.container-fluid -->
         </nav>
 
-        <form id = "accountForm" name = "accountForm" role="form" data-toggle="validator" method="post" action = "PHP/changePassword.php"> 
+        <form id = "accountForm" name = "accountForm" role="form" data-toggle="validator" method="post" action = "PHP/editAdminInfo.php"> 
             <h2>My Account</h2>
             <div class="rowTabs">
                 <div class="col-md-4">
                     <div class="contain">
                         <div class="form-group">
                             <label for="name">First Name</label>
-                            <input type="text" class="form-control" id="fname" placeholder="First name" value = "<?php echo $first; ?>">
+                            <input type="text" class="form-control" id="fname" name = "fname" placeholder="First name" value = "<?php echo $first; ?>">
                         </div>
                         <div class="form-group">
                             <label for="name">Last Name</label>
-                            <input type="text" class="form-control" id="lname" placeholder="Last name" value = "<?php echo $last; ?>">
+                            <input type="text" class="form-control" id="lname" name = "lname" placeholder="Last name" value = "<?php echo $last; ?>">
                         </div>
                         <div class="form-group">
                             <label for="name">Email</label>
@@ -90,33 +90,40 @@
                         </div>
                         <div class="form-group">
                             <label for="name">New Password</label>
-                            <input type="password" data-minlength="6" class="form-control" id = "pwd" name="InputPassword" placeholder="Password*" required>
+                            <input type="password" data-minlength="6" class="form-control" id = "pwd" name="InputPassword" placeholder="Password*" >
                             <span class="help-block">Minimum of 6 characters</span>
                         </div>
                         <div class="form-group">
                             <label for="name">Confirm New Password</label>
-                            <input type="password" data-minlength="6" class="form-control" id = "confpwd" name="ConfInputPassword" onkeyup="checkPass(); return false;" placeholder="Password*" required>
+                            <input type="password" data-minlength="6" class="form-control" id = "confpwd" name="ConfInputPassword" onkeyup="checkPass(); return false;" placeholder="Password*" >
                         </div>
                         <span id="confirmMessage" class="confirmMessage"></span>
+                        <div class="form-group">
+                            <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary" id = "accountSubmit">Submit Account Changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+        </form>
+        <form id = "chooseStudent" name = "chooseStudent" role = "form" data-toggle = "validator" method = "post" action = "PHP/changeToStudent.php">
             <div class="col-md-8">
                 <div class="contain">
                    <div class="panel panel-default">
                         <div class="panel-heading">View Student Page as Administrator</div>
                         <div class="panel-body">
                             <div class="col-md-6">
-			      		    <h4> Search for a student</h1>
+			      		    <h4> Search for a student</h4>
 			      		    <input type="text" class="form-control seach-text" placeholder="Ex: John Doe" id = "studentName" name="studentName">
+                                <button type="submit" class="btnModal btn-primary" id = "viewStudent">View Student Schedules</button>
 			      	</div>
                         </div>
                     </div>
                 </div>
             </div> 
-            <div class="form-group">
-                <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary" id = "accountSubmit">Submit Changes</button>
-            </div>
+            <div>&nbsp;</div>
+
+            
         </form>
 
         <div class="site-footer">
