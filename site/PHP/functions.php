@@ -237,12 +237,12 @@ function loadClassesIndex($nme){
 		
 		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' onchange='displaySections(this);' /> ".$val[0]." ".$val[1]."</label><br/>";
 
-		echo "<div><form style='display:none;' id='".$val[2]."Section'>";
+		echo "<div style='display:none;' id='".$val[2]."Section'>";
 			for ($x=0; $x<sizeof($sections); $x++){
  				echo "&nbsp;&nbsp;&nbsp;&nbsp;<input type='radio' name='section[".$val[2]."]' value='".$sections[$x][0]."' checked> ".$sections[$x][0]." <br>";
  			}	
  
- 		echo "</form></div>";
+ 		echo "</div>";
  		
 	}
 	echo "</div></div>";
