@@ -78,15 +78,13 @@ body{
     background-color: #e6e6e6;
 }
 
-.main-body a:link, a:visited, a:active, a:not(.nav-bar-brand){
+.main-body a:link, a:visited, a:active, a{
     color: #449BFF;
-    letter-spacing: 0.25px;
     text-decoration: none;
 }
 .main-body a:hover:not(.fc-event){
     color: #3375c1;
 }
-
 .search-text{
 	color: #3498DB;
 }
@@ -181,6 +179,5 @@ table{
 .table-bordered {
     border-style: none;
 }
-
 
 
