@@ -225,7 +225,7 @@ function loadClassesIndex($nme){
 
 		echo "<div><form style='display:none;' id='".$val[2]."Section'>";
 			for ($x=0; $x<sizeof($sections); $x++){
- 				echo "&nbsp;&nbsp;&nbsp;&nbsp;<input type='radio' name='".$val[2]."' value='".$sections[$x][0]."' checked> ".$sections[$x][0]." <br>";
+ 				echo "&nbsp;&nbsp;&nbsp;&nbsp;<input type='radio' name='section[".$val[2]."]' value='".$sections[$x][0]."' checked> ".$sections[$x][0]." <br>";
  			}	
  
  		echo "</form></div>";
