@@ -44,7 +44,7 @@
             });
         </script>
 
-        <title>My Account</title>
+        <title>Account Admin</title>
     </head>
 	<body>
         <nav class="navbar navbar-default">
@@ -98,12 +98,13 @@
                             <input type="password" data-minlength="6" class="form-control" id = "confpwd" name="ConfInputPassword" onkeyup="checkPass(); return false;" placeholder="Password*" >
                         </div>
                         <span id="confirmMessage" class="confirmMessage"></span>
+                        <div class="form-group">
+                            <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary" id = "accountSubmit">Submit Account Changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary" id = "accountSubmit">Submit Account Changes</button>
-            </div>
+            
         </form>
         <form id = "chooseStudent" name = "chooseStudent" role = "form" data-toggle = "validator" method = "post" action = "PHP/changeToStudent.php">
             <div class="col-md-8">
@@ -114,14 +115,15 @@
                             <div class="col-md-6">
 			      		    <h4> Search for a student</h4>
 			      		    <input type="text" class="form-control seach-text" placeholder="Ex: John Doe" id = "studentName" name="studentName">
+                                <button type="submit" class="btnModal btn-primary" id = "viewStudent">View Student Schedules</button>
 			      	</div>
                         </div>
                     </div>
                 </div>
             </div> 
-            <div class="form-group">
-                <button type="submit" class="btnModal btn-primary" id = "viewStudent">View Student Schedules</button>
-            </div>
+            <div>&nbsp;</div>
+
+            
         </form>
 
         <div class="site-footer">
