@@ -40,8 +40,7 @@ and open the template in the editor.
 				
 		<script>
 			<?php
-            
-            include "PHP/functions.php";
+				include "PHP/functions.php";
 			// put your code here
 			loadSchedule();
 			?>
@@ -66,15 +65,7 @@ and open the template in the editor.
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 			  <ul class="nav navbar-nav navbar-right">
-                  
-                  <?php 
-                  session_start();
-                  if($_SESSION['adminID'] != "")
-                      echo "<li><a href = 'AdminAccount.php'>ACCOUNT</a></li>";
-                  else
-                      echo "<li><a href='Account.php'>ACCOUNT</a></li>";
-                  ?>
-			<!--	<li><a href="Account.php">ACCOUNT</a></li> -->
+				<li><a href="Account.php">ACCOUNT</a></li>
 				<li><a href="SignIn.php">SIGN OUT</a></li>
 				
 			  </ul>
@@ -113,7 +104,7 @@ and open the template in the editor.
 
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
-			      	<div class="col-md-4 checkboxDiv">
+			      	<div class="col-md-6 checkboxDiv">
 			      		<h4> Add Classes</h4>
 			      		<!--  <input id="tags" type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">-->
 			      		<?php loadClassesIndex("chosen");?>
@@ -171,70 +162,69 @@ and open the template in the editor.
 				            $.each($("input[name='dow[]']:checked"), function() {
 				              dow.push($(this).val());
 				            });
-
+							
 				            var result = dow.toString();
 				            result = result.concat(" from ");
 				            var startTime = document.getElementById("startTime").value;
 				            var endTime = document.getElementById("endTime").value;
-				            result =  result.concat(startTime, " to ", endTime)
+				            result =  result.concat(startTime, " to ", endTime);
+                            var generatedID = result + '%' + startTime  + '%' + endTime; 
+							//From the line under to the end of the function encapsulate within an if statement if 
+                            if (document.getElementById(generatedID) == null){
+                                var node = document.createElement("LI");
+                                var textnode = document.createTextNode(result);
+                                node.appendChild(textnode);
+                                node.setAttribute('id','item'+lastid);
+                                var removeButton = document.createElement('a');
+                                var icon = document.createElement('span');
 
-				            var node = document.createElement("LI");
-				            var textnode = document.createTextNode(result);
-				            node.appendChild(textnode);
-				            node.setAttribute('id','item'+lastid);
-				            var removeButton = document.createElement('a');
-                            var icon = document.createElement('span');
+                                // add the class to the 'span'
 
-                            // add the class to the 'span'
-
-                            icon.className = 'glyphicon glyphicon-remove';
-                            removeButton.appendChild(icon);
-
-                            removeButton.className = 'glyphicon glyphicon-remove';
-				            removeButton.setAttribute('onClick','removeUnv("'+'item'+lastid+'")');
-				            removeButton.setAttribute('class', 'btn btn-link');
-				            node.appendChild(removeButton);
-				            lastid+=1;
-				            document.getElementById("myList").appendChild(node);
-				            
+                                icon.className = 'glyphicon glyphicon-remove';
+                                removeButton.appendChild(icon);
+                                removeButton.className = 'glyphicon glyphicon-remove';
+                                removeButton.setAttribute('onClick','removeUnv("'+'item'+lastid+'","'+generatedID+'")');
+                                removeButton.setAttribute('class', 'btn btn-link');
+                                node.appendChild(removeButton);
+                                lastid+=1;
+                                document.getElementById("myList").appendChild(node);
+                                //Generate ID based on startTime/Endtime
+                                $("#unav").append("<input id='"+generatedID+"' type='hidden' value = '" + dow + '%' + startTime + '%' + endTime + "' />");
+                            }
 				        }
 				        //function removes an unavailability from the html list when the remove button is pressed.
-				        function removeUnv(itemid){
+				        function removeUnv(itemid, tagid){
 				          var item = document.getElementById(itemid);
 				          document.getElementById("myList").removeChild(item);
 				        }
 				        </script>
- 
+                        
+                  
+                        
 					</div>
-                        <div class="col-md-4 checkboxDiv">
-                                <div class="compute">
-                                      <button type="submit" id="new_worktime" class="btn btn-submit btn-primary recomputeBtn">
-                                            <span class="glyphicon glyphicon-refresh"></span> Compute
-                                    </button> 
-                                      <div class="explainer">*Compute refreshes and optimizes your schedule with manually added classes.</div>
-                                </div>
-                            <?php /*
-                            $Error = $_SESSION['Message'];
-                            if (!empty($Error))
-                            {
-                                print '<script type="text/javascript">';
-                                print 'alert('.$Error.')';
-                                print '</script>';
-                            }*/
-                            ?>
-                            
-                            <form id="target" action="/PHP/ScheduleAuto.php" method="post">
-                                <div class="auto">
-                                      <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn">
-                                        <span class="glyphicon glyphicon-calendar"></span> Auto Generate
-                                    </button>
-                                      <div class="explainer">*Auto Generate intelligently chooses courses based on your unavailabilities and previously passed courses.</div>
-                                </div>
-                            </form>
-                            
-                        </form>
-                          
-                    </div>  
+						<button type="submit" id="new_worktime" class="btn btn-submit btn-primary recomputeBtn">
+                                <span class="glyphicon glyphicon-refresh"></span> Compute
+                            </button> 						
+						<?php /*
+						$Error = $_SESSION['Message'];
+						if (!empty($Error))
+						{
+							print '<script type="text/javascript">';
+							print 'alert('.$Error.')';
+							print '</script>';
+						}*/
+						?>
+					</form>
+                    
+    
+                    
+                      <form id="target" action="/PHP/ScheduleAuto.php" method="post">
+                            <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn">
+                                <span class="glyphicon glyphicon-calendar"></span> Auto Generate
+                            </button>
+							<span id="unav"></span>
+                    </form>
+                      
                       
                       
 			      </div>
