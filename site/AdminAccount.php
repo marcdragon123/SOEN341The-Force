@@ -4,12 +4,14 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type = "text/javascript" src = "js/jquery.js"></script>
+        <script type = "text/javascript" src = "js/jquery-ui.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/CSS.css">
         <link rel="stylesheet" type="text/css" href="css/footer.css">
         <link rel="stylesheet" type="text/css" href="css/admin.css">
-           
+        <link rel = "stylesheet" href = "css/jquery-ui_7.css">
+
         <!--Form validation-->
         <script type="text/javascript" src="js/validator.js"></script>
         <!-- Pass checker -->
@@ -22,25 +24,26 @@
             ?>
         </script>
         <script type = "text/javascript">
-            var auto = {};
-            $("#studentName").on('keydown', function() {
-                var autoStudent = <?php include('PHP/autoCompleteStudent.php'); ?>;
-                auto = {
-                    source: function( request, resp ) {
-                        var reg = $.ui.autocomplete.escapeRegex( request.term );
-                        var matcher = new RegExp(reg, "i");
+            $(function() {
+                var auto = {};
+                $("#studentName").on('keydown', function() {
+                    var autoStudent = <?php include('PHP/autoCompleteStudent.php'); ?>;
+                    auto = {
+                        source: function( request, resp ) {
+                            var reg = $.ui.autocomplete.escapeRegex( request.term );
+                            var matcher = new RegExp(reg, "i");
 
-                        //Call function on each term in echoed array, if matched then return
-                        resp($.grep(autoStudent, function(item, index){
-                            return matcher.test(item);
-                        }) );
-                    }
-                };
-                $("#studentName").autocomplete(auto);
+                            //Call function on each term in echoed array, if matched then   return
+                            resp($.grep(autoStudent, function(item, index){
+                                return matcher.test(item);
+                            }) );
+                        }
+                    };
+                    $("#studentName").autocomplete(auto);
+                });
             });
         </script>
 
-       
         <title>My Account</title>
     </head>
 	<body>
