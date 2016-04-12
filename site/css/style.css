@@ -104,6 +104,22 @@ body{
 	margin-bottom: 0px !important;
 }
 
+.auto, .compute{
+    width: 152px;
+    float: left;
+    margin-left: 5%;
+}
+.auto .explainer{
+    padding-left: 10px;
+    color: rgb(102, 144, 124);
+    font-size: .9em;
+}
+.compute .explainer{
+    padding-left: 10px;
+    color: rgb(93, 120, 144);
+    font-size: .9em;
+}
+
 
 
 .row {

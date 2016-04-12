@@ -104,7 +104,7 @@ and open the template in the editor.
 
 			    <div id="collapse1" class="panel-collapse collapse">
 			      <div class="panel-body modify-panel">
-			      	<div class="col-md-6 checkboxDiv">
+			      	<div class="col-md-4 checkboxDiv">
 			      		<h4> Add Classes</h4>
 			      		<!--  <input id="tags" type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">-->
 			      		<?php loadClassesIndex("chosen");?>
@@ -195,32 +195,38 @@ and open the template in the editor.
 				          document.getElementById("myList").removeChild(item);
 				        }
 				        </script>
-                        
-                  
-                        
+ 
 					</div>
-						<button type="submit" id="new_worktime" class="btn btn-submit btn-primary recomputeBtn">
-                                <span class="glyphicon glyphicon-refresh"></span> Compute
-                            </button> 						
-						<?php /*
-						$Error = $_SESSION['Message'];
-						if (!empty($Error))
-						{
-							print '<script type="text/javascript">';
-							print 'alert('.$Error.')';
-							print '</script>';
-						}*/
-						?>
-					</form>
-                    
-    
-                    
-                      <form id="target" action="/PHP/ScheduleAuto.php" method="post">
-                            <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn">
-                                <span class="glyphicon glyphicon-calendar"></span> Auto Generate
-                            </button>
-                    </form>
-                      
+                        <div class="col-md-4 checkboxDiv">
+                                <div class="compute">
+                                      <button type="submit" id="new_worktime" class="btn btn-submit btn-primary recomputeBtn">
+                                            <span class="glyphicon glyphicon-refresh"></span> Compute
+                                    </button> 
+                                      <div class="explainer">*Compute refreshes and optimizes your schedule with unavailabilities and manually added classes.</div>
+                                </div>
+                            <?php /*
+                            $Error = $_SESSION['Message'];
+                            if (!empty($Error))
+                            {
+                                print '<script type="text/javascript">';
+                                print 'alert('.$Error.')';
+                                print '</script>';
+                            }*/
+                            ?>
+                            
+                            <form id="target" action="/PHP/ScheduleAuto.php" method="post">
+                                <div class="auto">
+                                      <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn">
+                                        <span class="glyphicon glyphicon-calendar"></span> Auto Generate
+                                    </button>
+                                      <div class="explainer">*Auto Generate intelligently chooses courses based on your unavailabilities and previously passed courses.</div>
+                                </div>
+                            </form>
+                            
+                        </form>
+
+                          
+                    </div>  
                       
                       
 			      </div>
