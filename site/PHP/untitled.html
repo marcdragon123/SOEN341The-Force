@@ -113,6 +113,7 @@ function signIn(){
 		//link($target = "../Account.php" , $link = "Account");
 		$_SESSION['loginID'] = $row[0];
 		//var_dump($_SESSION);
+
 		header('Location: ../index.php');
 		//echo("result worked <br />");
 	}
@@ -122,6 +123,7 @@ function signIn(){
 	}
 	echo "didn't redirect";
 }
+
 //loads a list of classes takes a name to fill the name attribute of the input
 function loadClasses($nme,$msg){
 	$conn = getCon();
@@ -149,6 +151,7 @@ function loadClasses($nme,$msg){
 	
 	closeCon($conn);
 }
+
 //Load classes which were already completed on Account page
 //Should be uneditable checkboxes
 function loadCompletedClasses($nme,$msg){
@@ -190,6 +193,7 @@ function loadCompletedClasses($nme,$msg){
 	}
 	echo "</div></div></div>";
 }
+
 //A modified version of loadClasses() with the appropriate styling adjustments for the index.php
 function loadClassesIndex($nme){
 	$conn = getCon();
@@ -200,31 +204,31 @@ function loadClassesIndex($nme){
 	//echo "</code>";
 	$collapseID = 0; //an ID that will aid in creating groups for the accordion function
 	$last = null;
+
     echo '<div class="panel-body">';
-	foreach($result->fetch_all() as $val){
-		//store sections for each class
-		$sections = array(getSection($val[2],0), getSection($val[2],1), getSection($val[2],2));
+		foreach($result->fetch_all() as $val){
+			$sections = array(getSection($val[2],0), getSection($val[2],1), getSection($val[2],2));
 
-		if($last == null){
-			$last = $val[0];
-			echo '<a data-toggle="collapse" href="#'.$collapseID.'"><h5>'.$val[0].'</h5></a><div class="panel-collapse collapse checkboxList" id="'.$collapseID.'">';
-			$collapseID++;
-		}
-		else if($last != $val[0]){
-			echo "</div></div><div class='panel-body'><a data-toggle='collapse' href='#".$collapseID."'><h5>$val[0]</h5></a><div class='panel-collapse collapse checkboxList' id='".$collapseID."'>";
-			$last = $val[0];
-			$collapseID++;
-		}
-		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
-
-		echo "<div><form id='".$val[2]."'>";
+			if($last == null){
+				$last = $val[0];
+				echo '<a data-toggle="collapse" href="#'.$collapseID.'"><h5>'.$val[0].'</h5></a><div class="panel-collapse collapse checkboxList" id="'.$collapseID.'">';
+				$collapseID++;
+			}
+			else if($last != $val[0]){
+				echo "</div></div><div class='panel-body'><a data-toggle='collapse' href='#".$collapseID."'><h5>$val[0]</h5></a><div class='panel-collapse collapse checkboxList' id='".$collapseID."'>";
+				$last = $val[0];
+				$collapseID++;
+			}
+			echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."'/> ".$val[0]." ".$val[1]."</label><br/>";
+			echo "<form id='".$val[2]."'>";
 			echo "<input type='radio' name='".$val[2]."' value='".$sections[0]."'> ".$sections[0]." <br>";
 			echo "<input type='radio' name='".$val[2]."' value='".$sections[1]."'> ".$sections[1]." <br>";
 			echo "<input type='radio' name='".$val[2]."' value='".$sections[2]."'> ".$sections[2]." <br><br>";
 
-		echo "</form></div>";
+			echo "</form>";
 	}
 	echo "</div></div>";
+
 	
 	closeCon($conn);
 }
@@ -280,6 +284,7 @@ function loadSchedule() {
 function getFullDay($str){
 	$res="";
 	$val=$str;
+
 	if($val == "1"){
 		$res .= " Monday";
 	}elseif ($val == "2") {
@@ -322,9 +327,11 @@ function getDayStr($str){
 	//echo substr($res, 0, strlen($res)-1)."<br />";
 	return substr($res, 0, strlen($res)-1);
 }
+
 //for time conflicts
 function getSection($class, $index)
 {
+
 	$con = getCon();
 	$sql45 = "select Section from Sections where course_Master_List_id = '".$class."'";
 	$query45 = $con->query($sql45);
@@ -335,6 +342,7 @@ function getSection($class, $index)
 	//echo "<br />";
 	closeCon($con);
 }
+
 //loads the table that includes student classes
 function loadTable(){
 	$id = $_SESSION['loginID'];
@@ -343,6 +351,7 @@ function loadTable(){
 	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id ";
 	$qry .= "left join course_Master_List on enrollment.Sections_course_Master_List_id = course_master_list.id ";
 	$qry .= "where ".$id." = enrollment.student_idstudent";
+
 	$conn = getCon();
 	
 	$res = $conn->query($qry);
@@ -380,17 +389,21 @@ function loadTable(){
 		}
     }
     echo '</table>';
+
+
 }
 function accessGlobal($s){
     $string = $s;
     $result = $GLOBALS[$string];
     return $result;
 } 
+
 function accessPost($s){
     $string = $s;
     $result = $_POST["'".$string."'"];
     return $result;
 }
+
 function phpAlert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }

@@ -23,87 +23,27 @@ and open the template in the editor.
     <script src='js/lib/jquery.min.js'></script>
     <!--script src='js/fullcalendar.min.js'></script-->
     <script src='js/fullcalendar.js'></script>
-    <!-- Script for producing the table -->
-    <script src='js/ClassTable.js'></script>
+
+    <!-- script for for displaying sections -->
+    <script src='js/displaySections.js'> </script>
+   
 
     <!-- Jquery UI -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
       <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+      <script>
+      <?php
+        include "PHP/functions.php";
+      ?>
+    </script>
         <title></title>
+
     </head>
     <body>
       
-
-      <ul id="myList">
-      </ul>
-          <div class="checkbox">
-                            
-                  <label class="checkbox-inline"> 
-                    <input type="checkbox" name="dow[]" id="dow" value=" Mon " name="M"> M
-                  </label>
-
-                  <label class="checkbox-inline">
-                    <input type="checkbox"  name="dow[]"id="dow" value=" Tues " name="T"> T
-                  </label>
-
-                  <label class="checkbox-inline">
-                    <input type="checkbox" name="dow[]" id="dow" value=" Wed " name="W"> W
-                  </label>
-                              
-                  <label class="checkbox-inline">
-                    <input type="checkbox" name="dow[]" id="dow" value=" Thur " name="R"> T
-                  </label>
-
-                  <label class="checkbox-inline">
-                    <input type="checkbox" name="dow[]" id="dow" value=" Fri " name="F"> F
-                  </label>
-                            
-          </div>
-
-          <input type="time" id="startTime" value="00:00:00">
-          to
-          <input type="time" id="endTime" value="00:00:00">
-          <button onclick="addUnv()">Try it</button>
-      
-
-      <script>
-      //function adds an unavailability to the html list.
-      function addUnv() {
-          var dow = new Array();
-          var lastid = 0;
-          
-          //Use JQuery to retrieve values of checked checkboxes and store them in an array.
-          $.each($("input[name='dow[]']:checked"), function() {
-            dow.push($(this).val());
-          });
-
-          var result = dow.toString();
-          result = result.concat(" from ");
-          var startTime = document.getElementById("startTime").value;
-          var endTime = document.getElementById("endTime").value;
-          result =  result.concat(startTime, " to ", endTime)
-
-          var node = document.createElement("LI");
-          var textnode = document.createTextNode(result);
-          node.appendChild(textnode);
-          node.setAttribute('id','item'+lastid);
-          var removeButton = document.createElement('button');
-
-          removeButton.appendChild(document.createTextNode("remove"));
-          removeButton.setAttribute('onClick','removeUnv("'+'item'+lastid+'")');
-          removeButton.setAttribute('class', 'btn btn-link');
-          node.appendChild(removeButton);
-          lastid+=1;
-          document.getElementById("myList").appendChild(node);
-          
-      }
-
-      //function removes an unavailability from the html list when the remove button is pressed.
-      function removeUnv(itemid){
-        var item = document.getElementById(itemid);
-        document.getElementById("myList").removeChild(item);
-      }
-      </script>
+        <div>
+          <?php echo getSection(1,2)?>
+        </div>  
 
 </body>
 </html>
