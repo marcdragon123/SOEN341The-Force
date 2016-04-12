@@ -118,6 +118,8 @@ function signIn(){
 	//echo $result->num_rows;*/
 	if($row[2] == '1' && $result->num_rows == 1) {
 		//link($target = "../Account.php" , $link = "Account");
+                          
+        $_SESSION['semester'] = "Summer";
 		$_SESSION['loginID'] = $row[0];
 		//var_dump($_SESSION);
 
@@ -125,7 +127,7 @@ function signIn(){
 		//echo("result worked <br />");
 	}
 	else if ($rowAdmin[2] == '1' && $resultAdmin->num_rows == 1) {
-        
+        $_SESSION['semester'] = "Summer";
         $_SESSION['adminID'] = $rowAdmin[0];
         header('Location: ../AdminAccount.php');
     }

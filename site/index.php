@@ -83,21 +83,30 @@ and open the template in the editor.
 		</nav>
 
 	<div class="container main-body"> 
+        <form id = "semesterForm" name = "semesterForm" action="/PHP/changeSemester.php" method="post">
+            <div class="row semester-row">
+                <div class="dropdown">
+                    <!--
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 
-		<div class="row semester-row">
-			<div class="dropdown">
-			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			    Select Semester
-			    <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="#">Summer</a></li>
-			    <li><a href="#">Winter</a></li>
-			    <li><a href="#">Fall</a></li>
-			  </ul>
-			</div>
-		</div>
-
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" onchange="this.form.submit();">
+                        <li><a onclick="this.form.submit()" value = "1">Summer</a></li>
+                        <li><a onclick="this.form.submit()" value = "2">Winter</a></li>
+                        <li><a onclick="this.form.submit()">Fall</a></li>
+                    </ul>
+-->
+                    <div>Current Semester: <?php echo $_SESSION['semester'];?></div>
+                    <select id = "semesters" name = "semesters" onchange="this.form.submit();">
+                        <option value="Summer">Summer</option>
+                        <option value="Fall">Fall</option>
+                        <option value="Winter">Winter</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+            
 		<div class="jumbotron">
 			<div class="panel-group">
 			  <div class="panel panel-default">
@@ -285,8 +294,6 @@ and open the template in the editor.
             <center>George Theophanous</center>
 
         </div>
-
-            
         </div>
-</body>
+    </body>
 </html>
