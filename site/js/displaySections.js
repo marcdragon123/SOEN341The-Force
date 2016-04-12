@@ -2,9 +2,15 @@
 * name: name of the class for which the sections are being displayed
 * sectionsArray: array of sections
 */
-function displaySections(section1){
-
-	 alert(section1);
+function displaySections(cb){
+	var id = "#".concat(cb.value,"Section");
+	if (cb.checked == true){
+		$(id).show();
+	}
+	if (cb.checked == false){
+		$(id).hide();
+	}
+	
 	/*
 	for (var i = 0; i < sectionArray.value; i++){
 		var x = document.createElement("INPUT");

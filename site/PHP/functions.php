@@ -208,7 +208,8 @@ function loadClassesIndex($nme){
     echo '<div class="panel-body">';
 	foreach($result->fetch_all() as $val){
 		//store sections for each class
- 		$sections = array(getSection($val[2],0), getSection($val[2],1), getSection($val[2],2));
+ 		//$sections = array(getSection($val[2],0), getSection($val[2],1), getSection($val[2],2));
+ 		$sections = getSectionArray($val[2]);
 		if($last == null){
 			$last = $val[0];
 			echo '<a data-toggle="collapse" href="#'.$collapseID.'"><h5>'.$val[0].'</h5></a><div class="panel-collapse collapse checkboxList" id="'.$collapseID.'">';
@@ -219,13 +220,16 @@ function loadClassesIndex($nme){
 			$last = $val[0];
 			$collapseID++;
 		}
-		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' /> ".$val[0]." ".$val[1]."</label><br/>";
-		echo "<div><form id='".$val[2]."Section'>";
- 			echo "<input type='radio' name='".$val[2]."' value='".$sections[0]."'> ".$sections[0]." <br>";
- 			echo "<input type='radio' name='".$val[2]."' value='".$sections[1]."'> ".$sections[1]." <br>";
- 			echo "<input type='radio' name='".$val[2]."' value='".$sections[2]."'> ".$sections[2]." <br><br>";
+		
+		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' onchange='displaySections(this);' /> ".$val[0]." ".$val[1]."</label><br/>";
+
+		echo "<div><form style='display:none;' id='".$val[2]."Section'>";
+			for ($x=0; $x<sizeof($sections); $x++){
+ 				echo "&nbsp;&nbsp;&nbsp;&nbsp;<input type='radio' name='".$val[2]."' value='".$sections[$x][0]."' checked> ".$sections[$x][0]." <br>";
+ 			}	
  
  		echo "</form></div>";
+ 		
 	}
 	echo "</div></div>";
 	
@@ -337,6 +341,19 @@ function getSection($class, $index)
 	$resultsec = mysqli_fetch_all($query45);
 	$resultsec[$index] = $resultsec[$index][0];
 	return $resultsec[$index];
+	//print_r($section[$i]." ");
+	//echo "<br />";
+	closeCon($con);
+}
+//for time conflicts
+function getSectionArray($class)
+{
+
+	$con = getCon();
+	$sql45 = "select Section from Sections where course_Master_List_id = '".$class."'";
+	$query45 = $con->query($sql45);
+	$resultsec = mysqli_fetch_all($query45);
+	return $resultsec;
 	//print_r($section[$i]." ");
 	//echo "<br />";
 	closeCon($con);
