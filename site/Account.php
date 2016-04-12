@@ -77,10 +77,8 @@
                             <input type="password" data-minlength="6" class="form-control" id = "confpwd" name="ConfInputPassword" onkeyup="checkPass(); return false;" placeholder="Password*" value = "<?php echo $password; ?>" >
                         </div>
                         <span id="confirmMessage" class="confirmMessage"></span>
+                        <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary" id = "accountSubmit">Submit Account Changes</button>
                     </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" onclick="popUpPass();checkPass()" class="btnModal btn-primary" id = "accountSubmit">Submit Account Changes</button>
                 </div>
             </div>
         </form>
@@ -90,11 +88,11 @@
                     <?php
                     echo loadCompletedClasses("Courses You Have Already Passed");
                     ?>
+                    <button type = "submit" class = "btnModal btn-primary" id = "saveCourses">Save Completed Courses</button>
                 </div>
             </div>
-            <div class = "form-group">
-                <button type = "submit" class = "btnModal btn-primary" id = "saveCourses">Save Completed Courses</button>
-            </div>
+<!--            dont delete this next line it fixes the footer overlap issue-->
+            <div>&nbsp;</div> 
         </form>
 
         <div class="site-footer">

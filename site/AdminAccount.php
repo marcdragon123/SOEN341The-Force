@@ -121,6 +121,7 @@
                     </div>
                 </div>
             </div> 
+            <!--            dont delete this next line it fixes the footer overlap issue-->
             <div>&nbsp;</div>
 
             
