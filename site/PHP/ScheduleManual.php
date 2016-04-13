@@ -25,11 +25,11 @@ $TEMP = array();
 $TEMPEnr = array();
 $val = 0;
 $val2 = 0;
-print_r("User ".$userId." </br>");
-var_dump($class_ID_clone);
-echo "</br>";
-var_dump($section_clone);
-//echo "</br>";
+////print_r("User ".$userId." </br>");
+//var_dump($class_ID_clone);
+////echo "</br>";
+//var_dump($section_clone);
+////echo "</br>";
 
 foreach ($class_ID_clone as $value) {
     $queryEnrollment = "Delete from enrollment where Sections_course_Master_List_id = '".$value."' AND Student_idStudent = '".$userId."' AND semester = '".$semester."'";
@@ -45,11 +45,11 @@ foreach ($class_ID_clone as $value) {
 
 $enrolled = array();
 //for if he enrolled in classes before
-$sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
+$sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."' AND semester = '".$semester."'";
 $queryEnr = $con->query($sqlEnr);
 $resultEnr = mysqli_fetch_all($queryEnr);
 
-$sqlEnrSec = "select Sections_Section from enrollment where Student_idStudent = '".$userId."'";
+$sqlEnrSec = "select Sections_Section from enrollment where Student_idStudent = '".$userId."' AND semester = '".$semester."'";
 $queryEnrSec = $con->query($sqlEnrSec);
 $resultEnrSec = mysqli_fetch_all($queryEnrSec);
 $condition = false;
@@ -57,9 +57,9 @@ if (!empty($resultEnr))
 {
 for ($i = 0; $i < count($resultEnr); $i++)
 {
-	//print_r($resultEnr[$i][0]." </br>");
+	////print_r($resultEnr[$i][0]." </br>");
 	$enrolled[] = $resultEnr[$i][0]; 
-	//print_r($enrolled[count($class_ID)+$i]);
+	////print_r($enrolled[count($class_ID)+$i]);
 	$sectionEnr[] = $resultEnrSec[$i][0];
 }
 
@@ -75,10 +75,10 @@ for ($i=0; $i < count($enrolled); $i++){
 		$TimesEnr[$i][$j] = $TimesEnr[$i][$j][0];
 		$TimesEnr[$i][$j] = str_replace(":","",$TimesEnr[$i][$j]);
 
-		print_r("Times for ".$enrolled[$i]." is: ".$TimesEnr[$i][$j]." </br>");
+	//	//print_r("Times for ".$enrolled[$i]." is: ".$TimesEnr[$i][$j]." </br>");
 	}
-	//print_r($Times[$i]);
-	//echo "<br />";
+	////print_r($Times[$i]);
+	////echo "<br />";
 }
 for ($i=0; $i < count($enrolled); $i++){
 	$sqlend222 = "select end from Timeslot where Sections_course_Master_List_id = '".$enrolled[$i]."' and Sections_Section = '".$sectionEnr[$i]."'";
@@ -91,10 +91,10 @@ for ($i=0; $i < count($enrolled); $i++){
 	{
 		$TimefEnr[$i][$j] = $TimefEnr[$i][$j][0];
 		$TimefEnr[$i][$j] = str_replace(":","",$TimefEnr[$i][$j]);
-		print_r("Timef for ".$enrolled[$i]." is: ".$TimefEnr[$i][$j]." </br>");
+	//	//print_r("Timef for ".$enrolled[$i]." is: ".$TimefEnr[$i][$j]." </br>");
 	}
-	//print_r($Timef[$i]);
-	//echo "<br />";
+	////print_r($Timef[$i]);
+	////echo "<br />";
 }
 
 for ($i=0; $i < count($enrolled); $i++){
@@ -106,10 +106,10 @@ for ($i=0; $i < count($enrolled); $i++){
 	for($j = 0; $j < 2; $j++)
 	{
 		$TEMPEnr[$i][$j] = $TEMPEnr[$i][$j][0];
-		//print_r("DOW for ".$enrolled[$i]." is: ".$TEMPEnr[$i][$j]." </br>");
+		////print_r("DOW for ".$enrolled[$i]." is: ".$TEMPEnr[$i][$j]." </br>");
 	}
-	//print_r($TEMP[$i]);
-	//echo "<br />";
+	////print_r($TEMP[$i]);
+	////echo "<br />";
 }
 
 
@@ -137,14 +137,14 @@ for ($j=0; $j<count($enrolled); $j++)
 	$DOWEnr[$j][1] = substr($tempor, strpos($tempor, ',')+1);
 
 
-	//print_r($DOW[$j]);
-	//echo "<br />";
+	////print_r($DOW[$j]);
+	////echo "<br />";
 }
 for ($i = 0; $i < count($enrolled); $i++)
 {
 	for ($j = 0; $j < 3; $j++)
 	{
-print_r("DOW for ".$enrolled[$i]." is: ".$DOWEnr[$i][$j]." </br>");
+////print_r("DOW for ".$enrolled[$i]." is: ".$DOWEnr[$i][$j]." </br>");
 	}
 }
 }
@@ -163,7 +163,7 @@ for ($i = 0; $i < count($resultComp); $i++)
 	for ($j = 0; $j < 1; $j++)
 	{
 		$resultComp[$i][$j] = $resultComp[$i][$j][0];
-		print_r($resultComp[$i][$j]." </br>");
+//		//print_r($resultComp[$i][$j]." </br>");
 	}
 	
 }
@@ -197,7 +197,7 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 			
 			for ($j = 0; $j < count($resultPre); $j++)
 			{
-				print_r("Hello </br>");
+				//print_r("Hello </br>");
 				if ($resultComp[$i][1] == $resultPre[$j])
 				{
 					if ($resultComp[$i][0] == true)
@@ -207,7 +207,7 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 							if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
 							$class_ID[] = $class_ID_clone[$k];
 							$section[] = $section_clone[$k];
-							print_r("Hey </br>");
+					//		//print_r("Hey </br>");
 						}
 					}
 
@@ -223,7 +223,7 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 			if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
 							$class_ID[] = $class_ID_clone[$k];
 							$section[] = $section_clone[$k];
-							print_r("Hey </br>");
+					//		//print_r("Hey </br>");
 		}
 	}
 }
@@ -231,7 +231,7 @@ if (count($class_ID) > 0)
 {
 for ($i = 0; $i < count($class_ID); $i++)
 {
-	print_r($section[$i]."</br>");
+//	//print_r($section[$i]."</br>");
 	$index[] = 0;
 	$timebool[$i] = true;
 }
@@ -256,13 +256,13 @@ for ($i=0; $i < count($class_ID); $i++){
 	$Times[$i][$j] = $Times[$i][$j][0];
 	$Times[$i][$j] = str_replace(":","",$Times[$i][$j]);
 
-	print_r("Times for ".$class_ID[$i]." is: ".$Times[$i][$j]." </br>");
+	//print_r("Times for ".$class_ID[$i]." is: ".$Times[$i][$j]." </br>");
 	}
-	//print_r($Times[$i]);
-	//echo "<br />";
+	////print_r($Times[$i]);
+	////echo "<br />";
 }
 
-//echo "<br />";
+////echo "<br />";
 for ($i=0; $i < count($class_ID); $i++){
 	$sqlend = "select end from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
 	$query2 = $con->query($sqlend);
@@ -274,10 +274,10 @@ for ($i=0; $i < count($class_ID); $i++){
 	{
 	$Timef[$i][$j] = $Timef[$i][$j][0];
 	$Timef[$i][$j] = str_replace(":","",$Timef[$i][$j]);
-	print_r("Timef for ".$class_ID[$i]." is: ".$Timef[$i][$j]." </br>");
+	//print_r("Timef for ".$class_ID[$i]." is: ".$Timef[$i][$j]." </br>");
 	}
 }
-//echo "<br />";
+////echo "<br />";
 
 for ($i=0; $i < count($class_ID); $i++){
 	$sqlDOW = "select DOW from Timeslot where Sections_course_Master_List_id = '".$class_ID[$i]."' and Sections_Section = '".$section[$i]."'";
@@ -288,7 +288,7 @@ for ($i=0; $i < count($class_ID); $i++){
 	for($j = 0; $j < 2; $j++)
 	{
 	$TEMP[$i][$j] = $TEMP[$i][$j][0];
-	print_r("DOW for ".$class_ID[$i]." is: ".$TEMP[$i][$j]." </br>");
+	//print_r("DOW for ".$class_ID[$i]." is: ".$TEMP[$i][$j]." </br>");
 	}
 }
 
@@ -318,7 +318,7 @@ for ($j=0; $j<count($class_ID); $j++)
 //Olivier Algorithm section
 for ($j = 0; $j < count($enrolled); $j++)
 {
-	//print_r($Times[$i]." </br>");
+	////print_r($Times[$i]." </br>");
 	for ($i = 0; $i < count($class_ID); $i++)
 	{
 			
@@ -326,135 +326,171 @@ for ($j = 0; $j < count($enrolled); $j++)
 		{
 			if ((int)$TimesEnr[$j][0] < (int)$Timef[$i][0] && (int)$TimesEnr[$j][0] >= (int)$Times[$i][0])
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 			if ((int)$TimefEnr[$j][0] < (int)$Timef[$i][0] && (int)$TimefEnr[$j][0] >= (int)$Times[$i][0])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 		}
 		if ($DOW[$i][1] == $DOWEnr[$j][0])
 		{
 			if ((int)$TimesEnr[$j][0] < (int)$Timef[$i][0] && (int)$TimesEnr[$j][0] >= (int)$Times[$i][0])
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 			if ((int)$TimefEnr[$j][0] < (int)$Timef[$i][0] && (int)$TimefEnr[$j][0] >= (int)$Times[$i][0])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 		}
 		if ($DOW[$i][0] == $DOWEnr[$j][1])
 		{
 			if ((int)$TimesEnr[$j][0] < (int)$Timef[$i][0] && (int)$TimesEnr[$j][0] >= (int)$Times[$i][0])
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 			if ((int)$TimefEnr[$j][0] < (int)$Timef[$i][0] && (int)$TimefEnr[$j][0] >= (int)$Times[$i][0])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 		}
 		if ($DOW[$i][1] == $DOWEnr[$j][1])
 		{
 			if ((int)$TimesEnr[$j][0] < (int)$Timef[$i][0] && (int)$TimesEnr[$j][0] >= (int)$Times[$i][0])
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 			if ((int)$TimefEnr[$j][0] < (int)$Timef[$i][0] && (int)$TimefEnr[$j][0] >= (int)$Times[$i][0])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 		}
 		if ($DOW[$i][2] == $DOWEnr[$j][2])
 		{
 			if ((int)$TimesEnr[$j][1] < (int)$Timef[$i][1] && (int)$TimesEnr[$j][1] >= (int)$Times[$i][1])
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 			if ((int)$TimefEnr[$j][1] < (int)$Timef[$i][1] && (int)$TimefEnr[$j][1] >= (int)$Times[$i][1])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 		}
 		if ($DOW[$i][0] == $DOWEnr[$j][2])
 		{
 			if ((int)$TimesEnr[$j][1] < (int)$Timef[$i][0] && (int)$TimesEnr[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 			if ((int)$TimefEnr[$j][1] < (int)$Timef[$i][0] && (int)$TimefEnr[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 		}
 		if ($DOW[$i][1] == $DOWEnr[$j][2])
 		{
 			if ((int)$TimesEnr[$j][1] < (int)$Timef[$i][0] && (int)$TimesEnr[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 			if ((int)$TimefEnr[$j][1] < (int)$Timef[$i][0] && (int)$TimefEnr[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 		}
 		if ($DOWEnr[$j][0] == $DOW[$i][2])
 		{
 			if ((int)$TimesEnr[$j][0] < (int)$Timef[$i][1] && (int)$TimesEnr[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 			if ((int)$TimefEnr[$j][0] < (int)$Timef[$i][1] && (int)$TimefEnr[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 		}
 		if ($DOWEnr[$j][1] == $DOW[$i][2])
 		{
 			if ((int)$TimesEnr[$j][0] < (int)$Timef[$i][1] && (int)$TimesEnr[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 			if ((int)$TimefEnr[$j][0] < (int)$Timef[$i][1] && (int)$TimefEnr[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 			{
-				print_r("Hey </br>");
-				if ($timebool[$i] == true)
+				//print_r("Hey </br>");
+				if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 			}
 		}
 			
@@ -474,129 +510,165 @@ for ($i = 0; $i < count($class_ID); $i++)
 		
 			if ($DOW[$i][0] == $DOW[$j][0])
 			{
-				print_r("Hey </br>");
+				//print_r("Hey </br>");
 				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
-					if ($timebool[$i] == true)
+					if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 				if ((int)$Timef[$j][0] < (int)$Timef[$i][0] && (int)$Timef[$j][0] >= (int)$Times[$i][0])//starts in middle of other
 				{
-					print_r("Hey </br>");
-					if ($timebool[$i] == true)
-						$timebool[$i] = false;
+					//print_r("Hey </br>");
+					if ($timebool[$i] == true) {
+					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 			}
 			if ($DOW[$i][1] == $DOW[$j][0])
 			{
 				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
-					if ($timebool[$i] == true)
+					if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 				if ((int)$Timef[$j][0] < (int)$Timef[$i][0] && (int)$Timef[$j][0] >= (int)$Times[$i][0])//starts in middle of other
 				{
-					print_r("Hey </br>");
-					if ($timebool[$i] == true)
-						$timebool[$i] = false;
+					//print_r("Hey </br>");
+					if ($timebool[$i] == true) {
+					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 			}
 			if ($DOW[$i][0] == $DOW[$j][1])
 			{
 				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
-					if ($timebool[$i] == true)
+					if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 				if ((int)$Timef[$j][0] < (int)$Timef[$i][0] && (int)$Timef[$j][0] >= (int)$Times[$i][0])//starts in middle of other
 				{
-					print_r("Hey </br>");
-					if ($timebool[$i] == true)
-						$timebool[$i] = false;
+					//print_r("Hey </br>");
+					if ($timebool[$i] == true) {
+					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 			}
 			if ($DOW[$i][1] == $DOW[$j][1])
 			{
 				if ((int)$Times[$j][0] < (int)$Timef[$i][0] && (int)$Times[$j][0] >= (int)$Times[$i][0])
 				{
-					if ($timebool[$i] == true)
+					if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 				if ((int)$Timef[$j][0] < (int)$Timef[$i][0] && (int)$Timef[$j][0] >= (int)$Times[$i][0])//starts in middle of other
 				{
-					print_r("Hey </br>");
-					if ($timebool[$i] == true)
-						$timebool[$i] = false;
+					//print_r("Hey </br>");
+					if ($timebool[$i] == true) {
+					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 			}
 			if ($DOW[$i][2] == $DOW[$j][2])
 			{
 				if ((int)$Times[$j][1] < (int)$Timef[$i][1] && (int)$Times[$j][1] >= (int)$Times[$i][1])
 				{
-					if ($timebool[$i] == true)
+					if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 				if ((int)$Timef[$j][1] < (int)$Timef[$i][1] && (int)$Timef[$j][1] >= (int)$Times[$i][1])//starts in middle of other
 				{
-					print_r("Hey </br>");
-					if ($timebool[$i] == true)
-						$timebool[$i] = false;
+					//print_r("Hey </br>");
+					if ($timebool[$i] == true) {
+					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 			}
 			if ($DOW[$i][0] == $DOW[$j][2])
 			{
 				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 				{
-					if ($timebool[$i] == true)
+					if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 				if ((int)$Timef[$j][1] < (int)$Timef[$i][0] && (int)$Timef[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 				{
-					print_r("Hey </br>");
-					if ($timebool[$i] == true)
-						$timebool[$i] = false;
+					//print_r("Hey </br>");
+					if ($timebool[$i] == true) {
+					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 			}
 			if ($DOW[$i][1] == $DOW[$j][2])
 			{
 				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 				{
-					if ($timebool[$i] == true)
+					if ($timebool[$i] == true) {
 					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                }
 				}
 				if ((int)$Timef[$j][1] < (int)$Timef[$i][0] && (int)$Timef[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 				{
-					print_r("Hey </br>");
-					if ($timebool[$i] == true)
-						$timebool[$i] = false;
+					//print_r("Hey </br>");
+					if ($timebool[$i] == true) {
+					$timebool[$i] = false;
+                    $errorSSS[] = $class_ID[$i]; 
+                    }
 				}
 			}
 			if ($DOW[$j][0] == $DOW[$i][2])
 				{
 					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
-						if ($timebool[$i] == true)
-					$timebool[$i] = false;
+						if ($timebool[$i] == true) {
+                            $timebool[$i] = false;
+                            $errorSSS[] = $class_ID[$i]; 
+                        }
 					}
 					if ((int)$Timef[$j][0] < (int)$Timef[$i][1] && (int)$Timef[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
-						print_r("Hey </br>");
-						if ($timebool[$i] == true)
-							$timebool[$i] = false;
+						//print_r("Hey </br>");
+						if ($timebool[$i] == true) {
+                            $timebool[$i] = false;
+                            $errorSSS[] = $class_ID[$i]; 
+                        }
 					}
 				}
 			if ($DOW[$j][1] == $DOW[$i][2])
 				{
 					if ((int)$Times[$j][0] < (int)$Timef[$i][1] && (int)$Times[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
-						if ($timebool[$i] == true)
-					$timebool[$i] = false;
+						if ($timebool[$i] == true) {
+                            $timebool[$i] = false;
+                            $errorSSS[] = $class_ID[$i]; 
+                        }
 					}
 					if ((int)$Timef[$j][0] < (int)$Timef[$i][1] && (int)$Timef[$j][0] >= (int)$Times[$i][1])//starts in middle of other
 					{
-						print_r("Hey </br>");
-						if ($timebool[$i] == true)
-							$timebool[$i] = false;
+						//print_r("Hey </br>");
+						if ($timebool[$i] == true) {
+                            $timebool[$i] = false;
+                            $errorSSS[] = $class_ID[$i]; 
+                        }
 					}
 				}
 		}
@@ -605,14 +677,14 @@ for ($i = 0; $i < count($class_ID); $i++)
 }
 
 $Message = "";
-//print_r($timebool[0]." Boo");
+////print_r($timebool[0]." Boo");
 for ($i = 0; $i < count($errorSSS); $i++)
 {
 		$qry = "select Course_code, number from course_Master_List where id = '".$errorSSS[$i]."'";
 		
 		$query = $con->query($qry);
 		$temp = (mysqli_fetch_row($query));
-		$Message .= ("Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br />");
+		$Message .= "Course ".$temp[0]." ".$temp[1]." conflicts with other courses <br>";
 		
 }
 if (count($class_ID) > 0)
@@ -629,22 +701,25 @@ for ($i = 0; $i < count($class_ID); $i++)
 		
 		$queryTranscript333 = $con->query($transcriptUpdate);
 	}
-	else
-	{
-		echo '<script language="javascript">alert("message successfully sent");</script>';
-	}
+	//else
+	//{
+	//	echo '<script language="javascript">alert("message successfully sent");</script>';
+	//}
 }
 }
 for ($i = 0; $i < count($errorSSS); $i++)
 {
-print_r($errorSSS[$i]."</br>");
+//print_r($errorSSS[$i]."</br>");
 }
 
 $_SESSION['Message'] = $Message;
 
-print_r($_SESSION['Message']);
+////print_r($_SESSION['Message']);
 
-header("Location: /index.php");
+if($Message != "")
+    echo '<script language="javascript">var r = confirm("'.$Message.'"); if (r || !r) window.location.href = "../index.php";</script>';
+
+header("Location: ../index.php");
  
 closeCon($con);
 

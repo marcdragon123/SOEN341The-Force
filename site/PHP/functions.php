@@ -128,7 +128,7 @@ function signIn(){
 		//echo("result worked <br />");
 	}
 	else if ($rowAdmin[2] == '1' && $resultAdmin->num_rows == 1) {
-        $_SESSION['semester'] = "Summer";
+        $_SESSION['semester'] = "Summer 2016";
         $_SESSION['adminID'] = $rowAdmin[0];
         header('Location: ../AdminAccount.php');
     }
