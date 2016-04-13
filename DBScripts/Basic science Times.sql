@@ -70,7 +70,7 @@ INSERT INTO Timeslot(Sections_Section, Sections_course_Master_List_id, start, en
 INSERT INTO Timeslot(Sections_Section, Sections_course_Master_List_id, start, end, DOW) VALUES ('TB','51','11:00','12:00','M');
 INSERT INTO Timeslot(Sections_Section, Sections_course_Master_List_id, start, end, DOW) VALUES ('TM','51','13:00','14:15','M,W');
 INSERT INTO Timeslot(Sections_Section, Sections_course_Master_List_id, start, end, DOW) VALUES ('TM','51','11:00','12:00','W');
-INSERT INTO Timeslot(Sections_Section, Sections_course_Master_List_id, start, end, DOW) VALUES ('VG','51','17:00','18:15','M,T');
+INSERT INTO Timeslot(Sections_Section, Sections_course_Master_List_id, start, end, DOW) VALUES ('VG','51','17:00','18:15','M,Tu');
 INSERT INTO Timeslot(Sections_Section, Sections_course_Master_List_id, start, end, DOW) VALUES ('VG','51','15:00','16:00','Tu');
 INSERT INTO Timeslot(Sections_Section, Sections_course_Master_List_id, start, end, DOW) VALUES ('QP','52','18:00','19:15','W,F');
 INSERT INTO Timeslot(Sections_Section, Sections_course_Master_List_id, start, end, DOW) VALUES ('QP','52','19:30','20:30','F');
