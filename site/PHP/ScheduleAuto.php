@@ -72,13 +72,6 @@ for ($i = 0; $i < count($resultComp); $i++)
 	}
 }
 
-$sqlDel = "delete from enrollment where Student_idStudent = '".$userId."'";
-if ($con->query($sqlDel)) {
-	$queryDel =	$con->query($sqlDel);
-	//$queryDel = $con->query($sqlDel);
-	//print_r("DELETED </br>");
-}
-
 $errorSSS = array();
 $timebool = array();//for all courses, if no conflic, put to true
 $index = array();
@@ -430,7 +423,7 @@ $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 $_SESSION['Message'] = $Message;
-//header("Location: /index.php");
+header("Location: /index.php");
 
 closeCon($con);
 
