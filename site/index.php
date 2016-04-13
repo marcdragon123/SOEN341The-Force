@@ -198,6 +198,7 @@ and open the template in the editor.
                                 inputnode.setAttribute("type", "text");
                                 inputnode.setAttribute("value", result);
                                 inputnode.setAttribute("name", "unvs[]");
+                                inputnode.setAttribute("size", "30");
                                 node.appendChild(inputnode);
                                 node.setAttribute('id','item'+lastid);
                                 var removeButton = document.createElement('a');
