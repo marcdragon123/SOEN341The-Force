@@ -17,12 +17,10 @@ $val = 0;
 $val2 = 0;
 print_r("User ".$userId." </br>");
 $condition = false;
+if (!empty($_POST['unvs']))
+$unav = $_POST['unvs'][1];
+var_dump($unav."</br>");
 
-foreach($_POST as $val)
-{
- 	$una[] = $val;
-}
-var_dump($_POST);
 echo "</br>";
 //for if he enrolled in classes before
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
@@ -299,6 +297,29 @@ do
 							$timebool[$i] = false;
 						}
 					}
+					/*
+					if ($DOW[$i][0] == unavailibilityDOW)
+					{
+						if ((int)$Times[$i][0] < timefinishUNA && timeStartUNA >= (int)$Times[$i][1])//starts in middle of other
+						{
+							$timebool[$i] = false;
+						}
+					}
+					if ($DOW[$i][1] == unavailibilityDOW)
+					{
+						if ((int)$Times[$i][0] < timefinishUNA && timeStartUNA >= (int)$Times[$i][1])//starts in middle of other
+						{
+							$timebool[$i] = false;
+						}
+					}
+					if ($DOW[$i][2] == unavailibilityDOW)
+					{
+						if ((int)$Times[$i][0] < timefinishUNA && timeStartUNA >= (int)$Times[$i][1])//starts in middle of other
+						{
+							$timebool[$i] = false;
+						}
+					}
+					*/
 				}
 			}
 		}
@@ -407,7 +428,7 @@ $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 $_SESSION['Message'] = $Message;
-header("Location: /index.php");
+//header("Location: /index.php");
 
 closeCon($con);
 
