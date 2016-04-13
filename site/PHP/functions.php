@@ -207,7 +207,7 @@ function loadCompletedClasses($msg){
 }
 
 //A modified version of loadClasses() with the appropriate styling adjustments for the index.php
-function loadClassesIndex($nme){
+function loadClassesIndex($nme, $sect){
 	$conn = getCon();
 	
 	$result = $conn->query("Select course_code, `number`, id from course_master_list order  by course_code, `number`;");
@@ -235,12 +235,12 @@ function loadClassesIndex($nme){
 		
 		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' onchange='displaySections(this);' /> ".$val[0]." ".$val[1]."</label><br/>";
 
-		echo "<div><form style='display:none;' id='".$val[2]."Section'>";
+		echo "<div style='display:none;' id='".$val[2]."Section'>";
 			for ($x=0; $x<sizeof($sections); $x++){
- 				echo "&nbsp;&nbsp;&nbsp;&nbsp;<input type='radio' name='section[".$val[2]."]' value='".$sections[$x][0]."' checked> ".$sections[$x][0]." <br>";
+ 				echo "&nbsp;&nbsp;&nbsp;&nbsp;<label><input type='radio'name='".$sect."[".$val[2]."]"."' value='".$sections[$x][0]."'/> ".$sections[$x][0]."</label> <br>";
  			}	
  
- 		echo "</form></div>";
+ 		echo "</div>";
  		
 	}
 	echo "</div></div>";

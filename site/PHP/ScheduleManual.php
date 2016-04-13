@@ -5,6 +5,10 @@ $con = getCon();
 $userId = $_SESSION['loginID'];
 //$class_ID = array(0=>'COMP 249', 1=>'SOEN 341', 2=>'ENGR 201', 3=>'SOEN 228', 4=>'ENGR 213');
 $class_ID_clone = $_REQUEST['chosen'];
+$section_clone[] = $_REQUEST['sect'];
+$section_clone = array_values($section_clone[0]);
+
+
 $class_ID = array();
 $section = array();
 $sectionEnr = array();
@@ -22,7 +26,10 @@ $val = 0;
 $val2 = 0;
 print_r("User ".$userId." </br>");
 var_dump($class_ID_clone);
-/*
+echo "</br>";
+var_dump($section_clone);
+//echo "</br>";
+
 $enrolled = array();
 //for if he enrolled in classes before
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
@@ -181,6 +188,7 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 						{
 							if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
 							$class_ID[] = $class_ID_clone[$k];
+							$section[] = $section_clone[$k];
 						}
 					}
 
@@ -194,6 +202,7 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 		{
 			if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
 							$class_ID[] = $class_ID_clone[$k];
+							$section[] = $section_clone[$k];
 		}
 	}
 }
@@ -201,77 +210,15 @@ if (count($class_ID) > 0)
 {
 for ($i = 0; $i < count($class_ID); $i++)
 {
+	print_r($section[$i]."</br>");
 	$index[] = 0;
 	$timebool[$i] = true;
 }
 }
-if (count($class_ID) > 0)
-{
-for ($i = 0; $i < count($class_ID); $i++)
-{
-	
-	$section[$i] = getSection($class_ID[$i],$index[$i]);
-	print_r("section :".$section[$i]." </br>");
-	
-}
-}
+
 //**********************************************************DU HAST*******************************************
-do
-{
-	if (count($class_ID) > 0)
-	{
-	for ($i = 0; $i < count($class_ID); $i++)
-	{
-	if ($timebool[$i] == false)
-	{
-		if ($i != 0)
-		{
-			$index[$i] += 1;
-			print_r("Beep </br>");
-			print_r("Index :".$index[$i]." </br>");
-			if (($timebool[$i] == false) && ($index[$i] == 3))
-			{
-				$tempy = count($class_ID);
-				$errorSSS[] = $class_ID[$i];
-	
-				unset($timebool[$i]);
-				$timebool = array_values($timebool);
-				unset($index[$i]);
-				$index = array_values($index);
-				unset($class_ID[$i]);
-				$class_ID = array_values($class_ID);
-				unset($section[$i]);
-				$section = array_values($section);
-	
-			}
-			else {
-				$section[$i] = getSection($class_ID[$i],$index[$i]);
-			}
-		}
-		else
-		{
-			$index[$i] += 1;
-			print_r("Beep </br>");
-			print_r("Index :".$index[$i]." </br>");
-			if (($timebool[$i] == false) && ($index[$i] == 3))
-			{
-	
-				$errorSSS[] = $class_ID[$i];
-	
-				$timebool = array_slice($timebool,0);
-				$index = array_slice($index,0);
-				$class_ID = array_slice($class_ID,0);
-				$section = array_slice($section,0);
-	
-	
-			}
-			else {
-				$section[$i] = getSection($class_ID[$i],$index[$i]);
-			}
-		}
-	}
-	}
-	}
+
+
 	
 	for ($i = 0; $i < count($class_ID); $i++)
 	{
@@ -648,15 +595,9 @@ for ($i = 0; $i < count($class_ID); $i++)
 }
 }
 
-if (!in_array(false,$timebool))
-		{
-			$condition = true;
-		}
-		
 	
-}
-while ($condition == false);
-more:
+
+
 
 $Message = "";
 //print_r($timebool[0]." Boo");
@@ -674,7 +615,7 @@ if (count($class_ID) > 0)
 {
 for ($i = 0; $i < count($class_ID); $i++)
 {
-	
+	if ($timebool[$i] == true)
 	{
 		$sqlLLLL = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."')";
 		//"select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
@@ -704,7 +645,7 @@ header("Location: /index.php");
 //print '<script type="text/javascript">'; 
 //print 'alert('.$Message.')'; 
 //print '</script>'; 
-  */
+  
  
 closeCon($con);
 

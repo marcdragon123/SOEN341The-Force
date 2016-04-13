@@ -5,6 +5,10 @@ $con = getCon();
 $userId = $_SESSION['loginID'];
 //$class_ID = array(0=>'COMP 249', 1=>'SOEN 341', 2=>'ENGR 201', 3=>'SOEN 228', 4=>'ENGR 213');
 $class_ID_clone = $_REQUEST['chosen'];
+/*
+foreach()
+$_POST[]
+*/
 $class_ID = array();
 $section = array();
 $sectionEnr = array();
