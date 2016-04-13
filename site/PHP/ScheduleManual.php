@@ -32,13 +32,15 @@ var_dump($section_clone);
 //echo "</br>";
 
 foreach ($class_ID_clone as $value) {
-    $queryEnrollment = "Delete from enrollment where Sections_course_Master_List_id = '".$value."' AND Student_idStudent = '".$userId."'";
-    
-	$queryTranscript = "Delete from transcripts where Enrollment_Sections_course_Master_List_id = '".$value."' AND Enrollment_Student_idStudent = '".$userId."'";
-	
+    $queryEnrollment = "Delete from enrollment where Sections_course_Master_List_id = '".$value."' AND Student_idStudent = '".$userId."' AND semester = '".$semester."'";
+   
 	mysqli_query($con, $queryEnrollment);
+	if(mysqli_affected_rows($con)>0)
+	{
+		$queryTranscript = "Delete from transcripts where Enrollment_Sections_course_Master_List_id = '".$value."' AND Enrollment_Student_idStudent = '".$userId."'";
+		mysqli_query($con, $queryTranscript);
+	}
 	
-	mysqli_query($con, $queryTranscript);
 }
 
 $enrolled = array();
@@ -626,6 +628,10 @@ for ($i = 0; $i < count($class_ID); $i++)
 		$queryLLLLL = $con->query($sqlLLLL);
 		
 		$queryTranscript333 = $con->query($transcriptUpdate);
+	}
+	else
+	{
+		echo '<script language="javascript">alert("message successfully sent");</script>';
 	}
 }
 }
