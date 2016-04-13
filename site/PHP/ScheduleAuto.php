@@ -391,8 +391,11 @@ for ($i = 0; $i < count($class_ID); $i++)
 	{
 		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id, semester) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."', '".$semester."')";
 
+		$transcriptUpdate = "INSERT INTO transcripts (Completed, Enrollment_Student_idStudent, Enrollment_Sections_course_master_List_id) VALUES (true, '".$userId."','".$class_ID[$i]."')";
+		
 		$query222 = $con->query($sql);
 		
+		$queryTranscript333 = $con->query($transcriptUpdate);
 	}
 }
 //for ($i = 0; $i < count($errorSSS); $i++)
