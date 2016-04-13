@@ -69,6 +69,7 @@ function signUp(){
 	$tmp = $res2->fetch_row();
 //	var_dump($res);
 	$_SESSION['loginID'] = $tmp[0];
+	$_SESSION['semester'] = "Summer 2016";
 	
 //	echo "<br />".$_SESSION['loginID']."<br />";
 	
@@ -119,7 +120,7 @@ function signIn(){
 	if($row[2] == '1' && $result->num_rows == 1) {
 		//link($target = "../Account.php" , $link = "Account");
                           
-        $_SESSION['semester'] = "Summer";
+        $_SESSION['semester'] = "Summer 2016";
 		$_SESSION['loginID'] = $row[0];
 		//var_dump($_SESSION);
 
