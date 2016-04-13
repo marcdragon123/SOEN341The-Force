@@ -235,18 +235,18 @@ and open the template in the editor.
                                 print '</script>';
                             }*/
                             ?>
-                            
+                            </form>
                             <form id="target" action="/PHP/ScheduleAuto.php" method="post">
                                 <div class="auto">
                                       <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn">
                                         <span class="glyphicon glyphicon-calendar"></span> Auto Generate
                                     </button>
-                                    <span id='unav'></span>
+                                    
                                       <div class="explainer">*Auto Generate intelligently chooses courses based on your unavailabilities and previously passed courses.</div>
                                 </div>
                             </form>
                             
-                        </form>
+                        
                           
                     </div>  
                       
