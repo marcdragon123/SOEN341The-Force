@@ -224,7 +224,7 @@ function loadClassesIndex($nme, $sect){
 	foreach($result->fetch_all() as $val){
 		//store sections for each class
  		//$sections = array(getSection($val[2],0), getSection($val[2],1), getSection($val[2],2));
- 		$sections = getSectionArray($val[2]);
+ 		//$sections = getSectionArray($val[2]);
 		if($last == null){
 			$last = $val[0];
 			echo '<a data-toggle="collapse" href="#'.$collapseID.'"><h5>'.$val[0].'</h5></a><div class="panel-collapse collapse checkboxList" id="'.$collapseID.'">';
@@ -238,12 +238,13 @@ function loadClassesIndex($nme, $sect){
 		
 		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' onchange='displaySections(this);' /> ".$val[0]." ".$val[1]."</label><br/>";
 
-		echo "<div style='display:none;' id='".$val[2]."Section'>";
-			
-			
+		echo "<div style='display:none;' class='sections' id='".$val[2]."Section'>";
+			sectionRadios($val[2], $sect);
+			/*
 			for ($x=0; $x<sizeof($sections); $x++){
  				echo "&nbsp;&nbsp;&nbsp;&nbsp;<label><input type='radio'name='".$sect."[".$val[2]."]"."' value='".$sections[$x][0]."'/> ".$sections[$x][0]."</label> <br>";
  			}	
+ 			*/
  			
  		echo "</div>";
  		
@@ -252,6 +253,36 @@ function loadClassesIndex($nme, $sect){
 	
 	closeCon($conn);
 }
+function sectionRadios($id, $sect){
+	//$id = $_SESSION['loginID'];
+	//$qry = "Select * from enrollment ";
+	//$qry .= "left join timeslot on timeslot.Sections_Section = enrollment.Sections_Section ";
+ 	//$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id ";
+ 	//$qry .= "left join course_Master_List on enrollment.Sections_course_Master_List_id = course_master_list.id ";
+ 
+ 	$qry = "select Sections_Section, Sections_course_Master_List_id, start, end, DOW from timeslot";
+ 	$conn = getCon();
+ 
+ 	$res = $conn->query($qry);
+ 	while ($row = $res->fetch_assoc()){
+ 		
+ 		if($row['Sections_course_Master_List_id'] == $id){
+	 		//DOW is array of days (either 2 or 1)
+			$DOW = explode(',', $row['DOW']);
+	 		if (count($DOW)==2){
+	 			//course code + num and then lectures'
+	 			echo '<input type="radio"name="'.$sect.'['.$id.']'.'" value="'.$row['Sections_Section'].'"/> Section: <strong>'.$row['Sections_Section'].'</strong><br>'
+	 			. 'Lecture:'.getFullDay(getDayStr($DOW[0])).getFullDay(getDayStr($DOW[1])).'-'.$row['start'].'-'.$row['end'].'<br>';
+	 		}
+	 		elseif (count($DOW)==1) {
+	 			//tutorial
+	 			
+	 			echo 'Tutorial:'.getFullDay(getDayStr($DOW[0])).'-'.$row['start'].'-'.$row['end'].'<br><br>';
+	 		}
+	 	}
+ 		
+ 	}
+ }
 //checks if the session is set up
 function isLoggedIN(){
 	if(isset($_SESSION['loginID'])){
