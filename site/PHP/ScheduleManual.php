@@ -147,9 +147,10 @@ $resultComp = mysqli_fetch_all($queryComp);
 
 for ($i = 0; $i < count($resultComp); $i++)
 {
-	for ($j = 0; $j < count($resultComp); $j++)
+	for ($j = 0; $j < 1; $j++)
 	{
 		$resultComp[$i][$j] = $resultComp[$i][$j][0];
+		print_r($resultComp[$i][$j]." </br>");
 	}
 	
 }
@@ -176,10 +177,14 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 	}
 	if (!empty($resultPre))
 	{
+		if (!empty($resultComp))
+		{
 		for ($i = 0; $i < count($resultComp); $i++)
 		{
+			
 			for ($j = 0; $j < count($resultPre); $j++)
 			{
+				print_r("Hello </br>");
 				if ($resultComp[$i][1] == $resultPre[$j])
 				{
 					if ($resultComp[$i][0] == true)
@@ -189,11 +194,13 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 							if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
 							$class_ID[] = $class_ID_clone[$k];
 							$section[] = $section_clone[$k];
+							print_r("Hey </br>");
 						}
 					}
 
 				}
 			}
+		}
 		}
 	}
 	else
@@ -203,6 +210,7 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 			if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
 							$class_ID[] = $class_ID_clone[$k];
 							$section[] = $section_clone[$k];
+							print_r("Hey </br>");
 		}
 	}
 }
