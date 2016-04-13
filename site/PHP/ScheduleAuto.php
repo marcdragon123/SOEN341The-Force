@@ -3,7 +3,7 @@ include "functions.php";
 session_start();
 $con = getCon();
 $userId = $_SESSION['loginID'];
-//$semester = $_SESSION['semester'];
+$semester = $_SESSION['semester'];
 $class_ID = array();
 $section = array();
 $IDs = array();
@@ -389,7 +389,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 {
 
 	{
-		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."')";
+		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id, semester) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."', '".$semester."')";
 
 		$query222 = $con->query($sql);
 		
