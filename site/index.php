@@ -169,10 +169,11 @@ and open the template in the editor.
 				            <input type="time" id="endTime" value="00:00:00">
 				            <a onclick="addUnv()">Add</a>
 				            <ul id="myList"> </ul>
+				
 				            
 				        <script>
 				        //function adds an unavailability to the html list.
-				        
+
 				        function addUnv() {
 				            var dow = new Array();
 				            var lastid = 0;
@@ -186,13 +187,18 @@ and open the template in the editor.
 				            result = result.concat(" from ");
 				            var startTime = document.getElementById("startTime").value;
 				            var endTime = document.getElementById("endTime").value;
-				            result =  result.concat(startTime, " to ", endTime);
+				            result =  result.concat("[",startTime, " to ", endTime,"],");
                             var generatedID = result + '%' + startTime  + '%' + endTime; 
+                            
+                            
 							//From the line under to the end of the function encapsulate within an if statement if 
                             if (document.getElementById(generatedID) == null){
                                 var node = document.createElement("LI");
-                                var textnode = document.createTextNode(result);
-                                node.appendChild(textnode);
+                                var inputnode = document.createElement("INPUT");
+                                inputnode.setAttribute("type", "text");
+                                inputnode.setAttribute("value", result);
+                                inputnode.setAttribute("name", "unvs[]");
+                                node.appendChild(inputnode);
                                 node.setAttribute('id','item'+lastid);
                                 var removeButton = document.createElement('a');
                                 var icon = document.createElement('span');
@@ -210,7 +216,9 @@ and open the template in the editor.
                                 //Generate ID based on startTime/Endtime
                                 $("#unav").append("<input id='"+generatedID+"' type='hidden' value = '" + dow + '%' + startTime + '%' + endTime + "' />");
                             }
+                            
 				        }
+				        
 				        //function removes an unavailability from the html list when the remove button is pressed.
 				        function removeUnv(itemid, tagid){
 				          var item = document.getElementById(itemid);

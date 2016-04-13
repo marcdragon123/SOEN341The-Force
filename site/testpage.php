@@ -42,7 +42,7 @@ and open the template in the editor.
     <body>
       
         <div>
-          <?php sectionRadios(3); ?>
+          <?php sectionRadios(); ?>
         </div>  
 
 </body>

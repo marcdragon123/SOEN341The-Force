@@ -262,39 +262,10 @@ function isLoggedIN(){
 	}
 }
 
-//echos the radio buttons for the sections in the add classes part. 
-function sectionRadios($id){
-	//$id = $_SESSION['loginID'];
-	$qry = "Select * from enrollment ";
-	$qry .= "left join timeslot on timeslot.Sections_Section = enrollment.Sections_Section ";
-	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id ";
-	$qry .= "left join course_Master_List on enrollment.Sections_course_Master_List_id = course_master_list.id ";
 
-	$conn = getCon();
 
-	$res = $conn->query($qry);
-	while ($row = $res->fetch_assoc()){
-		
-		
-		if ($row['id'] == $id){
-			
-		//DOW is array of days (either 2 or 1)
-		$DOW = explode(',', $row['DOW']);
-		if (count($DOW)==2){
-			//course code + num and then lectures'
-			echo '<input type="radio" name="section" checked> Section: <strong>'.$row['Sections_Section'].'</strong><br>'
-			. 'Lecture:'.getFullDay(getDayStr($DOW[0])).getFullDay(getDayStr($DOW[1])).'-'.$row['start'].'-'.$row['end'].'<br>';
-		}
-		elseif (count($DOW)==1) {
-			//tutorial
-			
-			echo 'Tutorial:'.getFullDay(getDayStr($DOW[0])).'-'.$row['start'].'-'.$row['end'].'<br><br>';
-		}
-		
-		}
-		
-	}
-}
+
+
 //loads the schedule for the index page
 function loadSchedule() {
 	$id = $_SESSION['loginID'];
@@ -473,8 +444,6 @@ function loadTable(){
 		}
     }
     echo '</table>';
-
-
 }
 function accessGlobal($s){
     $string = $s;
