@@ -239,10 +239,12 @@ function loadClassesIndex($nme, $sect){
 		echo "<label><input type='checkbox' name='".$nme."[]' value='".$val[2]."' onchange='displaySections(this);' /> ".$val[0]." ".$val[1]."</label><br/>";
 
 		echo "<div style='display:none;' id='".$val[2]."Section'>";
+			
+			
 			for ($x=0; $x<sizeof($sections); $x++){
  				echo "&nbsp;&nbsp;&nbsp;&nbsp;<label><input type='radio'name='".$sect."[".$val[2]."]"."' value='".$sections[$x][0]."'/> ".$sections[$x][0]."</label> <br>";
  			}	
- 
+ 			
  		echo "</div>";
  		
 	}
@@ -257,6 +259,40 @@ function isLoggedIN(){
 	}
 	else{
 		header("Location: wolfcall.ddns.net:8085");
+	}
+}
+
+//echos the radio buttons for the sections in the add classes part. 
+function sectionRadios($id){
+	//$id = $_SESSION['loginID'];
+	$qry = "Select * from enrollment ";
+	$qry .= "left join timeslot on timeslot.Sections_Section = enrollment.Sections_Section ";
+	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id ";
+	$qry .= "left join course_Master_List on enrollment.Sections_course_Master_List_id = course_master_list.id ";
+
+	$conn = getCon();
+
+	$res = $conn->query($qry);
+	while ($row = $res->fetch_assoc()){
+		
+		
+		if ($row['id'] == $id){
+			
+		//DOW is array of days (either 2 or 1)
+		$DOW = explode(',', $row['DOW']);
+		if (count($DOW)==2){
+			//course code + num and then lectures'
+			echo '<input type="radio" name="section" checked> Section: <strong>'.$row['Sections_Section'].'</strong><br>'
+			. 'Lecture:'.getFullDay(getDayStr($DOW[0])).getFullDay(getDayStr($DOW[1])).'-'.$row['start'].'-'.$row['end'].'<br>';
+		}
+		elseif (count($DOW)==1) {
+			//tutorial
+			
+			echo 'Tutorial:'.getFullDay(getDayStr($DOW[0])).'-'.$row['start'].'-'.$row['end'].'<br><br>';
+		}
+		
+		}
+		
 	}
 }
 //loads the schedule for the index page
