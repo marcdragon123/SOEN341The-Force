@@ -88,7 +88,7 @@ and open the template in the editor.
                 <div class="dropdown">
                     <div>Current Semester: <strong><?php echo $_SESSION['semester'];?></strong></div>
                     <select id = "semesters" name = "semesters" onchange="this.form.submit();">
-                        <option selected>-----------------</option>
+                        <option selected>-- Change Semester --</option>
 						<option value="Summer 2016">Summer 2016</option>
                         <option value="Fall 2016">Fall 2016</option>
                         <option value="Winter 2017">Winter 2017</option>
