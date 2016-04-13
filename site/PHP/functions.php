@@ -298,11 +298,13 @@ function sectionRadios($id){
 //loads the schedule for the index page
 function loadSchedule() {
 	$id = $_SESSION['loginID'];
+	$semester = $_SESSION['semester'];
 	$qry = "Select * from enrollment ";
 	$qry .= "left join timeslot on timeslot.Sections_Section = enrollment.Sections_Section ";
 	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id ";
 	$qry .= "left join course_Master_List on enrollment.Sections_course_Master_List_id = course_master_list.id ";
-	$qry .= "where ".$id." = enrollment.student_idstudent";
+	$qry .= "where ".$id." = enrollment.student_idstudent AND '".$semester."' = enrollment.semester";
+	
 	//echo "$qry";
 	$conn = getCon();
 	
@@ -427,11 +429,12 @@ function getSectionAll($class)
 //loads the table that includes student classes
 function loadTable(){
 	$id = $_SESSION['loginID'];
+	$semester = $_SESSION['semester'];
 	$qry = "Select * from enrollment ";
 	$qry .= "left join timeslot on timeslot.Sections_Section = enrollment.Sections_Section ";
 	$qry .= "and enrollment.Sections_course_Master_List_id = timeslot.Sections_course_Master_List_id ";
 	$qry .= "left join course_Master_List on enrollment.Sections_course_Master_List_id = course_master_list.id ";
-	$qry .= "where ".$id." = enrollment.student_idstudent";
+	$qry .= "where ".$id." = enrollment.student_idstudent AND '".$semester."' = enrollment.semester";
 
 	$conn = getCon();
 	
