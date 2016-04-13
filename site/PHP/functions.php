@@ -118,6 +118,8 @@ function signIn(){
 	//echo $result->num_rows;*/
 	if($row[2] == '1' && $result->num_rows == 1) {
 		//link($target = "../Account.php" , $link = "Account");
+                          
+        $_SESSION['semester'] = "Summer";
 		$_SESSION['loginID'] = $row[0];
 		//var_dump($_SESSION);
 
@@ -125,7 +127,7 @@ function signIn(){
 		//echo("result worked <br />");
 	}
 	else if ($rowAdmin[2] == '1' && $resultAdmin->num_rows == 1) {
-        
+        $_SESSION['semester'] = "Summer";
         $_SESSION['adminID'] = $rowAdmin[0];
         header('Location: ../AdminAccount.php');
     }
@@ -411,7 +413,7 @@ function loadTable(){
 			.'<form action="/PHP/Delete.php" id="Delete" method="post"><td rowspan=2>
                             <button type="submit" class="delete">
                                 <span class="glyphicon glyphicon-trash"></span>
-                            </button> &nbsp;'.$row['Course_code'].' '.$row['number'].'</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.'Section: '.$row['Sections_Section'].'</td>'
+                            </button> &nbsp;<strong>'.$row['Course_code'].' '.$row['number'].'</strong></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.'Section: <strong>'.$row['Sections_Section'].'</strong></td>'
 			. '<td>Lecture:'.getFullDay(getDayStr($DOW[0])).getFullDay(getDayStr($DOW[1])).'-'.$row['start'].'-'.$row['end'].'</td>'
 			.'<input type = "hidden" value = "'.$row['Course_code'].'" name = "Course_code" /> '
 			.'<input type = "hidden" value = "'.$row['number'].'" name = "number" /> </form>';

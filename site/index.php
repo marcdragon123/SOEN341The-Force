@@ -83,21 +83,31 @@ and open the template in the editor.
 		</nav>
 
 	<div class="container main-body"> 
-
-		<div class="row semester-row">
-			<div class="dropdown">
-			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			    Select Semester
-			    <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="#">Summer</a></li>
-			    <li><a href="#">Winter</a></li>
-			    <li><a href="#">Fall</a></li>
-			  </ul>
-			</div>
-		</div>
-
+        <form id = "semesterForm" name = "semesterForm" action="/PHP/changeSemester.php" method="post">
+            <div class="row semester-row">
+                <div class="dropdown">
+                    <div>Current Semester: <strong><?php echo $_SESSION['semester'];?></strong></div>
+                    <select id = "semesters" name = "semesters" onchange="this.form.submit();">
+                        <option selected>-- Change Semester --</option>
+						<option value="Summer 2016">Summer 2016</option>
+                        <option value="Fall 2016">Fall 2016</option>
+                        <option value="Winter 2017">Winter 2017</option>
+						<option value="Summer 2017">Summer 2017</option>
+                        <option value="Fall 2017">Fall 2017</option>
+                        <option value="Winter 2018">Winter 2018</option>
+						<option value="Summer 2018">Summer 2018</option>
+                        <option value="Fall 2018">Fall 2018</option>
+                        <option value="Winter 2019">Winter 2019</option>
+						<option value="Summer 2019">Summer 2019</option>
+                        <option value="Fall 2019">Fall 2019</option>
+						<option value="Winter 2020">Winter 2020</option>
+						<option value="Summer 2020">Summer 2020</option>
+                        <option value="Fall 2020">Fall 2020</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+            
 		<div class="jumbotron">
 			<div class="panel-group">
 			  <div class="panel panel-default">
@@ -286,8 +296,6 @@ and open the template in the editor.
             <center>George Theophanous</center>
 
         </div>
-
-            
         </div>
-</body>
+    </body>
 </html>
