@@ -187,7 +187,7 @@ and open the template in the editor.
 				            result = result.concat(" from ");
 				            var startTime = document.getElementById("startTime").value;
 				            var endTime = document.getElementById("endTime").value;
-				            result =  result.concat("[",startTime, " to ", endTime,"],");
+				            result =  result.concat(startTime, " to ", endTime);
                             var generatedID = result + '%' + startTime  + '%' + endTime; 
                             
                             
@@ -199,6 +199,7 @@ and open the template in the editor.
                                 inputnode.setAttribute("value", result);
                                 inputnode.setAttribute("name", "unvs[]");
                                 inputnode.setAttribute("size", "30");
+                                inputnode.readOnly = true;
                                 node.appendChild(inputnode);
                                 node.setAttribute('id','item'+lastid);
                                 var removeButton = document.createElement('a');
