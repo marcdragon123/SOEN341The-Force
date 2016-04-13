@@ -31,6 +31,16 @@ echo "</br>";
 var_dump($section_clone);
 //echo "</br>";
 
+foreach ($class_ID_clone as $value) {
+    $queryEnrollment = "Delete from enrollment where Sections_course_Master_List_id = '".$value."' AND Student_idStudent = '".$userId."'";
+    
+	$queryTranscript = "Delete from transcripts where Enrollment_Sections_course_Master_List_id = '".$value."' AND Enrollment_Student_idStudent = '".$userId."'";
+	
+	mysqli_query($con, $queryEnrollment);
+	
+	mysqli_query($con, $queryTranscript);
+}
+
 $enrolled = array();
 //for if he enrolled in classes before
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
