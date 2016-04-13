@@ -216,7 +216,7 @@ and open the template in the editor.
                                 lastid+=1;
                                 document.getElementById("myList").appendChild(node);
                                 //Generate ID based on startTime/Endtime
-                                $("#unav").append("<input id='"+generatedID+"' type='hidden' value = '" + dow + '%' + startTime + '%' + endTime + "' />");
+                                $("#unav").append("<input name='"+generatedID+"' type='hidden' value = '" + dow + '%' + startTime + '%' + endTime + "' />");
                             }
                             
 				        }
@@ -248,10 +248,10 @@ and open the template in the editor.
                             </form>
                             <form id="target" action="/PHP/ScheduleAuto.php" method="post">
                                 <div class="auto">
+                                    <div id="unav" ></div>
                                       <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn">
                                         <span class="glyphicon glyphicon-calendar"></span> Auto Generate
                                     </button>
-                                    
                                       <div class="explainer">*Auto Generate intelligently chooses courses based on your unavailabilities and previously passed courses.</div>
                                 </div>
                             </form>

@@ -18,6 +18,7 @@ $val2 = 0;
 print_r("User ".$userId." </br>");
 $condition = false;
 var_dump($_POST);
+echo "end of post <br />";
 if (!empty($_POST['unvs']))
 	$unav = $_POST['unvs'];
 var_dump($unav."</br>");
