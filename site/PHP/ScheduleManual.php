@@ -3,8 +3,13 @@ include "functions.php";
 session_start();
 $con = getCon();
 $userId = $_SESSION['loginID'];
+$semester = $_SESSION['semester'];
 //$class_ID = array(0=>'COMP 249', 1=>'SOEN 341', 2=>'ENGR 201', 3=>'SOEN 228', 4=>'ENGR 213');
 $class_ID_clone = $_REQUEST['chosen'];
+$section_clone[] = $_REQUEST['sect'];
+$section_clone = array_values($section_clone[0]);
+
+
 $class_ID = array();
 $section = array();
 $sectionEnr = array();
@@ -22,7 +27,10 @@ $val = 0;
 $val2 = 0;
 print_r("User ".$userId." </br>");
 var_dump($class_ID_clone);
-/*
+echo "</br>";
+var_dump($section_clone);
+//echo "</br>";
+
 $enrolled = array();
 //for if he enrolled in classes before
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
@@ -181,6 +189,7 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 						{
 							if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
 							$class_ID[] = $class_ID_clone[$k];
+							$section[] = $section_clone[$k];
 						}
 					}
 
@@ -194,6 +203,7 @@ for ($k = 0; $k < count($class_ID_clone); $k++)
 		{
 			if (!in_array($class_ID_clone[$k],$class_ID))//in case picks twice
 							$class_ID[] = $class_ID_clone[$k];
+							$section[] = $section_clone[$k];
 		}
 	}
 }
@@ -201,77 +211,15 @@ if (count($class_ID) > 0)
 {
 for ($i = 0; $i < count($class_ID); $i++)
 {
+	print_r($section[$i]."</br>");
 	$index[] = 0;
 	$timebool[$i] = true;
 }
 }
-if (count($class_ID) > 0)
-{
-for ($i = 0; $i < count($class_ID); $i++)
-{
-	
-	$section[$i] = getSection($class_ID[$i],$index[$i]);
-	print_r("section :".$section[$i]." </br>");
-	
-}
-}
+
 //**********************************************************DU HAST*******************************************
-do
-{
-	if (count($class_ID) > 0)
-	{
-	for ($i = 0; $i < count($class_ID); $i++)
-	{
-	if ($timebool[$i] == false)
-	{
-		if ($i != 0)
-		{
-			$index[$i] += 1;
-			print_r("Beep </br>");
-			print_r("Index :".$index[$i]." </br>");
-			if (($timebool[$i] == false) && ($index[$i] == 3))
-			{
-				$tempy = count($class_ID);
-				$errorSSS[] = $class_ID[$i];
-	
-				unset($timebool[$i]);
-				$timebool = array_values($timebool);
-				unset($index[$i]);
-				$index = array_values($index);
-				unset($class_ID[$i]);
-				$class_ID = array_values($class_ID);
-				unset($section[$i]);
-				$section = array_values($section);
-	
-			}
-			else {
-				$section[$i] = getSection($class_ID[$i],$index[$i]);
-			}
-		}
-		else
-		{
-			$index[$i] += 1;
-			print_r("Beep </br>");
-			print_r("Index :".$index[$i]." </br>");
-			if (($timebool[$i] == false) && ($index[$i] == 3))
-			{
-	
-				$errorSSS[] = $class_ID[$i];
-	
-				$timebool = array_slice($timebool,0);
-				$index = array_slice($index,0);
-				$class_ID = array_slice($class_ID,0);
-				$section = array_slice($section,0);
-	
-	
-			}
-			else {
-				$section[$i] = getSection($class_ID[$i],$index[$i]);
-			}
-		}
-	}
-	}
-	}
+
+
 	
 	for ($i = 0; $i < count($class_ID); $i++)
 	{
@@ -308,8 +256,6 @@ for ($i=0; $i < count($class_ID); $i++){
 	$Timef[$i][$j] = str_replace(":","",$Timef[$i][$j]);
 	print_r("Timef for ".$class_ID[$i]." is: ".$Timef[$i][$j]." </br>");
 	}
-	//print_r($Timef[$i]);
-	//echo "<br />";
 }
 //echo "<br />";
 
@@ -318,14 +264,12 @@ for ($i=0; $i < count($class_ID); $i++){
 	$query3 = $con->query($sqlDOW);
 	$result3 = mysqli_fetch_all($query3);
 	$TEMP[$i] = $result3;
-	//var_dump($TEMP[$i]." ");
+
 	for($j = 0; $j < 2; $j++)
 	{
 	$TEMP[$i][$j] = $TEMP[$i][$j][0];
 	print_r("DOW for ".$class_ID[$i]." is: ".$TEMP[$i][$j]." </br>");
 	}
-	//print_r($TEMP[$i]);
-	//echo "<br />";
 }
 
 
@@ -340,8 +284,6 @@ for($i=0; $i<count($TEMP); $i++){
 	}
 }
 
-
-
 $tempo = "";
 for ($j=0; $j<count($class_ID); $j++)
 {
@@ -351,10 +293,6 @@ for ($j=0; $j<count($class_ID); $j++)
 	
 	$DOW[$j][0] = substr($tempo, 0, strpos($tempo, ','));
 	$DOW[$j][1] = substr($tempo, strpos($tempo, ',')+1);
-	
-	
-	//print_r($DOW[$j]);
-	//echo "<br />";
 }
 
 //Olivier Algorithm section
@@ -439,7 +377,7 @@ for ($j = 0; $j < count($enrolled); $j++)
 					$timebool[$i] = false;
 			}
 		}
-		if ($DOW[$i][0] == $DOWEnr[$j][2]) // ($DOW[$i][1] == $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
+		if ($DOW[$i][0] == $DOWEnr[$j][2])
 		{
 			if ((int)$TimesEnr[$j][1] < (int)$Timef[$i][0] && (int)$TimesEnr[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 			{
@@ -509,7 +447,6 @@ if (count($class_ID) > 1)
 
 for ($i = 0; $i < count($class_ID); $i++)
 {
-	//print_r($Times[$i]." </br>");
 	for ($j = 0; $j < count($class_ID); $j++)
 	{
 		if ($i != $j)
@@ -586,7 +523,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 						$timebool[$i] = false;
 				}
 			}
-			if ($DOW[$i][0] == $DOW[$j][2]) // ($DOW[$i][1] == $DOW[$j][2] && $DOW[$j][0] != $DOW[$i][2] && $DOW[$j][1] != $DOW[$i][2])
+			if ($DOW[$i][0] == $DOW[$j][2])
 			{
 				if ((int)$Times[$j][1] < (int)$Timef[$i][0] && (int)$Times[$j][1] >= (int)$Times[$i][0])//starts in middle of other
 				{
@@ -644,25 +581,13 @@ for ($i = 0; $i < count($class_ID); $i++)
 				}
 		}
 	}
-	
 }
 }
-
-if (!in_array(false,$timebool))
-		{
-			$condition = true;
-		}
-		
-	
-}
-while ($condition == false);
-more:
 
 $Message = "";
 //print_r($timebool[0]." Boo");
 for ($i = 0; $i < count($errorSSS); $i++)
 {
-		
 		$qry = "select Course_code, number from course_Master_List where id = '".$errorSSS[$i]."'";
 		
 		$query = $con->query($qry);
@@ -674,15 +599,10 @@ if (count($class_ID) > 0)
 {
 for ($i = 0; $i < count($class_ID); $i++)
 {
-	
+	if ($timebool[$i] == true)
 	{
-		$sqlLLLL = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."')";
-		//"select Course_code, number from course_Master_List where id = '".$class_ID[$i]."'";
+		$sqlLLLL = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id, semester) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."','".$semester."')";
 		$queryLLLLL = $con->query($sqlLLLL);
-		//echo $_REQUEST['chosen'];
-		//$temp = (mysqli_fetch_row($query));
-	//print_r("Course ".$temp[0]." ".$temp[1]." conflicts with other courses");
-	//echo "<br />";
 	}
 }
 }
@@ -690,21 +610,12 @@ for ($i = 0; $i < count($errorSSS); $i++)
 {
 print_r($errorSSS[$i]."</br>");
 }
-//print_r($Message);
-//$GLOBALS['Times']=$Times;
-//$GLOBALS['Timef']=$Timef;
-//$GLOBALS['DOW']=$DOW;
-//$GLOBALS['timebool'] = $timebool;
+
 $_SESSION['Message'] = $Message;
-//print_r($Message);
+
 print_r($_SESSION['Message']);
-//echo $Message;
-//echo "<script>setTimeout(\"location.href = ' /index.php';\",1500);</script>";
+
 header("Location: /index.php");
-//print '<script type="text/javascript">'; 
-//print 'alert('.$Message.')'; 
-//print '</script>'; 
-  */
  
 closeCon($con);
 

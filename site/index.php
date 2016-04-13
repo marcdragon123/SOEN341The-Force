@@ -86,22 +86,23 @@ and open the template in the editor.
         <form id = "semesterForm" name = "semesterForm" action="/PHP/changeSemester.php" method="post">
             <div class="row semester-row">
                 <div class="dropdown">
-                    <!--
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" onchange="this.form.submit();">
-                        <li><a onclick="this.form.submit()" value = "1">Summer</a></li>
-                        <li><a onclick="this.form.submit()" value = "2">Winter</a></li>
-                        <li><a onclick="this.form.submit()">Fall</a></li>
-                    </ul>
--->
                     <div>Current Semester: <strong><?php echo $_SESSION['semester'];?></strong></div>
                     <select id = "semesters" name = "semesters" onchange="this.form.submit();">
-                        <option value="Summer">Summer</option>
-                        <option value="Fall">Fall</option>
-                        <option value="Winter">Winter</option>
+                        <option selected>-- Change Semester --</option>
+						<option value="Summer 2016">Summer 2016</option>
+                        <option value="Fall 2016">Fall 2016</option>
+                        <option value="Winter 2017">Winter 2017</option>
+						<option value="Summer 2017">Summer 2017</option>
+                        <option value="Fall 2017">Fall 2017</option>
+                        <option value="Winter 2018">Winter 2018</option>
+						<option value="Summer 2018">Summer 2018</option>
+                        <option value="Fall 2018">Fall 2018</option>
+                        <option value="Winter 2019">Winter 2019</option>
+						<option value="Summer 2019">Summer 2019</option>
+                        <option value="Fall 2019">Fall 2019</option>
+						<option value="Winter 2020">Winter 2020</option>
+						<option value="Summer 2020">Summer 2020</option>
+                        <option value="Fall 2020">Fall 2020</option>
                     </select>
                 </div>
             </div>
@@ -116,7 +117,7 @@ and open the template in the editor.
 			      </h4>
 			    </div>
 
-			    <form action="/PHP/Testing/ScheduleTimes.php" method="post">
+			    <form action="/PHP/ScheduleManual.php" method="post">
 
 <!--			    <form id="target" action="ScheduleTimes.php" method="post">-->
 
@@ -125,7 +126,7 @@ and open the template in the editor.
 			      	<div class="col-md-4 checkboxDiv">
 			      		<h4> Add Classes</h4>
 			      		<!--  <input id="tags" type="text" class="form-control seach-text" placeholder="Ex: COMP 250" name="q">-->
-			      		<?php loadClassesIndex("chosen");?>
+			      		<?php loadClassesIndex("chosen", "sect");?>
 			      		<!-- JQUery for autocomplete class list -->
 			      		<!--  <script>
 						  $(function() {
@@ -237,9 +238,10 @@ and open the template in the editor.
                             
                             <form id="target" action="/PHP/ScheduleAuto.php" method="post">
                                 <div class="auto">
-                                      <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn">
+                                      <button type="submit" id="new_worktime" class="btn btn-submit btn-success recomputeBtn" form="target">
                                         <span class="glyphicon glyphicon-calendar"></span> Auto Generate
                                     </button>
+                                    <span id='unav'></span>
                                       <div class="explainer">*Auto Generate intelligently chooses courses based on your unavailabilities and previously passed courses.</div>
                                 </div>
                             </form>

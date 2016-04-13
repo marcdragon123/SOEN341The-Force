@@ -69,6 +69,7 @@ function signUp(){
 	$tmp = $res2->fetch_row();
 //	var_dump($res);
 	$_SESSION['loginID'] = $tmp[0];
+	$_SESSION['semester'] = "Summer 2016";
 	
 //	echo "<br />".$_SESSION['loginID']."<br />";
 	
@@ -119,7 +120,7 @@ function signIn(){
 	if($row[2] == '1' && $result->num_rows == 1) {
 		//link($target = "../Account.php" , $link = "Account");
                           
-        $_SESSION['semester'] = "Summer";
+        $_SESSION['semester'] = "Summer 2016";
 		$_SESSION['loginID'] = $row[0];
 		//var_dump($_SESSION);
 
@@ -209,7 +210,7 @@ function loadCompletedClasses($msg){
 }
 
 //A modified version of loadClasses() with the appropriate styling adjustments for the index.php
-function loadClassesIndex($nme){
+function loadClassesIndex($nme, $sect){
 	$conn = getCon();
 	
 	$result = $conn->query("Select course_code, `number`, id from course_master_list order  by course_code, `number`;");
@@ -239,7 +240,7 @@ function loadClassesIndex($nme){
 
 		echo "<div style='display:none;' id='".$val[2]."Section'>";
 			for ($x=0; $x<sizeof($sections); $x++){
- 				echo "&nbsp;&nbsp;&nbsp;&nbsp;<input type='radio' name='section[".$val[2]."]' value='".$sections[$x][0]."' checked> ".$sections[$x][0]." <br>";
+ 				echo "&nbsp;&nbsp;&nbsp;&nbsp;<label><input type='radio'name='".$sect."[".$val[2]."]"."' value='".$sections[$x][0]."'/> ".$sections[$x][0]."</label> <br>";
  			}	
  
  		echo "</div>";

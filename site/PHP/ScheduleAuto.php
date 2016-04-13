@@ -3,6 +3,7 @@ include "functions.php";
 session_start();
 $con = getCon();
 $userId = $_SESSION['loginID'];
+$semester = $_SESSION['semester'];
 $class_ID = array();
 $section = array();
 $IDs = array();
@@ -11,10 +12,18 @@ $Timesf = array();
 $DOW = array();
 $TEMP = array();
 $NC = array();
+$una = array();
 $val = 0;
 $val2 = 0;
 print_r("User ".$userId." </br>");
 $condition = false;
+
+foreach($_POST as $val)
+{
+ 	$una[] = $val;
+}
+var_dump($_POST);
+echo "</br>";
 //for if he enrolled in classes before
 $sqlEnr = "select Sections_course_Master_List_id from enrollment where Student_idStudent = '".$userId."'";
 $queryEnr = $con->query($sqlEnr);
@@ -380,7 +389,7 @@ for ($i = 0; $i < count($class_ID); $i++)
 {
 
 	{
-		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i]."')";
+		$sql = "INSERT INTO enrollment (Student_idStudent, Sections_Section, Sections_course_Master_List_id, semester) Values ('".$userId."', '".$section[$i]."', '".$class_ID[$i].", ".$semester."')";
 
 		$query222 = $con->query($sql);
 		
@@ -395,7 +404,7 @@ $GLOBALS['Timef']=$Timef;
 $GLOBALS['DOW']=$DOW;
 $GLOBALS['timebool'] = $timebool;
 $_SESSION['Message'] = $Message;
-header("Location: /index.php");
+//header("Location: /index.php");
 
 closeCon($con);
 
